@@ -1,0 +1,83 @@
+
+.ui-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 11, 18, 0.52);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  padding: 12px;
+.ui-modal {
+  width: min(520px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  overflow: hidden;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface-color) 88%, var(--primary-soft) 12%), var(--surface-color));
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 8px;
+}
+
+.ui-modal-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 36px;
+  gap: 10px;
+  min-height: 28px;
+}
+
+.ui-modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.1;
+  color: var(--primary-strong);
+}
+
+.ui-modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: var(--surface-alt);
+  color: var(--muted-color);
+  display: grid;
+  place-items: center;
+}
+
+.ui-modal-close:hover {
+  color: var(--text-color);
+}
+
+.ui-modal-close .ui-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.ui-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.ui-modal .ui-btn-ghost:hover {
+  border-color: var(--border-strong) !important;
+}
+
+.ui-modal .ui-btn-danger:hover {
+  border-color: var(--danger) !important;
+}
+
+.ui-modal button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+
+}
+

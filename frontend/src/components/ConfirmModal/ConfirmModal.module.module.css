@@ -1,0 +1,24 @@
+
+.ui-modal.ui-modal-compact {
+  width: min(420px, calc(100vw - 24px));
+  min-height: 0;
+  gap: 4px;
+  padding: 12px;
+.ui-modal.ui-modal-compact .ui-modal-header {
+  min-height: 24px;
+}
+
+.ui-modal.ui-modal-compact .ui-modal-header h3 {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.confirm-modal-text {
+  margin: 0;
+  line-height: 1.35;
+  color: var(--text-color);
+}
+
+
+}
+

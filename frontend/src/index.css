@@ -1,0 +1,103 @@
+﻿:root {
+  --primary-color: #58bde9;
+  --primary-strong: #9edcff;
+  --primary-soft: #1f4f67;
+  --bg-color: #0f1a23;
+  --surface-color: #162532;
+  --surface-alt: #1b2f3d;
+  --surface-muted: #203948;
+  --text-color: #ebf4fb;
+  --muted-color: #a8c0d1;
+  --border: #2b4558;
+  --border-strong: #3e5d74;
+  --ring: rgba(88, 189, 233, 0.2);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  --danger: #ff7f86;
+}
+
+[data-theme="light"] {
+  --primary-color: #007dba;
+  --primary-strong: #004680;
+  --primary-soft: #b9e5fa;
+  --bg-color: #f3f7fb;
+  --surface-color: #ffffff;
+  --surface-alt: #f7fafc;
+  --surface-muted: #eef4f8;
+  --text-color: #163247;
+  --muted-color: #60798d;
+  --border: #d5e2ec;
+  --border-strong: #b8cddb;
+  --ring: rgba(0, 125, 186, 0.18);
+  --shadow: 0 8px 24px rgba(25, 56, 78, 0.08);
+  --danger: #d14e57;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+a { color: inherit; text-decoration: none; }
+
+input:focus,
+input:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+select:focus,
+select:focus-visible,
+button:focus,
+button:focus-visible,
+a:focus,
+a:focus-visible {
+  outline: none;
+}
+
+button {
+  transition: transform 140ms ease;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+button:disabled {
+  transform: none;
+  cursor: not-allowed;
+}
+
+.ui-skeleton {
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--surface-muted) 88%, #000 12%) 0%,
+    color-mix(in srgb, var(--primary-strong) 22%, var(--surface-muted) 78%) 45%,
+    color-mix(in srgb, var(--surface-muted) 88%, #000 12%) 100%
+  );
+  background-size: 220% 100%;
+  animation: skeletonShimmer 1.35s linear infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -20% 0; }
+}
+
+.player-placeholder,
+.toast-placeholder {
+  background: var(--surface-color);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}

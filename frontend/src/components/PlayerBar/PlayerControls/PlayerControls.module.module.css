@@ -1,0 +1,49 @@
+
+.player-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+.player-action {
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--text-color) 78%, var(--primary-color) 22%);
+  padding: 0;
+.player-action .ui-icon {
+  --ui-icon-size: 2rem;
+}
+
+.player-action.is-active {
+  color: var(--primary-color);
+}
+
+.player-action-primary {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-color);
+  color: var(--surface-color);
+  box-shadow: 0 8px 24px rgba(81, 191, 236, 0.32);
+  border-radius: 999px;
+}
+
+.player-action-primary .ui-icon {
+  --ui-icon-size: 2.35rem;
+}
+
+.player-action-primary:hover {
+  background: var(--primary-color);
+}
+
+@media (max-width: 980px) {
+  .player-action .ui-icon { --ui-icon-size: 2rem; }
+}
+  .player-action-primary {
+    width: 60px;
+    height: 60px;
+  }
+  .player-action-primary .ui-icon { --ui-icon-size: 2.35rem; }
+}
+
+
+
+}
+

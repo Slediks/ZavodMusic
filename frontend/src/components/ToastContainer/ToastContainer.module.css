@@ -1,0 +1,11 @@
+
+.toast-container { position: fixed; right: 16px; top: 16px; display: grid; gap: 8px; z-index: 60; 
+.toast-item { border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; min-width: 220px; text-align: left; background: var(--surface-color); color: var(--text-color); }
+.toast-success { border-color: #31b86a; }
+.toast-error { border-color: var(--danger); }
+.toast-info { border-color: var(--primary-color); }
+
+
+
+}
+

@@ -1,0 +1,192 @@
+
+.playlist-card {
+  width: 150px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: fit-content;
+  cursor: pointer;
+.playlist-cover-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.playlist-cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transform: scale(1);
+  transition: transform 180ms ease;
+}
+
+.playlist-cover.placeholder {
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+}
+
+.playlist-cover.placeholder .ui-icon {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  color: var(--muted-color);
+}
+
+.playlist-cover-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: color-mix(in srgb, #000 40%, transparent);
+  opacity: 0;
+  transition: opacity 140ms ease;
+  z-index: 1;
+}
+
+.playlist-card:hover .playlist-cover-overlay {
+  opacity: 1;
+}
+
+.playlist-card:hover .playlist-cover {
+  transform: scale(1.06);
+}
+
+.playlist-cover-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  background: var(--surface-muted);
+  color: var(--muted-color);
+  opacity: 0.8;
+}
+
+.playlist-cover-play:hover {
+  opacity: 1;
+  transform: translate(-50%, -50%) !important;
+}
+
+.playlist-cover-play:focus-visible {
+  transform: translate(-50%, -50%) !important;
+}
+
+.playlist-cover-play .ui-icon {
+  --ui-icon-size: 2rem;
+}
+
+.playlist-cover-like,
+.playlist-cover-link {
+  position: absolute;
+  border: none;
+  background: transparent;
+  color: var(--muted-color);
+  padding: 0;
+  opacity: 0.8;
+  z-index: 2;
+}
+
+.playlist-cover-like {
+  left: 8px;
+  bottom: 8px;
+}
+
+.playlist-cover-link {
+  right: 8px;
+  bottom: 8px;
+}
+
+.playlist-cover-privacy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  color: var(--muted-color);
+  padding: 0;
+  opacity: 0.8;
+  z-index: 2;
+}
+
+.playlist-cover-like .ui-icon,
+.playlist-cover-link .ui-icon,
+.playlist-cover-privacy .ui-icon {
+  --ui-icon-size: 1.1rem;
+}
+
+.playlist-cover-like:hover,
+.playlist-cover-link:hover,
+.playlist-cover-privacy:hover {
+  opacity: 1;
+  color: var(--primary-strong);
+}
+
+.playlist-cover-like.is-liked {
+  color: var(--primary-color);
+  opacity: 1;
+}
+
+.playlist-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 8px;
+  min-width: 0;
+}
+
+.playlist-title {
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-desc {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-color);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.playlist-meta span {
+  white-space: nowrap;
+}
+
+
+}
+

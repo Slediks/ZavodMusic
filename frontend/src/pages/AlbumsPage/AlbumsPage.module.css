@@ -1,0 +1,97 @@
+﻿.tracksPage {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  height: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-strong);
+}
+
+.tableAndFooter {
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cardsRegion {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 8px;
+  display: block;
+  background: var(--surface-color);
+  border-radius: 8px;
+}
+
+.albumsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+  gap: 24px;
+  justify-content: start;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+  gap: 24px;
+  justify-content: start;
+}
+
+.skeletonCard {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeletonCover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+}
+
+.skeletonTitle {
+  width: 78%;
+  height: 18px;
+}
+
+.skeletonSubtitle {
+  width: 62%;
+  height: 14px;
+}
+
+.skeletonMetaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.skeletonMeta {
+  height: 14px;
+  width: 42%;
+}
+
+.page-stub.tracksPage {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+

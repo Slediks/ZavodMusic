@@ -1,0 +1,339 @@
+[
+  {
+    "id": "al17",
+    "title": "Lest We Forget: The Best Of",
+    "artistIds": [
+      "a15"
+    ],
+    "artistNames": [
+      "Marilyn Manson"
+    ],
+    "coverUrl": "/static/covers/cover-60f7b8cbc3436fe6.jpg"
+  },
+  {
+    "id": "al1",
+    "title": "Midnight Workshop",
+    "artistIds": [
+      "a1"
+    ],
+    "artistNames": [
+      "Neon Forge"
+    ],
+    "coverUrl": "/static/covers/album-1.jpg"
+  },
+  {
+    "id": "al12",
+    "title": "Monitoring",
+    "artistIds": [
+      "a10"
+    ],
+    "artistNames": [
+      "Sati Akura"
+    ],
+    "coverUrl": "/static/covers/cover-b086a9f56527298b.png"
+  },
+  {
+    "id": "al11",
+    "title": "Open Season",
+    "artistIds": [
+      "a4",
+      "a5",
+      "a6",
+      "a7",
+      "a8",
+      "a9"
+    ],
+    "artistNames": [
+      "Jillzay",
+      "Скриптонит",
+      "Cheenah",
+      "104",
+      "Magg '98",
+      "Kolyaolya"
+    ],
+    "coverUrl": "/static/covers/cover-fd5f9a21e02c3aad.jpg"
+  },
+  {
+    "id": "al14",
+    "title": "RockStar Cycle",
+    "artistIds": [
+      "a12"
+    ],
+    "artistNames": [
+      "Kijin"
+    ],
+    "coverUrl": "/static/covers/cover-e1538af5b5d8ba1e.jpg"
+  },
+  {
+    "id": "al16",
+    "title": "RockStar Cycle",
+    "artistIds": [
+      "a12",
+      "a14"
+    ],
+    "artistNames": [
+      "Kijin",
+      "Серега Пират"
+    ],
+    "coverUrl": "/static/covers/cover-e1538af5b5d8ba1e.jpg"
+  },
+  {
+    "id": "al2",
+    "title": "Rusted Echoes",
+    "artistIds": [
+      "a2"
+    ],
+    "artistNames": [
+      "Steel River"
+    ],
+    "coverUrl": "/static/covers/album-2.jpg"
+  },
+  {
+    "id": "al27",
+    "title": "Unknown Album",
+    "artistIds": [
+      "a18"
+    ],
+    "artistNames": [
+      "Серёга Пират"
+    ],
+    "coverUrl": "/static/covers/cover-654f2b09aeef0b52.png"
+  },
+  {
+    "id": "al19",
+    "title": "айзек",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-94879ef4629f5ec3.png"
+  },
+  {
+    "id": "al22",
+    "title": "Бес концепта",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-84b9de96cfc82f53.jpg"
+  },
+  {
+    "id": "al3",
+    "title": "Бесконечный реакт",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-374ba2d410486041.png"
+  },
+  {
+    "id": "al23",
+    "title": "В абрикосовой долине",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-6fd572a55e6e5e32.jpg"
+  },
+  {
+    "id": "al4",
+    "title": "Гимн Уродска",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-af91d492e26a84a6.png"
+  },
+  {
+    "id": "al18",
+    "title": "главная тайна неба",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-5e510b2c13671f24.png"
+  },
+  {
+    "id": "al29",
+    "title": "Дорога длиной в 35...",
+    "artistIds": [
+      "a20"
+    ],
+    "artistNames": [
+      "Ариэль"
+    ],
+    "coverUrl": "/static/covers/cover-e498ebb2e5412d7b.jpg"
+  },
+  {
+    "id": "al10",
+    "title": "Дыши",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-a68e88497fffee67.jpg"
+  },
+  {
+    "id": "al5",
+    "title": "Картофельный завод",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-74c162a199a63846.jpg"
+  },
+  {
+    "id": "al24",
+    "title": "Космоцветок",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-85dfb5a3441d8eda.jpg"
+  },
+  {
+    "id": "al28",
+    "title": "Ламбада",
+    "artistIds": [
+      "a19",
+      "a5"
+    ],
+    "artistNames": [
+      "T-Fest",
+      "Скриптонит"
+    ],
+    "coverUrl": "/static/covers/cover-03e3bbe88928d98c.jpg"
+  },
+  {
+    "id": "al6",
+    "title": "Марш уродской империи",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-3f8464fffe9b4232.jpg"
+  },
+  {
+    "id": "al25",
+    "title": "Неудачный фильм",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-814d71d8107d66a7.jpg"
+  },
+  {
+    "id": "al26",
+    "title": "Ничего плохого",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-89486499ede0d855.jpg"
+  },
+  {
+    "id": "al20",
+    "title": "потерянный мир",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png"
+  },
+  {
+    "id": "al21",
+    "title": "потерянный мир",
+    "artistIds": [
+      "a16",
+      "a17"
+    ],
+    "artistNames": [
+      "mzlff",
+      "pyrokinesis"
+    ],
+    "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png"
+  },
+  {
+    "id": "al15",
+    "title": "Привет, да, это матрица",
+    "artistIds": [
+      "a12",
+      "a13"
+    ],
+    "artistNames": [
+      "Kijin",
+      "dot"
+    ],
+    "coverUrl": "/static/covers/cover-9263c9da3d8d4281.jpg"
+  },
+  {
+    "id": "al13",
+    "title": "Серия явлений",
+    "artistIds": [
+      "a11"
+    ],
+    "artistNames": [
+      "HATE LINE"
+    ],
+    "coverUrl": "/static/covers/cover-8038fd8bd2eaafe0.jpg"
+  },
+  {
+    "id": "al7",
+    "title": "Средневековый слэм",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-9975a1d1959c517a.jpg"
+  },
+  {
+    "id": "al8",
+    "title": "Уродск. Трактирная",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-8425c8336298e361.jpg"
+  },
+  {
+    "id": "al9",
+    "title": "Хочу в исекай",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "coverUrl": "/static/covers/cover-d0e9b9bb05ad5cae.jpg"
+  }
+]

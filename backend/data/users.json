@@ -1,0 +1,36 @@
+[
+  {
+    "id": "u1",
+    "login": "ivan",
+    "likedTrackIds": [
+      "t31",
+      "t1",
+      "t10",
+      "t6"
+    ],
+    "dislikedTrackIds": [
+      "t41",
+      "t29",
+      "t3"
+    ],
+    "likedPlaylistIds": [
+      "p13",
+      "p15",
+      "p16",
+      "p17",
+      "p18",
+      "p20",
+      "p21",
+      "p22"
+    ]
+  },
+  {
+    "id": "u2",
+    "login": "olga",
+    "likedTrackIds": [
+      "t2"
+    ],
+    "dislikedTrackIds": [],
+    "likedPlaylistIds": []
+  }
+]

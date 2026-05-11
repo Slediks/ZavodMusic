@@ -1,0 +1,150 @@
+﻿import styles from './PublicPlaylistsPage.module.css';
+import { useEffect, useMemo, useState } from "react";
+import { playlistsApi } from "../../api/playlistsApi";
+import { EmptyState } from "../../components/EmptyState/EmptyState";
+import { ErrorBlock } from "../../components/ErrorBlock/ErrorBlock";
+import { Pagination } from "../../components/Pagination/Pagination";
+import { PlaylistCard } from "../../components/PlaylistCard/PlaylistCard";
+import { SearchToolbar } from "../../components/SearchToolbar/SearchToolbar";
+import { useAuth } from "../../context/AuthContext";
+import { useToast } from "../../context/ToastContext";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { ApiError } from "../../types/api";
+import type { Playlist } from "../../types/playlist";
+import { getRandomSearchPhrase } from "../../utils/searchPhrases";
+
+export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: string) => void }) {
+  const { user, updateUser } = useAuth();
+  const { showToast } = useToast();
+
+  const [items, setItems] = useState<Playlist[]>([]);
+  const [searchInput, setSearchInput] = useState("");
+  const search = useDebounce(searchInput, 300);
+  const [instantSearch, setInstantSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useLocalStorage<number>("zavod_public_playlists_limit", 24);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [searchPhrase] = useState(getRandomSearchPhrase);
+  const normalizedSearchPhrase = searchPhrase.replace(/^чем\s+/i, "");
+
+  const loadPublicPlaylists = async (opts?: { page?: number; limit?: number; search?: string }) => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await playlistsApi.getPublic({
+        page: opts?.page ?? page,
+        limit: opts?.limit ?? limit,
+        search: opts?.search ?? (instantSearch || search)
+      });
+      setItems(res.items || []);
+      setPages(res.pages || 0);
+      setTotal(res.total || 0);
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Не удалось загрузить плейлисты");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    void loadPublicPlaylists();
+  }, [search, instantSearch, page, limit]);
+
+  const likedIds = useMemo(() => new Set(user?.likedPlaylistIds || []), [user?.likedPlaylistIds]);
+
+  return (
+    <section className={`${'{'}styles["page-stub"]} ${styles.tracksPage}`}>
+      <h1 className={styles.title}>Публичные плейлисты</h1>
+
+      <SearchToolbar
+        hint={`Наш поиск работает быстрее, чем ${normalizedSearchPhrase}`}
+        value={searchInput}
+        onValueChange={(next) => {
+          setSearchInput(next);
+          setInstantSearch("");
+          setPage(1);
+        }}
+        onEnter={() => {
+          setInstantSearch(searchInput.trim());
+          setPage(1);
+        }}
+        onClear={() => {
+          setSearchInput("");
+          setInstantSearch("");
+          setPage(1);
+        }}
+        limit={limit}
+        limitOptions={[24, 48]}
+        onLimitChange={(next) => {
+          setLimit(next);
+          setPage(1);
+        }}
+      />
+
+      {error ? <ErrorBlock message={error} /> : null}
+
+      {!error ? (
+        <div className={styles.tableAndFooter}>
+          <div className={styles.cardsRegion}>
+            {loading ? (
+              <div className={styles.skeletonGrid} aria-hidden="true">
+                {Array.from({ length: Math.max(8, Math.min(limit, 12)) }).map((_, idx) => (
+                  <article key={`playlist-sk-${idx}`} className={styles.skeletonCard}>
+                    <div className={`ui-skeleton ${styles.skeletonCover}`} />
+                    <div className={`ui-skeleton ${styles.skeletonTitle}`} />
+                    <div className={`ui-skeleton ${styles.skeletonSubtitle}`} />
+                    <div className={styles.skeletonMetaRow}>
+                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
+                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : null}
+            {!loading && items.length === 0 ? <EmptyState text="Публичных плейлистов пока нет" /> : null}
+            {!loading && items.length > 0 ? (
+              <div className={styles.playlistsGrid}>
+                {items.map((p) => (
+                  <PlaylistCard
+                    key={p.id}
+                    playlist={p}
+                    canManage={false}
+                    canLike={p.ownerId !== user?.id}
+                    isLiked={likedIds.has(p.id)}
+                    onOpen={onOpenPlaylist}
+                    onPlay={() => showToast("Для воспроизведения откройте плейлист", "info")}
+                    onLike={async (playlist) => {
+                      const wasLiked = likedIds.has(playlist.id);
+                      try {
+                        const next = wasLiked
+                          ? await playlistsApi.unlike(playlist.id)
+                          : await playlistsApi.like(playlist.id);
+                        updateUser(next);
+                      } catch (e) {
+                        showToast(e instanceof ApiError ? e.message : "Ошибка лайка", "error");
+                      }
+                    }}
+                    onCopyLink={async (playlist) => {
+                      await navigator.clipboard.writeText(`${window.location.origin}/playlists/${playlist.id}`);
+                      showToast("Ссылка на плейлист скопирована", "success");
+                    }}
+                  />
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <Pagination total={total} page={page} pages={pages} onChange={setPage} />
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
+
+
+

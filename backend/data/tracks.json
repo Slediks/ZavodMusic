@@ -1,0 +1,1468 @@
+[
+  {
+    "id": "t71",
+    "title": "Bart Simpson",
+    "artistIds": [
+      "a50"
+    ],
+    "artistNames": [
+      "Элджей"
+    ],
+    "albumId": "al52",
+    "albumTitle": "Bart Simpson",
+    "duration": 112,
+    "coverUrl": "/static/covers/cover-c51b68b6f3cb3b92.jpg",
+    "audioUrl": "/static/audio/Элджей - Bart Simpson.mp3",
+    "lyrics": "Whoa-oh, mm-hmm\n\nYou've been running 'round, running 'round, running 'round\nThrowin' that dirt all on my name\n'Cause you knew that I, knew that I, knew that I'd call you up\nYou've been going 'round, going 'round, going 'round every party in L.A\n'Cause you knew that I, knew that I, knew that I'd be at one\nOh (oh)\n\nI know that dress is karma, perfume regret\nYou got me thinking 'bout when you were mine, oh\nAnd now I'm all up on ya, what'd you expect?\nBut you're not coming home with me tonight\n\nYou just want attention, you don't want my heart\nMaybe you just hate the thought of me with someone new\nYeah, you just want attention, I knew from the start\nYou're just making sure I'm never getting over you, oh\n\nYou've been running 'round, running 'round, running 'round\nThrowin' that dirt all on my name\n'Cause you knew that I, knew that I, knew that I'd call you up\nBaby, now that we're, now that we're, now that we're\nRight here, standing face to face\nYou already know, 'ready know, 'ready know that you won\nOh\n\nI know that dress is karma (dress is karma), perfume regret (yeah)\nYou got me thinking 'bout when you were mine\n(You got me thinking 'bout when you were mine)\nAnd now I'm all up on ya (all up on ya), what'd you expect? (Oh, baby)\nBut you're not coming home with me tonight (oh, no)\n\nYou just want attention, you don't want my heart\nMaybe you just hate the thought of me with someone new ('one new)\nYeah, you just want attention (oh), I knew from the start (the start)\nYou're just making sure I'm never getting over you (oh, you), oh\n\nWhat are you doing to me? What are you doing, love?\n(What are you doing?)\nWhat are you doing to me? What are you doing, love?\n(What are you doing?)\nWhat are you doing to me? What are you doing, love?\n(What are you doing?)\nWhat are you doing to me? What are you doing, love?\n\nI know that dress is karma, perfume regret\nYou got me thinking 'bout when you were mine\nAnd now I'm all up on ya, what'd you expect?\nBut you're not coming home with me tonight\n\nYou just want attention, you don't want my heart\nMaybe you just hate the thought of me with someone new\nYeah, you just want attention, I knew from the start\nYou're just making sure I'm never getting over you (over you)\n\nWhat are you doing to me? (Hey) what are you doing, love?\n(What are you doing, love?)\nWhat are you doing to me? What are you doing, love?\n\nYeah, you just want attention (what are you doing to me?)\nI knew from the start (what are you doing, love?)\nYou're just making sure I'm never getting over you\n(What are you doing to me? What are you doing, love?)\nOh",
+    "genre": "rusrap",
+    "year": 2021,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t2",
+    "title": "Blue Sparks",
+    "artistIds": [
+      "a2"
+    ],
+    "artistNames": [
+      "Steel River"
+    ],
+    "albumId": "al2",
+    "albumTitle": "Rusted Echoes",
+    "duration": 189,
+    "coverUrl": "/static/covers/album-2.jpg",
+    "audioUrl": "/static/audio/track-2.mp3",
+    "lyrics": "Sparks in the dark and steel in the rain",
+    "genre": "rock",
+    "year": 2023,
+    "missingFile": true,
+    "disabledManually": false
+  },
+  {
+    "id": "t1",
+    "title": "Factory Lights",
+    "artistIds": [
+      "a1"
+    ],
+    "artistNames": [
+      "Neon Forge"
+    ],
+    "albumId": "al1",
+    "albumTitle": "Midnight Workshop",
+    "duration": 214,
+    "coverUrl": "/static/covers/album-1.jpg",
+    "audioUrl": "/static/audio/track-1.mp3",
+    "lyrics": "We build the sound under factory lights",
+    "genre": "electronic",
+    "year": 2024,
+    "missingFile": true,
+    "disabledManually": false
+  },
+  {
+    "id": "t3",
+    "title": "Hidden Tape",
+    "artistIds": [
+      "a1",
+      "a2"
+    ],
+    "artistNames": [
+      "Neon Forge",
+      "Steel River"
+    ],
+    "albumId": "al1",
+    "albumTitle": "Midnight Workshop",
+    "duration": 202,
+    "coverUrl": "/static/covers/album-1.jpg",
+    "audioUrl": "/static/audio/track-3.mp3",
+    "lyrics": "Unavailable demo",
+    "genre": "indie",
+    "year": 2022,
+    "missingFile": true,
+    "disabledManually": false
+  },
+  {
+    "id": "t50",
+    "title": "Krasavitsa (Remix)",
+    "artistIds": [
+      "a24",
+      "a25",
+      "a26",
+      "a27"
+    ],
+    "artistNames": [
+      "ANGUISH",
+      "влад пиво",
+      "ЯРЧЕ СОЛНЦА",
+      "ILY"
+    ],
+    "albumId": "al31",
+    "albumTitle": "Krasavitsa",
+    "duration": 139,
+    "coverUrl": "/static/covers/cover-a84cd2a72abc1f7a.jpg",
+    "audioUrl": "/static/audio/ANGUISH,влад пиво,ЯРЧЕ СОЛНЦА,ILY - Krasavitsa (Remix).mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2023,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t28",
+    "title": "Lambo (prod.by GAXILLIC)",
+    "artistIds": [
+      "a12",
+      "a14"
+    ],
+    "artistNames": [
+      "Kijin",
+      "Серега Пират"
+    ],
+    "albumId": "al16",
+    "albumTitle": "RockStar Cycle",
+    "duration": 151,
+    "coverUrl": "/static/covers/cover-e1538af5b5d8ba1e.jpg",
+    "audioUrl": "/static/audio/ymu/Kijin/Kijin,Серега Пират - Lambo (prod.by GAXILLIC).mp3",
+    "lyrics": "",
+    "genre": "rusrock",
+    "year": 2024,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t56",
+    "title": "Mamma Mia",
+    "artistIds": [
+      "a33"
+    ],
+    "artistNames": [
+      "Lucky4"
+    ],
+    "albumId": "al37",
+    "albumTitle": "Mamma Mia",
+    "duration": 198,
+    "coverUrl": "/static/covers/cover-b7d12ec2d57ec219.jpg",
+    "audioUrl": "/static/audio/Lucky4 - Mamma Mia.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2018,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t13",
+    "title": "Monitoring",
+    "artistIds": [
+      "a10"
+    ],
+    "artistNames": [
+      "Sati Akura"
+    ],
+    "albumId": "al12",
+    "albumTitle": "Monitoring",
+    "duration": 177,
+    "coverUrl": "/static/covers/cover-b086a9f56527298b.png",
+    "audioUrl": "/static/audio/Sati Akura - Monitoring.mp3",
+    "lyrics": "",
+    "genre": "pop",
+    "year": 2025,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t45",
+    "title": "Monitoring",
+    "artistIds": [
+      "a10"
+    ],
+    "artistNames": [
+      "Sati Akura"
+    ],
+    "albumId": "al12",
+    "albumTitle": "Monitoring",
+    "duration": 177,
+    "coverUrl": "/static/covers/cover-b086a9f56527298b.png",
+    "audioUrl": "/static/audio/ymu/Sati Akura - Monitoring.mp3",
+    "lyrics": "",
+    "genre": "pop",
+    "year": 2025,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t49",
+    "title": "Monsters",
+    "artistIds": [
+      "a21",
+      "a22",
+      "a23"
+    ],
+    "artistNames": [
+      "All Time Low",
+      "Demi Lovato",
+      "blackbear"
+    ],
+    "albumId": "al30",
+    "albumTitle": "Monsters",
+    "duration": 174,
+    "coverUrl": "/static/covers/cover-c0e45f0decc521a0.jpg",
+    "audioUrl": "/static/audio/All Time Low,Demi Lovato,blackbear - Monsters.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t29",
+    "title": "This Is the New Shit (из фильма «Матрица: Перезагрузка»)",
+    "artistIds": [
+      "a15"
+    ],
+    "artistNames": [
+      "Marilyn Manson"
+    ],
+    "albumId": "al17",
+    "albumTitle": "Lest We Forget: The Best Of",
+    "duration": 260,
+    "coverUrl": "/static/covers/cover-60f7b8cbc3436fe6.jpg",
+    "audioUrl": "/static/audio/ymu/Marilyn Manson - This Is the New Shit (из фильма «Матрица_ Перезагрузка»).mp3",
+    "lyrics": "",
+    "genre": "industrial",
+    "year": 2004,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t31",
+    "title": "айзек",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al19",
+    "albumTitle": "айзек",
+    "duration": 182,
+    "coverUrl": "/static/covers/cover-94879ef4629f5ec3.png",
+    "audioUrl": "/static/audio/ymu/mzlff/2026 - mzlff - айзек/mzlff - айзек.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t12",
+    "title": "Бар \"2 лесбухи\"",
+    "artistIds": [
+      "a4",
+      "a5",
+      "a6",
+      "a7",
+      "a8",
+      "a9"
+    ],
+    "artistNames": [
+      "Jillzay",
+      "Скриптонит",
+      "Cheenah",
+      "104",
+      "Magg '98",
+      "Kolyaolya"
+    ],
+    "albumId": "al11",
+    "albumTitle": "Open Season",
+    "duration": 237,
+    "coverUrl": "/static/covers/cover-fd5f9a21e02c3aad.jpg",
+    "audioUrl": "/static/audio/Jillzay,Скриптонит,Cheenah,104,Magg '98,Kolyaolya - Бар _2 лесбухи_.mp3",
+    "lyrics": "",
+    "genre": "rap",
+    "year": 2017,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t23",
+    "title": "Бар \"2 лесбухи\"",
+    "artistIds": [
+      "a4",
+      "a5",
+      "a6",
+      "a7",
+      "a8",
+      "a9"
+    ],
+    "artistNames": [
+      "Jillzay",
+      "Скриптонит",
+      "Cheenah",
+      "104",
+      "Magg '98",
+      "Kolyaolya"
+    ],
+    "albumId": "al11",
+    "albumTitle": "Open Season",
+    "duration": 237,
+    "coverUrl": "/static/covers/cover-fd5f9a21e02c3aad.jpg",
+    "audioUrl": "/static/audio/ymu/Jillzay,Скриптонит,Cheenah,104,Magg '98,Kolyaolya - Бар _2 лесбухи_.mp3",
+    "lyrics": "",
+    "genre": "rap",
+    "year": 2017,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t66",
+    "title": "Батареи",
+    "artistIds": [
+      "a45"
+    ],
+    "artistNames": [
+      "Нервы"
+    ],
+    "albumId": "al47",
+    "albumTitle": "Всё Что Вокруг",
+    "duration": 168,
+    "coverUrl": "/static/covers/cover-9f168578d1297bf5.jpg",
+    "audioUrl": "/static/audio/Нервы - Батареи.mp3",
+    "lyrics": "",
+    "genre": "ukrrock",
+    "year": 2012,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t37",
+    "title": "Бес концепта",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al22",
+    "albumTitle": "Бес концепта",
+    "duration": 220,
+    "coverUrl": "/static/covers/cover-84b9de96cfc82f53.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - Бес концепта.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t4",
+    "title": "Бесконечный реакт",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al3",
+    "albumTitle": "Бесконечный реакт",
+    "duration": 235,
+    "coverUrl": "/static/covers/cover-374ba2d410486041.png",
+    "audioUrl": "/static/audio/Cyber Skufs/2026 - Cyber Skufs - Бесконечный реакт/Cyber Skufs - Бесконечный реакт.mp3",
+    "lyrics": "",
+    "genre": "rock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t14",
+    "title": "Бесконечный реакт",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al3",
+    "albumTitle": "Бесконечный реакт",
+    "duration": 235,
+    "coverUrl": "/static/covers/cover-374ba2d410486041.png",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/2026 - Cyber Skufs - Бесконечный реакт/Cyber Skufs - Бесконечный реакт.mp3",
+    "lyrics": "",
+    "genre": "rock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t61",
+    "title": "Больно было но прошло",
+    "artistIds": [
+      "a39"
+    ],
+    "artistNames": [
+      "SelimRamil"
+    ],
+    "albumId": "al42",
+    "albumTitle": "Больно было но прошло",
+    "duration": 156,
+    "coverUrl": "/static/covers/cover-c845dd80e4d519e9.jpg",
+    "audioUrl": "/static/audio/SelimRamil - Больно было но прошло.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2021,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t63",
+    "title": "Будильник",
+    "artistIds": [
+      "a41"
+    ],
+    "artistNames": [
+      "ЕГОР КРИД"
+    ],
+    "albumId": "al44",
+    "albumTitle": "Будильник",
+    "duration": 204,
+    "coverUrl": "/static/covers/cover-2cc00b309f6076de.jpg",
+    "audioUrl": "/static/audio/ЕГОР КРИД - Будильник.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2015,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t38",
+    "title": "В абрикосовой долине",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al23",
+    "albumTitle": "В абрикосовой долине",
+    "duration": 169,
+    "coverUrl": "/static/covers/cover-6fd572a55e6e5e32.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - В абрикосовой долине.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2021,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t48",
+    "title": "В краю магнолий (из фильма «Груз 200»)",
+    "artistIds": [
+      "a20"
+    ],
+    "artistNames": [
+      "Ариэль"
+    ],
+    "albumId": "al29",
+    "albumTitle": "Дорога длиной в 35...",
+    "duration": 225,
+    "coverUrl": "/static/covers/cover-e498ebb2e5412d7b.jpg",
+    "audioUrl": "/static/audio/ymu/Ариэль - В краю магнолий (из фильма «Груз 200»).mp3",
+    "lyrics": "",
+    "genre": "rusestrada",
+    "year": 2002,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t32",
+    "title": "ворона",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al20",
+    "albumTitle": "потерянный мир",
+    "duration": 148,
+    "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png",
+    "audioUrl": "/static/audio/ymu/mzlff/2026 - mzlff - потерянный мир/mzlff - ворона.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t24",
+    "title": "Газ в пол (prod.by billionstars)",
+    "artistIds": [
+      "a12"
+    ],
+    "artistNames": [
+      "Kijin"
+    ],
+    "albumId": "al14",
+    "albumTitle": "RockStar Cycle",
+    "duration": 131,
+    "coverUrl": "/static/covers/cover-e1538af5b5d8ba1e.jpg",
+    "audioUrl": "/static/audio/ymu/Kijin/Kijin - Газ в пол (prod.by billionstars).mp3",
+    "lyrics": "",
+    "genre": "rusrock",
+    "year": 2024,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t5",
+    "title": "Гимн Уродска",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al4",
+    "albumTitle": "Гимн Уродска",
+    "duration": 226,
+    "coverUrl": "/static/covers/cover-af91d492e26a84a6.png",
+    "audioUrl": "/static/audio/Cyber Skufs/2026 - Cyber Skufs - Гимн Уродска/Cyber Skufs - Гимн Уродска.mp3",
+    "lyrics": "",
+    "genre": "metal",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t15",
+    "title": "Гимн Уродска",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al4",
+    "albumTitle": "Гимн Уродска",
+    "duration": 226,
+    "coverUrl": "/static/covers/cover-af91d492e26a84a6.png",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/2026 - Cyber Skufs - Гимн Уродска/Cyber Skufs - Гимн Уродска.mp3",
+    "lyrics": "",
+    "genre": "metal",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t30",
+    "title": "главная тайна неба",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al18",
+    "albumTitle": "главная тайна неба",
+    "duration": 150,
+    "coverUrl": "/static/covers/cover-5e510b2c13671f24.png",
+    "audioUrl": "/static/audio/ymu/mzlff/2025 - mzlff - главная тайна неба/mzlff - главная тайна неба.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2025,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t39",
+    "title": "Девочка из аптечной",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al24",
+    "albumTitle": "Космоцветок",
+    "duration": 199,
+    "coverUrl": "/static/covers/cover-85dfb5a3441d8eda.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - Девочка из аптечной.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t11",
+    "title": "Дыши",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al10",
+    "albumTitle": "Дыши",
+    "duration": 220,
+    "coverUrl": "/static/covers/cover-a68e88497fffee67.jpg",
+    "audioUrl": "/static/audio/Cyber Skufs/Cyber Skufs - Дыши.mp3",
+    "lyrics": "",
+    "genre": "rock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t21",
+    "title": "Дыши",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al10",
+    "albumTitle": "Дыши",
+    "duration": 220,
+    "coverUrl": "/static/covers/cover-a68e88497fffee67.jpg",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/Cyber Skufs - Дыши.mp3",
+    "lyrics": "",
+    "genre": "rock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t53",
+    "title": "Забиваю на всё",
+    "artistIds": [
+      "a30"
+    ],
+    "artistNames": [
+      "DEMCHUK"
+    ],
+    "albumId": "al34",
+    "albumTitle": "Забиваю на всё",
+    "duration": 131,
+    "coverUrl": "/static/covers/cover-cce34035079c5c63.jpg",
+    "audioUrl": "/static/audio/DEMCHUK - Забиваю на всё.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2022,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t33",
+    "title": "запой",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al20",
+    "albumTitle": "потерянный мир",
+    "duration": 177,
+    "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png",
+    "audioUrl": "/static/audio/ymu/mzlff/2026 - mzlff - потерянный мир/mzlff - запой.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t60",
+    "title": "Зеленые глаза",
+    "artistIds": [
+      "a38"
+    ],
+    "artistNames": [
+      "Rxlzq"
+    ],
+    "albumId": "al41",
+    "albumTitle": "Зеленые глаза",
+    "duration": 137,
+    "coverUrl": "/static/covers/cover-0560601384e8dc78.jpg",
+    "audioUrl": "/static/audio/Rxlzq - Зеленые глаза.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2022,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t25",
+    "title": "Иди нахуй (prod.by ILIXX)",
+    "artistIds": [
+      "a12"
+    ],
+    "artistNames": [
+      "Kijin"
+    ],
+    "albumId": "al14",
+    "albumTitle": "RockStar Cycle",
+    "duration": 127,
+    "coverUrl": "/static/covers/cover-e1538af5b5d8ba1e.jpg",
+    "audioUrl": "/static/audio/ymu/Kijin/Kijin - Иди нахуй (prod.by ILIXX).mp3",
+    "lyrics": "",
+    "genre": "rusrock",
+    "year": 2024,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t6",
+    "title": "Картофельный завод",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al5",
+    "albumTitle": "Картофельный завод",
+    "duration": 120,
+    "coverUrl": "/static/covers/cover-74c162a199a63846.jpg",
+    "audioUrl": "/static/audio/Cyber Skufs/2026 - Cyber Skufs - Картофельный завод/Cyber Skufs - Картофельный завод.mp3",
+    "lyrics": "",
+    "genre": "dance",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t16",
+    "title": "Картофельный завод",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al5",
+    "albumTitle": "Картофельный завод",
+    "duration": 120,
+    "coverUrl": "/static/covers/cover-74c162a199a63846.jpg",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/2026 - Cyber Skufs - Картофельный завод/Cyber Skufs - Картофельный завод.mp3",
+    "lyrics": "",
+    "genre": "dance",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t52",
+    "title": "когда ты улыбаешься (Remix)",
+    "artistIds": [
+      "a29"
+    ],
+    "artistNames": [
+      "dd"
+    ],
+    "albumId": "al33",
+    "albumTitle": "когда ты улыбаешься",
+    "duration": 133,
+    "coverUrl": "",
+    "audioUrl": "/static/audio/dd - когда ты улыбаешься (Remix).mp3",
+    "lyrics": "",
+    "genre": "pop",
+    "year": 2022,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t57",
+    "title": "Корабли в бутылках",
+    "artistIds": [
+      "a34"
+    ],
+    "artistNames": [
+      "Markul"
+    ],
+    "albumId": "al38",
+    "albumTitle": "Корабли в бутылках",
+    "duration": 162,
+    "coverUrl": "/static/covers/cover-83764f35bbd273b4.jpg",
+    "audioUrl": "/static/audio/Markul - Корабли в бутылках.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2018,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t40",
+    "title": "Космоцветок",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al24",
+    "albumTitle": "Космоцветок",
+    "duration": 147,
+    "coverUrl": "/static/covers/cover-85dfb5a3441d8eda.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - Космоцветок.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t34",
+    "title": "культурный слой",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al20",
+    "albumTitle": "потерянный мир",
+    "duration": 169,
+    "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png",
+    "audioUrl": "/static/audio/ymu/mzlff/2026 - mzlff - потерянный мир/mzlff - культурный слой.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t47",
+    "title": "Ламбада",
+    "artistIds": [
+      "a19",
+      "a5"
+    ],
+    "artistNames": [
+      "T-Fest",
+      "Скриптонит"
+    ],
+    "albumId": "al28",
+    "albumTitle": "Ламбада",
+    "duration": 198,
+    "coverUrl": "/static/covers/cover-03e3bbe88928d98c.jpg",
+    "audioUrl": "/static/audio/ymu/T-Fest,Скриптонит - Ламбада.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2017,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t7",
+    "title": "Марш уродской империи",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al6",
+    "albumTitle": "Марш уродской империи",
+    "duration": 207,
+    "coverUrl": "/static/covers/cover-3f8464fffe9b4232.jpg",
+    "audioUrl": "/static/audio/Cyber Skufs/2026 - Cyber Skufs - Марш уродской империи/Cyber Skufs - Марш уродской империи.mp3",
+    "lyrics": "",
+    "genre": "rock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t17",
+    "title": "Марш уродской империи",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al6",
+    "albumTitle": "Марш уродской империи",
+    "duration": 207,
+    "coverUrl": "/static/covers/cover-3f8464fffe9b4232.jpg",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/2026 - Cyber Skufs - Марш уродской империи/Cyber Skufs - Марш уродской империи.mp3",
+    "lyrics": "",
+    "genre": "rock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t59",
+    "title": "НА ДНО",
+    "artistIds": [
+      "a37"
+    ],
+    "artistNames": [
+      "Polontayn"
+    ],
+    "albumId": "al40",
+    "albumTitle": "НА ДНО",
+    "duration": 122,
+    "coverUrl": "/static/covers/cover-8b68d3852c560427.jpg",
+    "audioUrl": "/static/audio/Polontayn - НА ДНО.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2021,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t41",
+    "title": "Неудачный фильм",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al25",
+    "albumTitle": "Неудачный фильм",
+    "duration": 202,
+    "coverUrl": "/static/covers/cover-814d71d8107d66a7.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - Неудачный фильм.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t62",
+    "title": "Обманула",
+    "artistIds": [
+      "a40"
+    ],
+    "artistNames": [
+      "The Limba"
+    ],
+    "albumId": "al43",
+    "albumTitle": "Обманула",
+    "duration": 164,
+    "coverUrl": "/static/covers/cover-cb77033f454d4396.jpg",
+    "audioUrl": "/static/audio/The Limba - Обманула.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2018,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t35",
+    "title": "обыкновенная жизнь",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al20",
+    "albumTitle": "потерянный мир",
+    "duration": 209,
+    "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png",
+    "audioUrl": "/static/audio/ymu/mzlff/2026 - mzlff - потерянный мир/mzlff - обыкновенная жизнь.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t65",
+    "title": "Один",
+    "artistIds": [
+      "a44"
+    ],
+    "artistNames": [
+      "Коля Кировский"
+    ],
+    "albumId": "al46",
+    "albumTitle": "Один",
+    "duration": 133,
+    "coverUrl": "/static/covers/cover-3111ddb19270a71e.jpg",
+    "audioUrl": "/static/audio/Коля Кировский - Один.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t36",
+    "title": "оставь себе",
+    "artistIds": [
+      "a16",
+      "a17"
+    ],
+    "artistNames": [
+      "mzlff",
+      "pyrokinesis"
+    ],
+    "albumId": "al21",
+    "albumTitle": "потерянный мир",
+    "duration": 158,
+    "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png",
+    "audioUrl": "/static/audio/ymu/mzlff/2026 - mzlff - потерянный мир/mzlff,pyrokinesis - оставь себе.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t68",
+    "title": "Плачь и смотри",
+    "artistIds": [
+      "a47"
+    ],
+    "artistNames": [
+      "Реднакси"
+    ],
+    "albumId": "al49",
+    "albumTitle": "Плачь и смотри",
+    "duration": 183,
+    "coverUrl": "/static/covers/cover-305104ef8482f9d3.jpg",
+    "audioUrl": "/static/audio/Реднакси - Плачь и смотри.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t26",
+    "title": "Представь",
+    "artistIds": [
+      "a12",
+      "a13"
+    ],
+    "artistNames": [
+      "Kijin",
+      "dot"
+    ],
+    "albumId": "al15",
+    "albumTitle": "Привет, да, это матрица",
+    "duration": 128,
+    "coverUrl": "/static/covers/cover-9263c9da3d8d4281.jpg",
+    "audioUrl": "/static/audio/ymu/Kijin/Kijin,dot - Представь.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2025,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t27",
+    "title": "Привет, ты дома",
+    "artistIds": [
+      "a12",
+      "a13"
+    ],
+    "artistNames": [
+      "Kijin",
+      "dot"
+    ],
+    "albumId": "al15",
+    "albumTitle": "Привет, да, это матрица",
+    "duration": 135,
+    "coverUrl": "/static/covers/cover-9263c9da3d8d4281.jpg",
+    "audioUrl": "/static/audio/ymu/Kijin/Kijin,dot - Привет, ты дома.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2025,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t69",
+    "title": "Пьяный по дворам (Chicagoo Remix; prod. by Afreens)",
+    "artistIds": [
+      "a48"
+    ],
+    "artistNames": [
+      "Саша Джаз"
+    ],
+    "albumId": "al50",
+    "albumTitle": "Пьяный по дворам",
+    "duration": 156,
+    "coverUrl": "/static/covers/cover-985a475f1e2af05e.jpg",
+    "audioUrl": "/static/audio/Саша Джаз - Пьяный по дворам (Chicagoo Remix_ prod. by Afreens).mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t42",
+    "title": "Руку на пульсе",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al26",
+    "albumTitle": "Ничего плохого",
+    "duration": 199,
+    "coverUrl": "/static/covers/cover-89486499ede0d855.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - Руку на пульсе.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2019,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t46",
+    "title": "Свинья",
+    "artistIds": [
+      "a18"
+    ],
+    "artistNames": [
+      "Серёга Пират"
+    ],
+    "albumId": "al27",
+    "albumTitle": "Unknown Album",
+    "duration": 155,
+    "coverUrl": "/static/covers/cover-654f2b09aeef0b52.png",
+    "audioUrl": "/static/audio/ymu/Serjoga_Pirat_-_Svinya_73585047.mp3",
+    "lyrics": "",
+    "genre": "unknown",
+    "year": null,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t22",
+    "title": "Серия явлений",
+    "artistIds": [
+      "a11"
+    ],
+    "artistNames": [
+      "HATE LINE"
+    ],
+    "albumId": "al13",
+    "albumTitle": "Серия явлений",
+    "duration": 182,
+    "coverUrl": "/static/covers/cover-8038fd8bd2eaafe0.jpg",
+    "audioUrl": "/static/audio/ymu/HATE LINE - Серия явлений.mp3",
+    "lyrics": "",
+    "genre": "rap",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t8",
+    "title": "Средневековый слэм",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al7",
+    "albumTitle": "Средневековый слэм",
+    "duration": 175,
+    "coverUrl": "/static/covers/cover-9975a1d1959c517a.jpg",
+    "audioUrl": "/static/audio/Cyber Skufs/2026 - Cyber Skufs - Средневековый слэм/Cyber Skufs - Средневековый слэм.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t18",
+    "title": "Средневековый слэм",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al7",
+    "albumTitle": "Средневековый слэм",
+    "duration": 175,
+    "coverUrl": "/static/covers/cover-9975a1d1959c517a.jpg",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/2026 - Cyber Skufs - Средневековый слэм/Cyber Skufs - Средневековый слэм.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t43",
+    "title": "Станционный смотритель",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al26",
+    "albumTitle": "Ничего плохого",
+    "duration": 123,
+    "coverUrl": "/static/covers/cover-89486499ede0d855.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - Станционный смотритель.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2019,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t58",
+    "title": "ТАЙМАУТ (Remix)",
+    "artistIds": [
+      "a35",
+      "a36"
+    ],
+    "artistNames": [
+      "Nikitata",
+      "Kordhell"
+    ],
+    "albumId": "al39",
+    "albumTitle": "ТАЙМАУТ",
+    "duration": 154,
+    "coverUrl": "/static/covers/cover-376f087f12a22afc.jpg",
+    "audioUrl": "/static/audio/Nikitata,Kordhell - ТАЙМАУТ (Remix).mp3",
+    "lyrics": "",
+    "genre": "electronics",
+    "year": 2022,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t9",
+    "title": "Уродск. Трактирная",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al8",
+    "albumTitle": "Уродск. Трактирная",
+    "duration": 245,
+    "coverUrl": "/static/covers/cover-8425c8336298e361.jpg",
+    "audioUrl": "/static/audio/Cyber Skufs/2026 - Cyber Skufs - Уродск. Трактирная/Cyber Skufs - Уродск. Трактирная.mp3",
+    "lyrics": "",
+    "genre": "rusrock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t19",
+    "title": "Уродск. Трактирная",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al8",
+    "albumTitle": "Уродск. Трактирная",
+    "duration": 245,
+    "coverUrl": "/static/covers/cover-8425c8336298e361.jpg",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/2026 - Cyber Skufs - Уродск. Трактирная/Cyber Skufs - Уродск. Трактирная.mp3",
+    "lyrics": "",
+    "genre": "rusrock",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t10",
+    "title": "Хочу в исекай",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al9",
+    "albumTitle": "Хочу в исекай",
+    "duration": 243,
+    "coverUrl": "/static/covers/cover-d0e9b9bb05ad5cae.jpg",
+    "audioUrl": "/static/audio/Cyber Skufs/2026 - Cyber Skufs - Хочу в исекай/Cyber Skufs - Хочу в исекай.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t20",
+    "title": "Хочу в исекай",
+    "artistIds": [
+      "a3"
+    ],
+    "artistNames": [
+      "Cyber Skufs"
+    ],
+    "albumId": "al9",
+    "albumTitle": "Хочу в исекай",
+    "duration": 243,
+    "coverUrl": "/static/covers/cover-d0e9b9bb05ad5cae.jpg",
+    "audioUrl": "/static/audio/ymu/Cyber Skufs/2026 - Cyber Skufs - Хочу в исекай/Cyber Skufs - Хочу в исекай.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2026,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t64",
+    "title": "Хочу к тебе",
+    "artistIds": [
+      "a42",
+      "a43"
+    ],
+    "artistNames": [
+      "ЕГОР НАТС",
+      "Вневесомости"
+    ],
+    "albumId": "al45",
+    "albumTitle": "Хочу к тебе",
+    "duration": 153,
+    "coverUrl": "/static/covers/cover-3ca1c91a17eb6bbc.jpg",
+    "audioUrl": "/static/audio/ЕГОР НАТС,Вневесомости - Хочу к тебе.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2018,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t54",
+    "title": "Цветы",
+    "artistIds": [
+      "a31"
+    ],
+    "artistNames": [
+      "DSPRITE"
+    ],
+    "albumId": "al35",
+    "albumTitle": "Цветы",
+    "duration": 119,
+    "coverUrl": "/static/covers/cover-f028e38e6bd5d4d8.jpg",
+    "audioUrl": "/static/audio/DSPRITE - Цветы.mp3",
+    "lyrics": "",
+    "genre": "rusrock",
+    "year": 2021,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t44",
+    "title": "Эвкалиптова ветвь",
+    "artistIds": [
+      "a16"
+    ],
+    "artistNames": [
+      "mzlff"
+    ],
+    "albumId": "al24",
+    "albumTitle": "Космоцветок",
+    "duration": 255,
+    "coverUrl": "/static/covers/cover-85dfb5a3441d8eda.jpg",
+    "audioUrl": "/static/audio/ymu/mzlff/mzlff - Эвкалиптова ветвь.mp3",
+    "lyrics": "",
+    "genre": "rusrap",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t51",
+    "title": "Эхо",
+    "artistIds": [
+      "a28"
+    ],
+    "artistNames": [
+      "Dan Korshunov"
+    ],
+    "albumId": "al32",
+    "albumTitle": "Эхо",
+    "duration": 134,
+    "coverUrl": "/static/covers/cover-b16a88b115646658.jpg",
+    "audioUrl": "/static/audio/Dan Korshunov - Эхо.mp3",
+    "lyrics": "",
+    "genre": "dance",
+    "year": 2022,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t70",
+    "title": "Я и одиночество",
+    "artistIds": [
+      "a49"
+    ],
+    "artistNames": [
+      "Три дня дождя"
+    ],
+    "albumId": "al51",
+    "albumTitle": "Байполар",
+    "duration": 229,
+    "coverUrl": "/static/covers/cover-b0498e645adb6c65.jpg",
+    "audioUrl": "/static/audio/Три дня дождя - Я и одиночество.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2022,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t55",
+    "title": "Я твой, играй со мной",
+    "artistIds": [
+      "a32"
+    ],
+    "artistNames": [
+      "karbon"
+    ],
+    "albumId": "al36",
+    "albumTitle": "Я твой, играй со мной",
+    "duration": 187,
+    "coverUrl": "/static/covers/cover-2528f8fdc1227770.jpg",
+    "audioUrl": "/static/audio/karbon - Я твой, играй со мной.mp3",
+    "lyrics": "",
+    "genre": "alternative",
+    "year": 2020,
+    "disabledManually": false,
+    "missingFile": false
+  },
+  {
+    "id": "t67",
+    "title": "Я устал",
+    "artistIds": [
+      "a46"
+    ],
+    "artistNames": [
+      "Остап Парфёнов"
+    ],
+    "albumId": "al48",
+    "albumTitle": "Я устал",
+    "duration": 128,
+    "coverUrl": "/static/covers/cover-baa784780717ae08.jpg",
+    "audioUrl": "/static/audio/Остап Парфёнов - Я устал.mp3",
+    "lyrics": "",
+    "genre": "ruspop",
+    "year": 2022,
+    "disabledManually": false,
+    "missingFile": false
+  }
+]

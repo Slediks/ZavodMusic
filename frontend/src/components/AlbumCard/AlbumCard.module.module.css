@@ -1,0 +1,147 @@
+
+.album-card {
+  width: 150px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: fit-content;
+  cursor: pointer;
+.album-cover-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.album-cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transform: scale(1);
+  transition: transform 180ms ease;
+}
+
+.album-cover-fallback {
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+}
+
+.album-cover-fallback .ui-icon {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  color: var(--muted-color);
+}
+
+.album-cover-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: color-mix(in srgb, #000 40%, transparent);
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.album-card:hover .album-cover-overlay {
+  opacity: 1;
+}
+
+.album-card:hover .album-cover {
+  transform: scale(1.06);
+}
+
+.album-cover-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  background: var(--surface-muted);
+  color: var(--muted-color);
+  opacity: 0.8;
+}
+
+.album-cover-play:hover {
+  opacity: 1;
+  transform: translate(-50%, -50%) !important;
+}
+
+.album-cover-play:focus-visible {
+  transform: translate(-50%, -50%) !important;
+}
+
+.album-cover-play .ui-icon {
+  --ui-icon-size: 2rem;
+}
+
+.album-cover-link {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  border: none;
+  background: transparent;
+  color: var(--muted-color);
+  padding: 0;
+}
+
+.album-cover-link .ui-icon {
+  --ui-icon-size: 1.1rem;
+}
+
+.album-info-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 8px;
+  min-width: 0;
+}
+
+.album-title {
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album-subtitle {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  color: var(--muted-color);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+}
+

@@ -1,0 +1,218 @@
+[
+  {
+    "id": "p1",
+    "title": "Morning Shift",
+    "description": "Tracks for focused work",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": true,
+    "trackIds": [
+      "t10",
+      "t1",
+      "t2",
+      "t12"
+    ],
+    "coverUrl": "/static/covers/cover-d0e9b9bb05ad5cae.jpg"
+  },
+  {
+    "id": "p2",
+    "title": "Late Drive",
+    "description": "Night ride selection",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": [
+      "t2"
+    ]
+  },
+  {
+    "id": "p3",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": true,
+    "trackIds": [
+      "t38",
+      "t31",
+      "t13",
+      "t28",
+      "t50"
+    ],
+    "coverUrl": "/static/covers/cover-6fd572a55e6e5e32.jpg"
+  },
+  {
+    "id": "p4",
+    "title": "1234",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p5",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": [
+      "t37"
+    ],
+    "coverUrl": "/static/covers/cover-84b9de96cfc82f53.jpg"
+  },
+  {
+    "id": "p6",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p7",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p8",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p9",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p10",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p11",
+    "title": "123",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p12",
+    "title": "123134345",
+    "description": "",
+    "ownerId": "u1",
+    "ownerLogin": "ivan",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p13",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p14",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p15",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p16",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p17",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p18",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p19",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": false,
+    "trackIds": []
+  },
+  {
+    "id": "p20",
+    "title": "1",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p21",
+    "title": "2",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  },
+  {
+    "id": "p22",
+    "title": "3",
+    "description": "",
+    "ownerId": "u2",
+    "ownerLogin": "olga",
+    "isPublic": true,
+    "trackIds": []
+  }
+]
