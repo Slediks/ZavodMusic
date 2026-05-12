@@ -1,4 +1,4 @@
-﻿import styles from './EditPlaylistModal.module.css';
+﻿import styles from "./EditPlaylistModal.module.css";
 import { useEffect, useState } from "react";
 import type { Playlist } from "../../types/playlist";
 import { Button } from "../Button/Button";
@@ -44,7 +44,7 @@ export function EditPlaylistModal({ playlist, onClose, onSubmit }: EditPlaylistM
           }}
           aria-pressed={isPublic}
         >
-          <UiIcon name={isPublic ? "lockOff" : "lock"} />
+          <UiIcon name={isPublic ? "lockOff" : "lock"} className={styles["privacy-toggle-icon"]} />
           {isPublic ? "Публичный" : "Приватный"}
         </div>
       </div>
@@ -56,8 +56,5 @@ export function EditPlaylistModal({ playlist, onClose, onSubmit }: EditPlaylistM
     </Modal>
   );
 }
-
-
-
 
 

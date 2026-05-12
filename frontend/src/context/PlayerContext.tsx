@@ -12,6 +12,7 @@ import type { Track } from "../types/track";
 import type { RepeatMode } from "../types/player";
 import { authStorage } from "../utils/authStorage";
 import { useToast } from "./ToastContext";
+import { getTrackAudioUrl } from "../api/trackMedia";
 
 type FullscreenMode = "closed" | "player" | "lyrics";
 
@@ -178,8 +179,9 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !currentTrack) return;
-    if (audio.src !== currentTrack.audioUrl) {
-      audio.src = currentTrack.audioUrl;
+    const audioUrl = getTrackAudioUrl(currentTrack.id);
+    if (audio.src !== audioUrl) {
+      audio.src = audioUrl;
       audio.load();
     }
     if (isPlaying) {
@@ -417,6 +419,10 @@ export function usePlayer() {
   if (!value) throw new Error("usePlayer must be used inside PlayerProvider");
   return value;
 }
+
+
+
+
 
 
 

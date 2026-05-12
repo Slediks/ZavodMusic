@@ -1,4 +1,4 @@
-﻿import styles from './Modal.module.css';
+﻿import styles from "./Modal.module.css";
 import { useEffect } from "react";
 import type { ReactNode } from "react";
 import { UiIcon } from "../UiIcon/UiIcon";
@@ -26,13 +26,13 @@ export function Modal({ isOpen, title, onClose, children, showCloseButton = true
 
   return (
     <div className={styles["ui-modal-backdrop"]} onClick={onClose} role="dialog" aria-modal="true">
-      <div className={`ui-modal ${modalClassName}`.trim()} onClick={(e) => e.stopPropagation()}>
+      <div className={[styles["ui-modal"], modalClassName].filter(Boolean).join(" ")} onClick={(e) => e.stopPropagation()}>
         {title || showCloseButton ? (
           <div className={styles["ui-modal-header"]}>
             {title ? <h3>{title}</h3> : null}
             {showCloseButton ? (
               <button type="button" className={styles["ui-modal-close"]} onClick={onClose} aria-label="Закрыть">
-                <UiIcon name="close" />
+                <UiIcon name="close" className={styles["ui-modal-close-icon"]} />
               </button>
             ) : null}
           </div>
@@ -42,8 +42,5 @@ export function Modal({ isOpen, title, onClose, children, showCloseButton = true
     </div>
   );
 }
-
-
-
 
 

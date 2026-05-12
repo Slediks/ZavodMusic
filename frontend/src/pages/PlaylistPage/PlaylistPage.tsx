@@ -15,8 +15,9 @@ import type { PlaylistDetail } from "../../types/playlist";
 import type { Track } from "../../types/track";
 import { UiIcon } from "../../components/UiIcon/UiIcon";
 import { formatDuration } from "../../utils/formatDuration";
+import { getPlaylistCoverUrl } from "../../api/entityMedia";
 
-export function PlaylistPage({ playlistId }: { playlistId: string }) {
+export function PlaylistPage({ playlistId, onDeleted }: { playlistId: string; onDeleted: () => void }) {
   const { user, updateUser } = useAuth();
   const { playTrack, addToQueue } = usePlayer();
   const { showToast } = useToast();
@@ -25,6 +26,7 @@ export function PlaylistPage({ playlistId }: { playlistId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [deleteTrackId, setDeleteTrackId] = useState<string | null>(null);
+  const [deletePlaylistOpen, setDeletePlaylistOpen] = useState(false);
   const [addTrackModal, setAddTrackModal] = useState<{ id: string; title: string } | null>(null);
   const [editOpen, setEditOpen] = useState(false);
 
@@ -73,7 +75,17 @@ export function PlaylistPage({ playlistId }: { playlistId: string }) {
               {isOwner ? (
                 <button
                   type="button"
-                  className={`ui-icon-btn ${styles.quickBtn}`}
+                  className={styles.quickBtn}
+                  onClick={() => setDeletePlaylistOpen(true)}
+                  aria-label="Удалить плейлист"
+                >
+                  <UiIcon name="trash" className={styles.quickBtnIcon} />
+                </button>
+              ) : null}
+              {isOwner ? (
+                <button
+                  type="button"
+                  className={styles.quickBtn}
                   onClick={async () => {
                     try {
                       await playlistsApi.update(playlist.id, { isPublic: !playlist.isPublic });
@@ -85,13 +97,13 @@ export function PlaylistPage({ playlistId }: { playlistId: string }) {
                   }}
                   aria-label={playlist.isPublic ? "Сделать плейлист приватным" : "Сделать плейлист публичным"}
                 >
-                  <UiIcon name={playlist.isPublic ? "lockOff" : "lock"} />
+                  <UiIcon name={playlist.isPublic ? "lockOff" : "lock"} className={styles.quickBtnIcon} />
                 </button>
               ) : null}
               {!isOwner ? (
                 <button
                   type="button"
-                  className={`ui-icon-btn ${styles.quickBtn} ${isLikedPlaylist ? styles.quickBtnActive : ""}`}
+                  className={`${styles.quickBtn} ${isLikedPlaylist ? styles.quickBtnActive : ""}`.trim()}
                   onClick={async () => {
                     try {
                       const next = isLikedPlaylist ? await playlistsApi.unlike(playlist.id) : await playlistsApi.like(playlist.id);
@@ -103,21 +115,21 @@ export function PlaylistPage({ playlistId }: { playlistId: string }) {
                   }}
                   aria-label={isLikedPlaylist ? "Убрать лайк плейлиста" : "Поставить лайк плейлисту"}
                 >
-                  <UiIcon name="heart" />
+                  <UiIcon name="heart" className={styles.quickBtnIcon} />
                 </button>
               ) : null}
               {isOwner ? (
-                <button type="button" className={`ui-icon-btn ${styles.quickBtn}`} onClick={() => setEditOpen(true)} aria-label="Редактировать плейлист">
-                  <UiIcon name="edit" />
+                <button type="button" className={styles.quickBtn} onClick={() => setEditOpen(true)} aria-label="Редактировать плейлист">
+                  <UiIcon name="edit" className={styles.quickBtnIcon} />
                 </button>
               ) : null}
             </div>
             <div className={styles.coverWrap}>
-              {playlist.coverUrl ? (
-                <img src={playlist.coverUrl} alt={playlist.title} className={styles.cover} />
+              {playlist.coverExists ? (
+                <img src={getPlaylistCoverUrl(playlist.id)} alt={playlist.title} className={styles.cover} />
               ) : (
                 <div className={`${styles.cover} ${styles.coverFallback}`}>
-                  <UiIcon name="folderMusic" />
+                  <UiIcon name="folderMusic" className={styles.coverFallbackIcon} />
                 </div>
               )}
               <div className={styles.coverOverlay}>
@@ -131,7 +143,7 @@ export function PlaylistPage({ playlistId }: { playlistId: string }) {
                   }}
                   aria-label="Играть плейлист"
                 >
-                  <UiIcon name="play" />
+                  <UiIcon name="play" className={styles.coverPlayIcon} />
                 </button>
               </div>
             </div>
@@ -204,6 +216,22 @@ export function PlaylistPage({ playlistId }: { playlistId: string }) {
               }
             }}
           />
+          <ConfirmModal
+            isOpen={deletePlaylistOpen}
+            title="Удалить плейлист"
+            text="Удалить плейлист без возможности восстановления?"
+            onCancel={() => setDeletePlaylistOpen(false)}
+            onConfirm={async () => {
+              try {
+                await playlistsApi.remove(playlist.id);
+                setDeletePlaylistOpen(false);
+                showToast("Плейлист удален", "info");
+                onDeleted();
+              } catch (e) {
+                showToast(e instanceof ApiError ? e.message : "Не удалось удалить плейлист", "error");
+              }
+            }}
+          />
 
           <AddToPlaylistModal
             isOpen={Boolean(addTrackModal)}
@@ -234,6 +262,10 @@ export function PlaylistPage({ playlistId }: { playlistId: string }) {
     </section>
   );
 }
+
+
+
+
 
 
 

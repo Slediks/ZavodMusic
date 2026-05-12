@@ -10,12 +10,13 @@ import { SearchToolbar } from "../../components/SearchToolbar/SearchToolbar";
 import { useAuth } from "../../context/AuthContext";
 import { usePlayer } from "../../context/PlayerContext";
 import { useToast } from "../../context/ToastContext";
-import { useDebounce } from "../../hooks/useDebounce";
 import { usePagination } from "../../hooks/usePagination";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSearchControls } from "../../hooks/useSearchControls";
 import { ApiError } from "../../types/api";
 import type { Track } from "../../types/track";
 import { getRandomSearchPhrase } from "../../utils/searchPhrases";
+import { buildTrackPlaybackHandlers } from "../../utils/trackPlayback";
 
 type SortBy = "title" | "albumTitle" | "duration";
 type SortDirection = "asc" | "desc";
@@ -31,9 +32,7 @@ export function TracksPage({ onTracksHydrated, onToggleLike, onToggleDislike }: 
   const { user } = useAuth();
   const { playTrack, addToQueue } = usePlayer();
 
-  const [searchInput, setSearchInput] = useState("");
-  const debouncedSearch = useDebounce(searchInput, 300);
-  const [search, setSearch] = useState("");
+  const { searchInput, setSearchInput, search, applyInstantSearch, clearAllSearch } = useSearchControls();
 
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);
@@ -55,9 +54,8 @@ export function TracksPage({ onTracksHydrated, onToggleLike, onToggleDislike }: 
   const likedTrackIds = user?.likedTrackIds || [];
 
   useEffect(() => {
-    setSearch(debouncedSearch);
     setPage(1);
-  }, [debouncedSearch]);
+  }, [search]);
 
   useEffect(() => {
     const run = async () => {
@@ -90,23 +88,28 @@ export function TracksPage({ onTracksHydrated, onToggleLike, onToggleDislike }: 
     setPage(1);
   };
 
-  const onEnterSearch = () => {
-    setSearch(searchInput.trim());
-    setPage(1);
-  };
+  const { onPlay, onAddToQueue } = buildTrackPlaybackHandlers({
+    tracks,
+    dislikedTrackIds,
+    playTrack,
+    addToQueue,
+    showToast,
+  });
 
   return (
-    <section className={`page-stub ${styles.tracksPage}`}>
+    <section className={styles.tracksPage}>
       <h1 className={styles.title}>Все треки</h1>
 
       <SearchToolbar
         hint={`Наш поиск работает быстрее, чем ${normalizedSearchPhrase}`}
         value={searchInput}
         onValueChange={setSearchInput}
-        onEnter={onEnterSearch}
+        onEnter={() => {
+          applyInstantSearch();
+          setPage(1);
+        }}
         onClear={() => {
-          setSearchInput("");
-          setSearch("");
+          clearAllSearch();
           setPage(1);
         }}
         limit={limit}
@@ -134,22 +137,8 @@ export function TracksPage({ onTracksHydrated, onToggleLike, onToggleDislike }: 
               onToggleDislike={onToggleDislike}
               onInfo={setInfoTrack}
               onAddToPlaylist={setPlaylistTrack}
-              onPlay={(track) => {
-                if (dislikedTrackIds.includes(track.id)) {
-                  showToast("Дизлайкнутый трек нельзя воспроизвести", "error");
-                  return;
-                }
-                const playableQueue = tracks.filter((t) => !dislikedTrackIds.includes(t.id));
-                playTrack(track, playableQueue);
-              }}
-              onAddToQueue={(track) => {
-                if (dislikedTrackIds.includes(track.id)) {
-                  showToast("Дизлайкнутый трек нельзя добавить в очередь", "error");
-                  return;
-                }
-                addToQueue(track);
-                showToast("Трек добавлен в очередь", "info");
-              }}
+              onPlay={onPlay}
+              onAddToQueue={onAddToQueue}
               emptyText="Ничего не нашли, но мы старались"
             />
           </div>
@@ -166,6 +155,8 @@ export function TracksPage({ onTracksHydrated, onToggleLike, onToggleDislike }: 
     </section>
   );
 }
+
+
 
 
 

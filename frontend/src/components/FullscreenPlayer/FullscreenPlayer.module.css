@@ -1,5 +1,4 @@
-
-.fullscreen-player {
+﻿.fullscreen-player {
   position: fixed;
   left: 0;
   right: 0;
@@ -14,8 +13,14 @@
   grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
   gap: 22px;
   overflow: hidden;
-.fullscreen-player.no-lyrics {
+}
+
+.no-lyrics {
   grid-template-columns: 1fr;
+}
+
+.has-lyrics {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
 }
 
 .fullscreen-main {
@@ -41,7 +46,7 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border: 1px solid var(--border);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+  box-shadow: var(--card-shadow-strong);
   display: block;
 }
 
@@ -49,7 +54,7 @@
   position: absolute;
   inset: 0;
   border-radius: 14px;
-  background: linear-gradient(180deg, rgba(4, 10, 16, 0.46) 0%, rgba(4, 10, 16, 0.82) 100%);
+  background: linear-gradient(180deg, var(--fullscreen-overlay-start) 0%, var(--fullscreen-overlay-end) 100%);
   opacity: 0;
   transition: opacity 180ms ease;
   pointer-events: none;
@@ -81,17 +86,17 @@
   transform: none !important;
 }
 
-.fullscreen-control-btn.is-active {
+.is-active {
   color: var(--primary-color);
   opacity: 1;
 }
 
-.fullscreen-control-btn.is-disliked {
-  color: #ff6f7b;
+.is-disliked {
+  color: var(--danger-strong);
   opacity: 1;
 }
 
-.fullscreen-control-btn .ui-icon {
+.fullscreen-control-icon {
   --ui-icon-size: 2rem;
 }
 
@@ -138,36 +143,6 @@
 .fullscreen-transport-group {
   display: inline-flex;
   align-items: center;
-}
-
-.fullscreen-transport-group .player-controls {
-  gap: 10px;
-}
-
-.fullscreen-transport-group .player-action {
-  color: color-mix(in srgb, var(--text-color) 78%, var(--primary-color) 22%);
-  opacity: 0.82;
-}
-
-.fullscreen-transport-group .player-action:hover:not(:disabled) {
-  opacity: 1;
-  color: var(--text-color);
-}
-
-.fullscreen-transport-group .player-action:disabled {
-  opacity: 0.35;
-  color: var(--muted-color);
-}
-
-.fullscreen-transport-group .player-action.is-active {
-  color: var(--primary-color);
-  opacity: 1;
-}
-
-.fullscreen-transport-group .player-action-primary {
-  width: 52px;
-  height: 52px;
-  box-shadow: 0 8px 24px rgba(81, 191, 236, 0.32);
 }
 
 .fullscreen-track-meta {
@@ -234,5 +209,6 @@
 }
 
 
-}
+
+
 

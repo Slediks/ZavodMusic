@@ -1,5 +1,4 @@
-
-.progress-wrap {
+﻿.progress-wrap {
   --progress-track-h: 8px;
   --progress-thumb-w: 6px;
   --progress-thumb-h: 10px;
@@ -9,6 +8,8 @@
   flex-direction: column;
   width: calc(100% + 20px);
   margin: 0 -10px;
+}
+
 .progress-wrap input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -88,6 +89,11 @@
   color: var(--muted-color);
 }
 
+.progress-time-left {
+  text-align: left;
+}
 
+.progress-time-right {
+  text-align: right;
 }
 

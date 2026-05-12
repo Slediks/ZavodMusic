@@ -1,8 +1,0 @@
-
-.form-grid { display: grid; gap: 8px; 
-.form-grid input, .form-grid textarea { border: 1px solid var(--border-strong); background: var(--surface-alt); color: var(--text-color); border-radius: 8px; padding: 8px; }
-
-
-
-}
-

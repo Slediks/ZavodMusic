@@ -1,7 +1,7 @@
-
-.form-grid {
+﻿.form-grid {
   display: grid;
   gap: 10px;
+}
 
 .form-grid input,
 .form-grid textarea {
@@ -32,7 +32,7 @@
   user-select: none;
 }
 
-.privacy-toggle.is-public {
+.is-public {
   color: var(--text-color);
   border-color: var(--primary-color);
 }
@@ -42,11 +42,13 @@
   box-shadow: 0 0 0 3px var(--ring);
 }
 
-.privacy-toggle .ui-icon {
-  width: 14px;
-  height: 14px;
+.privacy-toggle-icon {
+  --ui-icon-size: 0.875rem;
 }
 
-
+.ui-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
 }
 

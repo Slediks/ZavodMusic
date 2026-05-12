@@ -93,7 +93,7 @@
   color: var(--primary-strong);
 }
 
-.coverFallback .ui-icon {
+.coverFallbackIcon {
   --ui-icon-size: 1.15rem;
 }
 
@@ -104,7 +104,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in oklab, #000 35%, transparent);
+  background: color-mix(in oklab, var(--mix-black) 35%, transparent);
   opacity: 0;
   transition: opacity 120ms ease;
 }
@@ -225,7 +225,7 @@
   transition: opacity 120ms ease;
 }
 
-.iconBtn .ui-icon {
+.actionIcon {
   --ui-icon-size: 1.2rem;
 }
 
@@ -369,5 +369,9 @@
 .dragHandle:active {
   cursor: grabbing;
 }
+
+
+
+
 
 

@@ -1,7 +1,8 @@
-﻿import styles from './PlayerTrackInfo.module.css';
+﻿import styles from "./PlayerTrackInfo.module.css";
 import { useEffect, useState } from "react";
 import { UiIcon } from "../../UiIcon/UiIcon";
 import type { Track } from "../../../types/track";
+import { getTrackCoverUrl } from "../../../api/trackMedia";
 
 type PlayerTrackInfoProps = {
   track: Track | null;
@@ -14,28 +15,28 @@ export function PlayerTrackInfo({ track, isPlaying, onOpenFullscreen }: PlayerTr
 
   useEffect(() => {
     setCoverFailed(false);
-  }, [track?.id, track?.coverUrl]);
+  }, [track?.id]);
 
   if (!track) {
     return <div className={styles["player-track-info"]}>Ничего не играет</div>;
   }
 
   const artistLabel = track.artistNames.join(", ");
-  const coverWrapClassName = `player-cover-wrap ${isPlaying ? "is-playing" : ""}`;
+  const coverWrapClassName = [styles["player-cover-wrap"], isPlaying ? styles["is-playing"] : ""].filter(Boolean).join(" ");
 
   return (
     <div className={styles["player-track-info"]}>
       <div className={coverWrapClassName}>
-        {!coverFailed && track.coverUrl ? (
-          <img src={track.coverUrl} alt={track.title} className={styles["player-cover"]} onError={() => setCoverFailed(true)} />
+        {!coverFailed && getTrackCoverUrl(track.id) ? (
+          <img src={getTrackCoverUrl(track.id)} alt={track.title} className={styles["player-cover"]} onError={() => setCoverFailed(true)} />
         ) : (
           <div className={styles["player-cover"] + " " + styles["player-cover-fallback"]}>
-            <UiIcon name="musicTwo" />
+            <UiIcon name="musicTwo" className={styles["player-cover-fallback-icon"]} />
           </div>
         )}
         {onOpenFullscreen ? (
           <button type="button" className={styles["hover-fullscreen-btn"]} onClick={onOpenFullscreen} aria-label="Полный экран">
-            <UiIcon name="fullscreen" />
+            <UiIcon name="fullscreen" className={styles["hover-fullscreen-icon"]} />
           </button>
         ) : null}
       </div>
@@ -47,8 +48,6 @@ export function PlayerTrackInfo({ track, isPlaying, onOpenFullscreen }: PlayerTr
     </div>
   );
 }
-
-
 
 
 

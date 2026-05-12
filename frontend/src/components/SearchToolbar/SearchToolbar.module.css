@@ -24,6 +24,11 @@
   color: var(--primary-soft);
 }
 
+:global([data-theme="light"]) .searchHint {
+  color: var(--primary-strong);
+  opacity: 0.72;
+}
+
 .searchInputWrap {
   position: relative;
   width: 100%;
@@ -72,7 +77,7 @@
   justify-content: center;
 }
 
-.clearBtn .ui-icon {
+.clearIcon {
   --ui-icon-size: 2rem;
 }
 
@@ -103,4 +108,5 @@
   font-size: 14px;
   font-weight: 600;
 }
+
 

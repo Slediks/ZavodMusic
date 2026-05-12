@@ -1,4 +1,4 @@
-﻿import styles from './PlayerControls.module.css';
+﻿import styles from "./PlayerControls.module.css";
 import { UiIcon } from "../../UiIcon/UiIcon";
 
 type PlayerControlsProps = {
@@ -16,22 +16,19 @@ export function PlayerControls({ isPlaying, isPreviousDisabled, isNextDisabled, 
 
   return (
     <div className={styles["player-controls"]}>
-      <button type="button" className={styles["ui-icon-btn"] + " " + styles["player-action"]} onClick={onPrevious} aria-label="Предыдущий" disabled={isPreviousDisabled}>
-        <UiIcon name="previous" />
+      <button type="button" className={styles["player-action"]} onClick={onPrevious} aria-label="Предыдущий" disabled={isPreviousDisabled}>
+        <UiIcon name="previous" className={styles["player-action-icon"]} />
       </button>
 
-      <button type="button" className={styles["ui-icon-btn"] + " " + styles["player-action"] + " " + styles["player-action-primary"]} onClick={onTogglePlay} aria-label={playButtonLabel}>
+      <button type="button" className={[styles["player-action"], styles["player-action-primary"]].join(" ")} onClick={onTogglePlay} aria-label={playButtonLabel}>
         <UiIcon name={playIcon} className={styles["player-action-primary-icon"]} />
       </button>
 
-      <button type="button" className={styles["ui-icon-btn"] + " " + styles["player-action"]} onClick={onNext} aria-label="Следующий" disabled={isNextDisabled}>
-        <UiIcon name="next" />
+      <button type="button" className={styles["player-action"]} onClick={onNext} aria-label="Следующий" disabled={isNextDisabled}>
+        <UiIcon name="next" className={styles["player-action-icon"]} />
       </button>
     </div>
   );
 }
-
-
-
 
 

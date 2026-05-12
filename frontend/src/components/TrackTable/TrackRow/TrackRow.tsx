@@ -1,9 +1,10 @@
-﻿import styles from './TrackRow.module.css';
+﻿import styles from "./TrackRow.module.css";
 import { useMemo, useState } from "react";
 import type { Track } from "../../../types/track";
 import { usePlayer } from "../../../context/PlayerContext";
 import { UiIcon } from "../../UiIcon/UiIcon";
 import { formatDuration } from "../../../utils/formatDuration";
+import { getTrackCoverUrl } from "../../../api/trackMedia";
 
 type TrackRowProps = {
   track: Track;
@@ -94,10 +95,10 @@ export function TrackRow({
             disabled={!canInteract}
             aria-label={`Воспроизвести ${track.title}`}
           >
-            {!coverFailed && track.coverUrl ? (
-              <img src={track.coverUrl} alt={track.title} className={styles.trackCover} onError={() => setCoverFailed(true)} />
+            {!coverFailed && getTrackCoverUrl(track.id) ? (
+              <img src={getTrackCoverUrl(track.id)} alt={track.title} className={styles.trackCover} onError={() => setCoverFailed(true)} />
             ) : (
-              <span className={styles.coverFallback}><UiIcon name="musicTwo" /></span>
+              <span className={styles.coverFallback}><UiIcon name="musicTwo" className={styles.coverFallbackIcon} /></span>
             )}
             <span className={`${styles.coverOverlay} ${showCoverOverlay ? styles.coverOverlayVisible : ""}`}>
               <UiIcon name={coverIconName} className={styles.coverPlayIcon} />
@@ -149,23 +150,23 @@ export function TrackRow({
         {showRemoveButton ? (
           <button
             type="button"
-            className={`ui-icon-btn ${styles.iconBtn} ${styles.iconBtnRemove}`}
+            className={`${styles.iconBtn} ${styles.iconBtnRemove}`}
             onClick={(e) => {
               e.stopPropagation();
               onRemoveTrack?.(track);
             }}
             aria-label="Удалить из плейлиста"
           >
-            <UiIcon name="trash" />
+            <UiIcon name="trash" className={styles.actionIcon} />
           </button>
         ) : null}
         <button
           type="button"
-          className={`ui-icon-btn ${styles.iconBtn} ${isLiked ? styles.iconBtnActive : ""} ${isDisliked ? styles.iconBtnDanger : ""}`}
+          className={`${styles.iconBtn} ${isLiked ? styles.iconBtnActive : ""} ${isDisliked ? styles.iconBtnDanger : ""}`}
           onClick={(e) => { e.stopPropagation(); isDisliked ? onToggleDislike(track) : onToggleLike(track); }}
           aria-label={isDisliked ? "Убрать дизлайк" : isLiked ? "Убрать лайк" : "Поставить лайк"}
         >
-          <UiIcon name={isDisliked ? "heartOff" : "heart"} />
+          <UiIcon name={isDisliked ? "heartOff" : "heart"} className={styles.actionIcon} />
         </button>
       </div>
 
@@ -174,13 +175,13 @@ export function TrackRow({
         {canInteract ? (
           <div className={`${styles.actions} ${menuOpen ? styles.actionsVisible : ""}`}>
             {showQueueButton ? (
-              <button type="button" className={`ui-icon-btn ${styles.iconBtn}`} onClick={(e) => { e.stopPropagation(); onAddToQueue(track); }} aria-label="Добавить в очередь">
-                <UiIcon name="plus" />
+              <button type="button" className={styles.iconBtn} onClick={(e) => { e.stopPropagation(); onAddToQueue(track); }} aria-label="Добавить в очередь">
+                <UiIcon name="plus" className={styles.actionIcon} />
               </button>
             ) : null}
             <div className={styles.menuWrap}>
-              <button type="button" className={`ui-icon-btn ${styles.iconBtn}`} onClick={(e) => { e.stopPropagation(); setMenuOpen((prev) => !prev); }} aria-label="Больше опций">
-                <UiIcon name="menuVertical" />
+              <button type="button" className={styles.iconBtn} onClick={(e) => { e.stopPropagation(); setMenuOpen((prev) => !prev); }} aria-label="Больше опций">
+                <UiIcon name="menuVertical" className={styles.actionIcon} />
               </button>
               {menuOpen ? (
                 <div className={styles.menuPopover}>
@@ -201,13 +202,13 @@ export function TrackRow({
             {showDragHandle ? (
               <button
                 type="button"
-                className={`ui-icon-btn ${styles.iconBtn} ${styles.dragHandle}`}
+                className={`${styles.iconBtn} ${styles.dragHandle}`}
                 onClick={(e) => e.stopPropagation()}
                 aria-label="Перетащить трек"
                 {...(dragHandleAttributes as Record<string, unknown>)}
                 {...(dragHandleListeners as Record<string, unknown>)}
               >
-                <UiIcon name="signEqual" />
+                <UiIcon name="signEqual" className={styles.actionIcon} />
               </button>
             ) : null}
           </div>
@@ -216,7 +217,6 @@ export function TrackRow({
     </div>
   );
 }
-
 
 
 

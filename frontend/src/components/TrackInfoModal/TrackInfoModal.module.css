@@ -1,9 +1,10 @@
-
-.track-info-layout {
+﻿.track-info-layout {
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: 12px;
   align-items: start;
+}
+
 .track-info-cover {
   width: 140px;
   height: 140px;
@@ -11,6 +12,8 @@
   object-fit: cover;
   border: 1px solid var(--border);
   background: var(--surface-alt);
+}
+
 .track-info-grid {
   display: grid;
   gap: 8px;
@@ -36,14 +39,10 @@
     grid-template-columns: 1fr;
   }
 
-}
   .track-info-cover {
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
   }
-}
-
-
 }
 

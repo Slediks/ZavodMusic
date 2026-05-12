@@ -753,7 +753,7 @@ def get_artist_albums(artist_id: str):
 
     result = []
     for album in albums:
-        if artist_id not in album.get("artistIds", []):
+        if artist_id not in (album.get("artistIds") or []):
             continue
         album_tracks = track_map_by_album.get(album.get("id"), [])
         if not album_tracks:

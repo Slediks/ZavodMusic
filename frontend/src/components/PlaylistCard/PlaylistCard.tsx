@@ -1,7 +1,8 @@
-﻿import styles from './PlaylistCard.module.css';
+﻿import styles from "./PlaylistCard.module.css";
 import { UiIcon } from "../UiIcon/UiIcon";
 import type { Playlist } from "../../types/playlist";
 import { formatDuration } from "../../utils/formatDuration";
+import { getPlaylistCoverUrl } from "../../api/entityMedia";
 
 type PlaylistCardProps = {
   playlist: Playlist;
@@ -33,10 +34,10 @@ export function PlaylistCard({ playlist, canManage, isLiked, canLike = true, can
       }}
     >
       <div className={styles["playlist-cover-wrap"]}>
-        {playlist.coverUrl ? (
-          <img src={playlist.coverUrl} alt={playlist.title} className={styles["playlist-cover"]} />
+        {playlist.coverExists ? (
+          <img src={getPlaylistCoverUrl(playlist.id)} alt={playlist.title} className={styles["playlist-cover"]} />
         ) : (
-          <div className={styles["playlist-cover"] + " " + styles.placeholder}><UiIcon name="folderMusic" /></div>
+          <div className={styles["playlist-cover"] + " " + styles.placeholder}><UiIcon name="folderMusic" className={styles["playlist-cover-fallback-icon"]} /></div>
         )}
 
         <div className={styles["playlist-cover-overlay"]}>
@@ -49,7 +50,7 @@ export function PlaylistCard({ playlist, canManage, isLiked, canLike = true, can
             }}
             aria-label={`Играть плейлист ${playlist.title}`}
           >
-            <UiIcon name="play" />
+            <UiIcon name="play" className={styles["playlist-cover-play-icon"]} />
           </button>
 
           {!canManage && canLike ? (
@@ -62,7 +63,7 @@ export function PlaylistCard({ playlist, canManage, isLiked, canLike = true, can
               }}
               aria-label={isLiked ? "Убрать лайк" : "Поставить лайк"}
             >
-              <UiIcon name="heart" />
+              <UiIcon name="heart" className={styles["playlist-cover-inline-icon"]} />
             </button>
           ) : null}
 
@@ -77,7 +78,7 @@ export function PlaylistCard({ playlist, canManage, isLiked, canLike = true, can
               aria-label={playlist.isPublic ? "Сделать приватным" : "Сделать публичным"}
               title={playlist.isPublic ? "Публичный плейлист" : "Приватный плейлист"}
             >
-              <UiIcon name={playlist.isPublic ? "lockOff" : "lock"} />
+              <UiIcon name={playlist.isPublic ? "lockOff" : "lock"} className={styles["playlist-cover-inline-icon"]} />
             </button>
           ) : null}
 
@@ -90,7 +91,7 @@ export function PlaylistCard({ playlist, canManage, isLiked, canLike = true, can
             }}
             aria-label="Копировать ссылку"
           >
-            <UiIcon name="link" />
+            <UiIcon name="link" className={styles["playlist-cover-inline-icon"]} />
           </button>
         </div>
       </div>
@@ -106,8 +107,6 @@ export function PlaylistCard({ playlist, canManage, isLiked, canLike = true, can
     </article>
   );
 }
-
-
 
 
 

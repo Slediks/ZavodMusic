@@ -6,8 +6,8 @@ import { EmptyState } from "../../components/EmptyState/EmptyState";
 import { ErrorBlock } from "../../components/ErrorBlock/ErrorBlock";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { SearchToolbar } from "../../components/SearchToolbar/SearchToolbar";
-import { useDebounce } from "../../hooks/useDebounce";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSearchControls } from "../../hooks/useSearchControls";
 import { usePlayer } from "../../context/PlayerContext";
 import { useToast } from "../../context/ToastContext";
 import type { Artist } from "../../types/artist";
@@ -19,9 +19,7 @@ export function ArtistsPage({ onOpenArtist }: { onOpenArtist: (id: string) => vo
   const { showToast } = useToast();
 
   const [items, setItems] = useState<Artist[]>([]);
-  const [searchInput, setSearchInput] = useState("");
-  const search = useDebounce(searchInput, 300);
-  const [instantSearch, setInstantSearch] = useState("");
+  const { searchInput, setSearchInput, search, clearInstantSearch, applyInstantSearch, clearAllSearch } = useSearchControls();
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
   const [total, setTotal] = useState(0);
@@ -36,7 +34,7 @@ export function ArtistsPage({ onOpenArtist }: { onOpenArtist: (id: string) => vo
       setLoading(true);
       setError("");
       try {
-        const res = await artistsApi.getAll({ search: instantSearch || search, page, limit });
+        const res = await artistsApi.getAll({ search, page, limit });
         setItems(res.items || []);
         setPages(res.pages || 0);
         setTotal(res.total || 0);
@@ -48,10 +46,10 @@ export function ArtistsPage({ onOpenArtist }: { onOpenArtist: (id: string) => vo
     };
 
     void run();
-  }, [search, instantSearch, page, limit]);
+  }, [search, page, limit]);
 
   return (
-    <section className={`${'{'}styles["page-stub"]} ${styles.tracksPage}`}>
+    <section className={styles.tracksPage}>
       <h1 className={styles.title}>Исполнители</h1>
 
       <SearchToolbar
@@ -59,16 +57,15 @@ export function ArtistsPage({ onOpenArtist }: { onOpenArtist: (id: string) => vo
         value={searchInput}
         onValueChange={(next) => {
           setSearchInput(next);
-          setInstantSearch("");
+          clearInstantSearch();
           setPage(1);
         }}
         onEnter={() => {
-          setInstantSearch(searchInput.trim());
+          applyInstantSearch();
           setPage(1);
         }}
         onClear={() => {
-          setSearchInput("");
-          setInstantSearch("");
+          clearAllSearch();
           setPage(1);
         }}
         limit={limit}
@@ -88,11 +85,11 @@ export function ArtistsPage({ onOpenArtist }: { onOpenArtist: (id: string) => vo
               <div className={styles.skeletonGrid} aria-hidden="true">
                 {Array.from({ length: Math.max(8, Math.min(limit, 12)) }).map((_, idx) => (
                   <article key={`artist-sk-${idx}`} className={styles.skeletonCard}>
-                    <div className={`ui-skeleton ${styles.skeletonCover}`} />
-                    <div className={`ui-skeleton ${styles.skeletonTitle}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonCover}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonTitle}`} />
                     <div className={styles.skeletonMetaRow}>
-                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
-                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
+                      <div className={`${styles.skeletonBase} ${styles.skeletonMeta}`} />
+                      <div className={`${styles.skeletonBase} ${styles.skeletonMeta}`} />
                     </div>
                   </article>
                 ))}
@@ -132,6 +129,16 @@ export function ArtistsPage({ onOpenArtist }: { onOpenArtist: (id: string) => vo
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

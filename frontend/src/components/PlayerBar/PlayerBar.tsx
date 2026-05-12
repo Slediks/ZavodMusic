@@ -1,4 +1,4 @@
-﻿import styles from './PlayerBar.module.css';
+﻿import styles from "./PlayerBar.module.css";
 import { useCallback, useMemo, useState } from "react";
 import { useToast } from "../../context/ToastContext";
 import { usePlayer } from "../../context/PlayerContext";
@@ -114,21 +114,21 @@ export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onTog
           {hasCurrentTrack ? (
             <button
               type="button"
-              className={`${styles["ui-icon-btn"]} player-action ${isCurrentLiked ? "is-active" : ""}`}
+              className={[styles["player-action"], isCurrentLiked ? styles["is-active"] : ""].filter(Boolean).join(" ")}
               onClick={handleToggleLike}
               aria-label="Лайк"
             >
-              <UiIcon name="heart" />
+              <UiIcon name="heart" className={styles["player-action-icon"]} />
             </button>
           ) : null}
 
           <button
             type="button"
-            className={`${styles["ui-icon-btn"]} player-action ${isShuffled ? "is-active" : ""}`}
+            className={[styles["player-action"], isShuffled ? styles["is-active"] : ""].filter(Boolean).join(" ")}
             onClick={toggleShuffle}
             aria-label={isShuffled ? "Перемешивание включено" : "Перемешать"}
           >
-            <UiIcon name="shuffle" />
+            <UiIcon name="shuffle" className={styles["player-action-icon"]} />
           </button>
 
           <PlayerControls
@@ -142,21 +142,21 @@ export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onTog
 
           <button
             type="button"
-            className={`${styles["ui-icon-btn"]} player-action ${repeatMode !== "off" ? "is-active" : ""}`}
+            className={[styles["player-action"], repeatMode !== "off" ? styles["is-active"] : ""].filter(Boolean).join(" ")}
             onClick={handleToggleRepeat}
             aria-label="Режим повтора"
           >
-            <UiIcon name={repeatMode === "one" ? "repeatOne" : "repeat"} />
+            <UiIcon name={repeatMode === "one" ? "repeatOne" : "repeat"} className={styles["player-action-icon"]} />
           </button>
 
           {hasCurrentTrack ? (
             <button
               type="button"
-              className={`${styles["ui-icon-btn"]} player-action ${isCurrentDisliked ? "is-disliked is-active" : ""}`}
+              className={[styles["player-action"], isCurrentDisliked ? styles["is-disliked"] : "", isCurrentDisliked ? styles["is-active"] : ""].filter(Boolean).join(" ")}
               onClick={handleToggleDislike}
               aria-label="Дизлайк"
             >
-              <UiIcon name="heartOff" />
+              <UiIcon name="heartOff" className={styles["player-action-icon"]} />
             </button>
           ) : null}
         </div>
@@ -164,30 +164,30 @@ export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onTog
         <div className={styles["player-right"]}>
           <button
             type="button"
-            className={styles["ui-icon-btn"] + " " + styles["player-action"]}
+            className={styles["player-action"]}
             onClick={() => setIsAddToPlaylistOpen(true)}
             aria-label="Добавить в плейлист"
             disabled={!hasCurrentTrack}
           >
-            <UiIcon name="folderMusic" />
+            <UiIcon name="folderMusic" className={styles["player-action-icon"]} />
           </button>
 
           <button
             type="button"
-            className={`${styles["ui-icon-btn"]} player-action ${hasLyrics ? "" : "is-soft-disabled"}`.trim()}
+            className={[styles["player-action"], hasLyrics ? "" : styles["is-soft-disabled"]].filter(Boolean).join(" ")}
             onClick={handleOpenLyrics}
             aria-label="Текст"
           >
-            <UiIcon name="text" />
+            <UiIcon name="text" className={styles["player-action-icon"]} />
           </button>
 
           <button
             type="button"
-            className={`${styles["ui-icon-btn"]} player-action ${isQueueOpen ? "is-active" : ""}`}
+            className={[styles["player-action"], isQueueOpen ? styles["is-active"] : ""].filter(Boolean).join(" ")}
             onClick={toggleQueuePanel}
             aria-label="Очередь"
           >
-            <UiIcon name="queue" />
+            <UiIcon name="queue" className={styles["player-action-icon"]} />
           </button>
 
           <VolumeControl
@@ -208,8 +208,5 @@ export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onTog
     </div>
   );
 }
-
-
-
 
 

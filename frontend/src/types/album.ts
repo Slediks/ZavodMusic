@@ -5,7 +5,6 @@ export type Album = {
   title: string;
   artistIds: string[];
   artistNames: string[];
-  coverUrl: string | null;
   coverExists: boolean;
   tracksCount: number;
   duration: number;
@@ -20,5 +19,4 @@ export type AlbumTracksResponse = {
   limit: number;
   pages: number;
 };
-
 

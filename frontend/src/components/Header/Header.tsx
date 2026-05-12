@@ -1,4 +1,4 @@
-﻿import './Header.module.css';
+﻿import styles from "./Header.module.css";
 import { useCallback, useRef, useState } from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { AppLink } from "../Navigation/AppLink/AppLink";
@@ -26,7 +26,10 @@ export function Header({ pathname, onNavigate, isDark, isAuthorized, currentLogi
   const [isShake, setIsShake] = useState(false);
   const wrapRef = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(wrapRef, () => { setIsLoginOpen(false); onClearLoginError(); }, isLoginOpen);
+  useClickOutside(wrapRef, () => {
+    setIsLoginOpen(false);
+    onClearLoginError();
+  }, isLoginOpen);
 
   const submitLogin = useCallback(async () => {
     try {
@@ -40,44 +43,57 @@ export function Header({ pathname, onNavigate, isDark, isAuthorized, currentLogi
   }, [loginValue, onLogin]);
 
   return (
-    <header className="header">
-      <div className="header-row">
-        <div className="brand-block">
-          <div className="brand-logo" aria-hidden="true" />
-          <div className="brand-divider" aria-hidden="true" />
-          <AppLink to="/" currentPath={pathname} onNavigate={onNavigate} className="brand-link">
-            <span className="brand-title">ZAVOD MUSIC</span>
-            <span className="brand-subtitle">Работай с удовольствием</span>
+    <header className={styles.header}>
+      <div className={styles["header-row"]}>
+        <div className={styles["brand-block"]}>
+          <div className={styles["brand-logo"]} aria-hidden="true" />
+          <div className={styles["brand-divider"]} aria-hidden="true" />
+          <AppLink to="/" currentPath={pathname} onNavigate={onNavigate} className={styles["brand-link"]}>
+            <span className={styles["brand-title"]}>ZAVOD MUSIC</span>
+            <span className={styles["brand-subtitle"]}>Работай с удовольствием</span>
           </AppLink>
         </div>
 
-        <div className="header-controls">
+        <div className={styles["header-controls"]}>
           {!isAuthorized ? (
-            <div className="login-wrap" ref={wrapRef}>
+            <div className={styles["login-wrap"]} ref={wrapRef}>
               {!isLoginOpen ? (
-                <button type="button" className="login-button" onClick={() => setIsLoginOpen(true)}>Войти</button>
+                <button type="button" className={styles["login-button"]} onClick={() => setIsLoginOpen(true)}>
+                  Войти
+                </button>
               ) : (
-                <div className="login-inline">
-                  <div className="login-input-wrap">
+                <div className={styles["login-inline"]}>
+                  <div className={styles["login-input-wrap"]}>
                     <input
-                      className={`login-input ${loginError ? "is-error" : ""} ${isShake ? "is-shake" : ""}`}
+                      className={[
+                        styles["login-input"],
+                        loginError ? styles["is-error"] : "",
+                        isShake ? styles["is-shake"] : ""
+                      ].filter(Boolean).join(" ")}
                       placeholder="Логин"
                       value={loginValue}
                       onChange={(e) => setLoginValue(e.target.value)}
-                      onKeyDown={(e) => { if (e.key === "Enter") void submitLogin(); }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          void submitLogin();
+                        }
+                      }}
                     />
-                    <div className="login-actions">
+                    <div className={styles["login-actions"]}>
                       <button
                         type="button"
-                        className="ui-icon-btn login-action-btn"
-                        onClick={() => { setIsLoginOpen(false); onClearLoginError(); }}
+                        className={styles["login-action-btn"]}
+                        onClick={() => {
+                          setIsLoginOpen(false);
+                          onClearLoginError();
+                        }}
                         aria-label="Отмена"
                       >
                         <UiIcon name="close" />
                       </button>
                       <button
                         type="button"
-                        className="ui-icon-btn login-action-btn login-action-btn-submit"
+                        className={[styles["login-action-btn"], styles["login-action-btn-submit"]].join(" ")}
                         onClick={() => void submitLogin()}
                         aria-label="Подтвердить"
                       >
@@ -87,23 +103,35 @@ export function Header({ pathname, onNavigate, isDark, isAuthorized, currentLogi
                   </div>
                 </div>
               )}
-              {loginError ? <div className="login-error-text">{loginError}</div> : null}
+              {loginError ? <div className={styles["login-error-text"]}>{loginError}</div> : null}
             </div>
           ) : (
-            <div className="login-inline">
-              <div className="user-chip">
-                <span className="user-chip-name">{currentLogin}</span>
-                <button type="button" className="ui-icon-btn user-chip-logout" onClick={onLogout} aria-label="Выйти"><UiIcon name="logout" /></button>
+            <div className={styles["login-inline"]}>
+              <div className={styles["user-chip"]}>
+                <span className={styles["user-chip-name"]}>{currentLogin}</span>
+                <button
+                  type="button"
+                  className={styles["user-chip-logout"]}
+                  onClick={onLogout}
+                  aria-label="Выйти"
+                >
+                  <UiIcon name="logout" className={styles["user-chip-logout-icon"]} />
+                </button>
               </div>
             </div>
           )}
-          <button type="button" className="theme-toggle" onClick={onToggleTheme} aria-label={isDark ? "Светлая тема" : "Темная тема"}>
-            <UiIcon name={isDark ? "themeDark" : "themeLight"} />
+          <button
+            type="button"
+            className={styles["theme-toggle"]}
+            onClick={onToggleTheme}
+            aria-label={isDark ? "Светлая тема" : "Темная тема"}
+          >
+            <UiIcon name={isDark ? "themeDark" : "themeLight"} className={styles["theme-toggle-icon"]} />
           </button>
         </div>
       </div>
 
-      <div className="nav-container">
+      <div className={styles["nav-container"]}>
         <Navigation
           items={navItems}
           pathname={pathname}
@@ -115,3 +143,6 @@ export function Header({ pathname, onNavigate, isDark, isAuthorized, currentLogi
     </header>
   );
 }
+
+
+

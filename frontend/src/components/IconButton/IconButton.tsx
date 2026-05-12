@@ -1,17 +1,8 @@
-﻿import type { ButtonHTMLAttributes } from "react";
+﻿import styles from "./IconButton.module.css";
+import type { ButtonHTMLAttributes } from "react";
 
 export function IconButton({ className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button className={`ui-icon-btn ${className}`.trim()} type="button" {...props} />;
+  return <button className={[styles["ui-icon-btn"], className].filter(Boolean).join(" ")} type="button" {...props} />;
 }
-
-
-
-
-
-
-
-
-
-
 
 

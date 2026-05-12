@@ -1,0 +1,5 @@
+﻿services:
+  frontend:
+    image: zavodmusic-frontend:local
+    ports:
+      - "8080:80"

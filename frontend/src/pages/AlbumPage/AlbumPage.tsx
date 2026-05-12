@@ -13,6 +13,7 @@ import type { Album } from "../../types/album";
 import type { Track } from "../../types/track";
 import { ApiError } from "../../types/api";
 import { formatDuration } from "../../utils/formatDuration";
+import { getAlbumCoverUrl } from "../../api/entityMedia";
 
 export function AlbumPage({ albumId, onToggleLike, onToggleDislike }: { albumId: string; onToggleLike: (track: Track) => void; onToggleDislike: (track: Track) => void }) {
   const { user } = useAuth();
@@ -52,8 +53,8 @@ export function AlbumPage({ albumId, onToggleLike, onToggleDislike }: { albumId:
     <section className={styles.page}>
       <header className={styles.hero}>
         <div className={styles.coverWrap}>
-          {album.coverUrl ? (
-            <img src={album.coverUrl} alt={album.title} className={styles.cover} />
+          {album.coverExists ? (
+            <img src={getAlbumCoverUrl(album.id)} alt={album.title} className={styles.cover} />
           ) : (
             <div className={`${styles.cover} ${styles.coverFallback}`}>
               <UiIcon name="musicAlbum" />
@@ -117,6 +118,9 @@ export function AlbumPage({ albumId, onToggleLike, onToggleDislike }: { albumId:
     </section>
   );
 }
+
+
+
 
 
 

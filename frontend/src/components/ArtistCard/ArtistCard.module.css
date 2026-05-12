@@ -1,5 +1,4 @@
-
-.artist-card {
+﻿.artist-card {
   width: 150px;
   padding: 0;
   border: none;
@@ -10,6 +9,8 @@
   gap: 10px;
   height: fit-content;
   cursor: pointer;
+}
+
 .artist-cover-wrap {
   position: relative;
   width: 100%;
@@ -23,7 +24,7 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--card-shadow-soft);
   transform: scale(1);
   transition: transform 180ms ease;
 }
@@ -36,7 +37,7 @@
   padding: 50px;
 }
 
-.artist-cover-fallback .ui-icon {
+.artist-cover-fallback-icon {
   width: 100%;
   aspect-ratio: 1 / 1;
   height: auto;
@@ -47,7 +48,7 @@
   position: absolute;
   inset: 0;
   border-radius: 8px;
-  background: color-mix(in srgb, #000 40%, transparent);
+  background: color-mix(in srgb, var(--mix-black) 40%, transparent);
   opacity: 0;
   transition: opacity 140ms ease;
 }
@@ -84,7 +85,7 @@
   transform: translate(-50%, -50%) !important;
 }
 
-.artist-cover-play .ui-icon {
+.artist-cover-play-icon {
   --ui-icon-size: 2rem;
 }
 
@@ -98,7 +99,7 @@
   padding: 0;
 }
 
-.artist-cover-link .ui-icon {
+.artist-cover-link-icon {
   --ui-icon-size: 1.1rem;
 }
 
@@ -107,6 +108,7 @@
   flex-direction: column;
   gap: 4px;
   padding: 0 8px;
+  min-width: 0;
 }
 
 .artist-title {
@@ -114,21 +116,6 @@
   font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.artist-info-wrap {
-  min-width: 0;
-}
-
-.artist-meta span {
-  min-width: 0;
-}
-
-.artist-meta span:first-child {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -144,6 +131,16 @@
   font-weight: 500;
 }
 
-
+.artist-meta span {
+  min-width: 0;
 }
+
+.artist-meta span:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
 

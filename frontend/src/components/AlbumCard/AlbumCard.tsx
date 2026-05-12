@@ -1,7 +1,8 @@
-﻿import styles from './AlbumCard.module.css';
+﻿import styles from "./AlbumCard.module.css";
 import { UiIcon } from "../UiIcon/UiIcon";
 import type { Album } from "../../types/album";
 import { formatDuration } from "../../utils/formatDuration";
+import { getAlbumCoverUrl } from "../../api/entityMedia";
 
 type AlbumCardProps = {
   album: Album;
@@ -42,10 +43,10 @@ export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
       }}
     >
       <div className={styles["album-cover-wrap"]}>
-        {album.coverUrl ? (
-          <img src={album.coverUrl} alt={album.title} className={styles["album-cover"]} />
+        {album.coverExists ? (
+          <img src={getAlbumCoverUrl(album.id)} alt={album.title} className={styles["album-cover"]} />
         ) : (
-          <div className={styles["album-cover"] + " " + styles["album-cover-fallback"]}><UiIcon name="musicAlbum" /></div>
+          <div className={styles["album-cover"] + " " + styles["album-cover-fallback"]}><UiIcon name="musicAlbum" className={styles["album-cover-fallback-icon"]} /></div>
         )}
 
         <div className={styles["album-cover-overlay"]}>
@@ -58,7 +59,7 @@ export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
             }}
             aria-label={`Играть альбом ${album.title}`}
           >
-            <UiIcon name="play" />
+            <UiIcon name="play" className={styles["album-cover-play-icon"]} />
           </button>
 
           <button
@@ -74,7 +75,7 @@ export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
             }}
             aria-label={`Копировать ссылку на ${album.title}`}
           >
-            <UiIcon name="link" />
+            <UiIcon name="link" className={styles["album-cover-link-icon"]} />
           </button>
         </div>
       </div>
@@ -91,8 +92,6 @@ export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
     </article>
   );
 }
-
-
 
 
 

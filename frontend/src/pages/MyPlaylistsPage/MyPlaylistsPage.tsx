@@ -77,7 +77,7 @@ export function MyPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: strin
   };
 
   return (
-    <section className={`${'{'}styles["page-stub"]} ${styles.tracksPage}`}>
+    <section className={styles.tracksPage}>
       <h1 className={styles.title}>Мои плейлисты</h1>
       {error ? <ErrorBlock message={error} /> : null}
 
@@ -88,9 +88,9 @@ export function MyPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: strin
             {loading
               ? Array.from({ length: 8 }).map((_, idx) => (
                   <article key={`my-own-sk-${idx}`} className={styles.playlistCardSkeleton}>
-                    <div className={`ui-skeleton ${styles.playlistCardSkeletonCover}`} />
-                    <div className={`ui-skeleton ${styles.playlistCardSkeletonTitle}`} />
-                    <div className={`ui-skeleton ${styles.playlistCardSkeletonMeta}`} />
+                    <div className={`${styles.skeletonBase} ${styles.playlistCardSkeletonCover}`} />
+                    <div className={`${styles.skeletonBase} ${styles.playlistCardSkeletonTitle}`} />
+                    <div className={`${styles.skeletonBase} ${styles.playlistCardSkeletonMeta}`} />
                   </article>
                 ))
               : (
@@ -136,9 +136,9 @@ export function MyPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: strin
             {loading
               ? Array.from({ length: 8 }).map((_, idx) => (
                   <article key={`my-liked-sk-${idx}`} className={styles.playlistCardSkeleton}>
-                    <div className={`ui-skeleton ${styles.playlistCardSkeletonCover}`} />
-                    <div className={`ui-skeleton ${styles.playlistCardSkeletonTitle}`} />
-                    <div className={`ui-skeleton ${styles.playlistCardSkeletonMeta}`} />
+                    <div className={`${styles.skeletonBase} ${styles.playlistCardSkeletonCover}`} />
+                    <div className={`${styles.skeletonBase} ${styles.playlistCardSkeletonTitle}`} />
+                    <div className={`${styles.skeletonBase} ${styles.playlistCardSkeletonMeta}`} />
                   </article>
                 ))
               : liked.map((p) => (
@@ -226,6 +226,16 @@ export function MyPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: strin
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

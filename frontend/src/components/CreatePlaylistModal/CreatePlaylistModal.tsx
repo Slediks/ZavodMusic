@@ -1,4 +1,4 @@
-﻿import styles from './CreatePlaylistModal.module.css';
+﻿import styles from "./CreatePlaylistModal.module.css";
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import { Modal } from "../Modal/Modal";
@@ -36,7 +36,7 @@ export function CreatePlaylistModal({ isOpen, onClose, onSubmit }: CreatePlaylis
           }}
           aria-pressed={isPublic}
         >
-          <UiIcon name={isPublic ? "lockOff" : "lock"} />
+          <UiIcon name={isPublic ? "lockOff" : "lock"} className={styles["privacy-toggle-icon"]} />
           {isPublic ? "Публичный" : "Приватный"}
         </div>
       </div>
@@ -48,8 +48,5 @@ export function CreatePlaylistModal({ isOpen, onClose, onSubmit }: CreatePlaylis
     </Modal>
   );
 }
-
-
-
 
 

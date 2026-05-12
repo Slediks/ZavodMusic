@@ -10,12 +10,13 @@ import { SearchToolbar } from "../../components/SearchToolbar/SearchToolbar";
 import { useAuth } from "../../context/AuthContext";
 import { usePlayer } from "../../context/PlayerContext";
 import { useToast } from "../../context/ToastContext";
-import { useDebounce } from "../../hooks/useDebounce";
 import { usePagination } from "../../hooks/usePagination";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSearchControls } from "../../hooks/useSearchControls";
 import { ApiError } from "../../types/api";
 import type { Track } from "../../types/track";
 import { getRandomSearchPhrase } from "../../utils/searchPhrases";
+import { buildTrackPlaybackHandlers } from "../../utils/trackPlayback";
 
 type FavoritesPageProps = {
   onTracksHydrated: (tracks: Track[]) => void;
@@ -28,9 +29,7 @@ export function FavoritesPage({ onTracksHydrated, onToggleLike, onToggleDislike 
   const { user } = useAuth();
   const { playTrack, addToQueue } = usePlayer();
 
-  const [searchInput, setSearchInput] = useState("");
-  const debouncedSearch = useDebounce(searchInput, 300);
-  const [search, setSearch] = useState("");
+  const { searchInput, setSearchInput, search, applyInstantSearch, clearAllSearch } = useSearchControls();
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -46,9 +45,8 @@ export function FavoritesPage({ onTracksHydrated, onToggleLike, onToggleDislike 
   const likedTrackIds = user?.likedTrackIds || [];
 
   useEffect(() => {
-    setSearch(debouncedSearch);
     setPage(1);
-  }, [debouncedSearch]);
+  }, [search]);
 
   useEffect(() => {
     const run = async () => {
@@ -71,9 +69,16 @@ export function FavoritesPage({ onTracksHydrated, onToggleLike, onToggleDislike 
   }, [search, page, limit, onTracksHydrated]);
 
   const { pages } = usePagination({ total, page, limit });
+  const { onPlay, onAddToQueue } = buildTrackPlaybackHandlers({
+    tracks,
+    dislikedTrackIds,
+    playTrack,
+    addToQueue,
+    showToast,
+  });
 
   return (
-    <section className={`page-stub ${styles.tracksPage}`}>
+    <section className={styles.tracksPage}>
       <h1 className={styles.title}>Избранные треки</h1>
 
       <SearchToolbar
@@ -81,12 +86,11 @@ export function FavoritesPage({ onTracksHydrated, onToggleLike, onToggleDislike 
         value={searchInput}
         onValueChange={setSearchInput}
         onEnter={() => {
-          setSearch(searchInput.trim());
+          applyInstantSearch();
           setPage(1);
         }}
         onClear={() => {
-          setSearchInput("");
-          setSearch("");
+          clearAllSearch();
           setPage(1);
         }}
         limit={limit}
@@ -114,22 +118,8 @@ export function FavoritesPage({ onTracksHydrated, onToggleLike, onToggleDislike 
               onToggleDislike={onToggleDislike}
               onInfo={setInfoTrack}
               onAddToPlaylist={setPlaylistTrack}
-              onPlay={(track) => {
-                if (dislikedTrackIds.includes(track.id)) {
-                  showToast("Дизлайкнутый трек нельзя воспроизвести", "error");
-                  return;
-                }
-                const playableQueue = tracks.filter((t) => !dislikedTrackIds.includes(t.id));
-                playTrack(track, playableQueue);
-              }}
-              onAddToQueue={(track) => {
-                if (dislikedTrackIds.includes(track.id)) {
-                  showToast("Дизлайкнутый трек нельзя добавить в очередь", "error");
-                  return;
-                }
-                addToQueue(track);
-                showToast("Трек добавлен в очередь", "info");
-              }}
+              onPlay={onPlay}
+              onAddToQueue={onAddToQueue}
               emptyText="Избранного пока нет"
               showHeader={false}
             />
@@ -147,6 +137,8 @@ export function FavoritesPage({ onTracksHydrated, onToggleLike, onToggleDislike 
     </section>
   );
 }
+
+
 
 
 

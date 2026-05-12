@@ -1,2 +1,19 @@
-﻿
+﻿.ui-skeleton {
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--surface-muted) 88%, var(--mix-black) 12%) 0%,
+    color-mix(in srgb, var(--primary-strong) 22%, var(--surface-muted) 78%) 45%,
+    color-mix(in srgb, var(--surface-muted) 88%, var(--mix-black) 12%) 100%
+  );
+  background-size: 220% 100%;
+  animation: skeletonShimmer 1.35s linear infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -20% 0; }
+}
+
+
 

@@ -54,7 +54,7 @@
   color: var(--primary-strong);
 }
 
-.pageBtn .ui-icon {
+.pageIcon {
   --ui-icon-size: 1rem;
 }
 
@@ -80,4 +80,5 @@
   height: 10px;
   background: var(--primary-color);
 }
+
 

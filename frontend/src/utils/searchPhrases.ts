@@ -83,7 +83,7 @@
   "чем согласованный отпуск",
   "чем табличка “ремонт завершен”",
   "чем звонок в конце рабочего дня",
-  "чем ты ¯\\_(ツ)_/¯",
+  "чем ты ?\\_(?)_/?",
   "чем короткое письмо",
   "чем задача без вложений",
   "чем идеальный плейлист на смену",
@@ -95,5 +95,7 @@ export function getRandomSearchPhrase() {
   const idx = Math.floor(Math.random() * SEARCH_PHRASES.length);
   return SEARCH_PHRASES[idx] || SEARCH_PHRASES[0];
 }
+
+
 
 

@@ -1,7 +1,8 @@
-﻿import styles from './ArtistCard.module.css';
+﻿import styles from "./ArtistCard.module.css";
 import { UiIcon } from "../UiIcon/UiIcon";
 import type { Artist } from "../../types/artist";
 import { formatDuration } from "../../utils/formatDuration";
+import { getArtistCoverUrl } from "../../api/entityMedia";
 
 type ArtistCardProps = {
   artist: Artist;
@@ -12,8 +13,6 @@ type ArtistCardProps = {
 export function ArtistCard({ artist, onOpen, onPlay }: ArtistCardProps) {
   const artistLink = `${window.location.origin}/artists/${artist.id}`;
   const copyArtistLink = async () => {
-    // Clipboard API may be unavailable on non-secure contexts (e.g. local http),
-    // so keep a fallback for predictable behavior.
     if (navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(artistLink);
       return;
@@ -44,15 +43,15 @@ export function ArtistCard({ artist, onOpen, onPlay }: ArtistCardProps) {
       }}
     >
       <div className={styles["artist-cover-wrap"]}>
-        {artist.coverUrl ? (
-          <img src={artist.coverUrl} alt={artist.name} className={styles["artist-cover"]} />
+        {artist.coverExists ? (
+          <img src={getArtistCoverUrl(artist.id)} alt={artist.name} className={styles["artist-cover"]} />
         ) : (
-          <div className={styles["artist-cover"] + " " + styles["artist-cover-fallback"]}><UiIcon name="musicArtist" /></div>
+          <div className={styles["artist-cover"] + " " + styles["artist-cover-fallback"]}><UiIcon name="musicArtist" className={styles["artist-cover-fallback-icon"]} /></div>
         )}
 
         <div className={styles["artist-cover-overlay"]}>
           <button type="button" className={styles["artist-cover-play"]} onClick={(e) => { e.stopPropagation(); onPlay(artist.id); }} aria-label={`Играть исполнителя ${artist.name}`}>
-            <UiIcon name="play" />
+            <UiIcon name="play" className={styles["artist-cover-play-icon"]} />
           </button>
 
           <button
@@ -68,15 +67,13 @@ export function ArtistCard({ artist, onOpen, onPlay }: ArtistCardProps) {
             }}
             aria-label={`Копировать ссылку на ${artist.name}`}
           >
-            <UiIcon name="link" />
+            <UiIcon name="link" className={styles["artist-cover-link-icon"]} />
           </button>
         </div>
       </div>
 
       <div className={styles["artist-info-wrap"]}>
-        <div className={styles["artist-title"]}>
-          {artist.name}
-        </div>
+        <div className={styles["artist-title"]}>{artist.name}</div>
 
         <div className={styles["artist-meta"]}>
           <span>{artist.tracksCount} треков</span>
@@ -86,8 +83,6 @@ export function ArtistCard({ artist, onOpen, onPlay }: ArtistCardProps) {
     </article>
   );
 }
-
-
 
 
 

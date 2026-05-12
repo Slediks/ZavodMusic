@@ -9,6 +9,8 @@
   min-height: 0;
   height: 100%;
   overflow: hidden;
+}
+
 .hero {
   display: grid;
   grid-template-columns: 112px 1fr;
@@ -106,7 +108,7 @@
 }
 
 .albumsScroll {
-  height: 236px;
+  height: 264px;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;
@@ -114,18 +116,19 @@
   border-radius: 8px;
 }
 
-.albumsScroll .entity-grid {
+.albumsGrid {
   display: flex;
   flex-wrap: nowrap;
   gap: 16px;
   width: max-content;
-  padding: 12px 8px;
+  padding: 12px 8px 16px;
+  align-items: flex-start;
 }
 
-.albumsScroll .album-card {
-  flex: 0 0 124px;
-  width: 124px;
-  min-width: 124px;
+.albumsItem {
+  flex: 0 0 150px;
+  width: 150px;
+  min-width: 150px;
 }
 
 .sectionTitle {
@@ -137,7 +140,6 @@
     height: 100%;
   }
 
-}
   .hero {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -159,10 +161,6 @@
 
   .content {
     gap: 12px;
-  }
-
-  .albumsScroll {
-    height: 200px;
   }
 }
 

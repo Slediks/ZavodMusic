@@ -1,4 +1,4 @@
-﻿import { useMemo } from "react";
+﻿import { useEffect, useMemo } from "react";
 import { tracksApi } from "./api/tracksApi";
 import { AppLayout } from "./components/AppLayout/AppLayout";
 import { useAuth } from "./context/AuthContext";
@@ -31,6 +31,11 @@ function App() {
   const { pathname, route, navigate } = useRouter(isAuthorized);
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
+
   const toggleLike = async (track: Track) => {
     if (!user) { showToast("Войдите, чтобы ставить лайки", "error"); return; }
     const isLiked = user.likedTrackIds.includes(track.id);
@@ -61,7 +66,7 @@ function App() {
     if (pathname === "/favorites") return <FavoritesPage onTracksHydrated={hydrateTracks} onToggleLike={(track) => { void toggleLike(track); }} onToggleDislike={(track) => { void toggleDislike(track); }} />;
     if (pathname === "/playlists/my") return <MyPlaylistsPage onOpenPlaylist={(id) => navigate(`/playlists/${id}`)} />;
     if (pathname === "/playlists/public") return <PublicPlaylistsPage onOpenPlaylist={(id) => navigate(`/playlists/${id}`)} />;
-    if (pathname.startsWith("/playlists/")) return <PlaylistPage playlistId={playlistIdFromPath} />;
+    if (pathname.startsWith("/playlists/")) return <PlaylistPage playlistId={playlistIdFromPath} onDeleted={() => navigate("/playlists/my")} />;
     if (pathname === "/artists") return <ArtistsPage onOpenArtist={(id) => navigate(`/artists/${id}`)} />;
     if (pathname.startsWith("/artists/")) return <ArtistPage artistId={artistIdFromPath} onOpenAlbum={(id) => navigate(`/albums/${id}`)} onToggleLike={(track) => { void toggleLike(track); }} onToggleDislike={(track) => { void toggleDislike(track); }} />;
     if (pathname === "/albums") return <AlbumsPage onOpenAlbum={(id) => navigate(`/albums/${id}`)} />;
@@ -69,10 +74,10 @@ function App() {
     return <NotFoundPage />;
   }, [pathname, route, hydrateTracks, user]);
 
-  if (isLoading) return <div data-theme={theme}><div className="app-shell"><div className="page-content">Восстановление сессии...</div></div></div>;
+  if (isLoading) return <div><div className="app-shell"><div className="page-content">Восстановление сессии...</div></div></div>;
 
   return (
-    <div data-theme={theme}>
+    <div>
       <AppLayout
         pathname={pathname}
         onNavigate={navigate}
@@ -101,6 +106,10 @@ function App() {
 }
 
 export default App;
+
+
+
+
 
 
 

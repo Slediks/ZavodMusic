@@ -1,7 +1,6 @@
 ﻿import styles from './ArtistPage.module.css';
 import { useEffect, useRef, useState } from "react";
 import { artistsApi } from "../../api/artistsApi";
-import { EntityGrid } from "../../components/EntityGrid/EntityGrid";
 import { AlbumCard } from "../../components/AlbumCard/AlbumCard";
 import { AddToPlaylistModal } from "../../components/AddToPlaylistModal/AddToPlaylistModal";
 import { ErrorBlock } from "../../components/ErrorBlock/ErrorBlock";
@@ -16,6 +15,7 @@ import type { Album } from "../../types/album";
 import type { Track } from "../../types/track";
 import { ApiError } from "../../types/api";
 import { formatDuration } from "../../utils/formatDuration";
+import { getArtistCoverUrl } from "../../api/entityMedia";
 
 export function ArtistPage({ artistId, onOpenAlbum, onToggleLike, onToggleDislike }: { artistId: string; onOpenAlbum: (id: string) => void; onToggleLike: (track: Track) => void; onToggleDislike: (track: Track) => void }) {
   const { user } = useAuth();
@@ -59,8 +59,8 @@ export function ArtistPage({ artistId, onOpenAlbum, onToggleLike, onToggleDislik
     <section className={styles.page}>
       <header className={styles.hero}>
         <div className={styles.coverWrap}>
-          {artist.coverUrl ? (
-            <img src={artist.coverUrl} alt={artist.name} className={styles.cover} />
+          {artist.coverExists ? (
+            <img src={getArtistCoverUrl(artist.id)} alt={artist.name} className={styles.cover} />
           ) : (
             <div className={`${styles.cover} ${styles.coverFallback}`}>
               <UiIcon name="musicArtist" />
@@ -125,24 +125,25 @@ export function ArtistPage({ artistId, onOpenAlbum, onToggleLike, onToggleDislik
               e.preventDefault();
             }}
           >
-            <EntityGrid>
+            <div className={styles.albumsGrid}>
               {albums.map((album) => (
-                <AlbumCard
-                  key={album.id}
-                  album={album}
-                  onOpen={onOpenAlbum}
-                  onPlay={() => {
-                    const albumTracks = tracks.filter((track) => track.albumId === album.id);
-                    const playable = albumTracks.filter((track) => !disliked.includes(track.id));
-                    if (!playable.length) {
-                      showToast("Нет доступных треков для старта", "error");
-                      return;
-                    }
-                    playTrack(playable[0], playable);
-                  }}
-                />
+                <div key={album.id} className={styles.albumsItem}>
+                  <AlbumCard
+                    album={album}
+                    onOpen={onOpenAlbum}
+                    onPlay={() => {
+                      const albumTracks = tracks.filter((track) => track.albumId === album.id);
+                      const playable = albumTracks.filter((track) => !disliked.includes(track.id));
+                      if (!playable.length) {
+                        showToast("Нет доступных треков для старта", "error");
+                        return;
+                      }
+                      playTrack(playable[0], playable);
+                    }}
+                  />
+                </div>
               ))}
-            </EntityGrid>
+            </div>
           </div>
         </div>
       </div>
@@ -156,6 +157,9 @@ export function ArtistPage({ artistId, onOpenAlbum, onToggleLike, onToggleDislik
     </section>
   );
 }
+
+
+
 
 
 

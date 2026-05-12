@@ -1,4 +1,5 @@
 ﻿import type { CSSProperties } from "react";
+import styles from "./UiIcon.module.css";
 
 export type UiIconName =
   | "play"
@@ -84,5 +85,10 @@ type UiIconProps = {
 
 export function UiIcon({ name, className = "" }: UiIconProps) {
   const mask = `url(${ICON_PATHS[name]})`;
-  return <span aria-hidden="true" className={`ui-icon ${className}`.trim()} style={{ "--ui-icon-mask": mask } as CSSProperties} />;
+  return <span aria-hidden="true" className={`${styles["ui-icon"]} ${className}`.trim()} style={{ "--ui-icon-mask": mask } as CSSProperties} />;
 }
+
+
+
+
+

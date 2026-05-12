@@ -2,7 +2,6 @@
 import type { PaginatedResponse } from "../types/pagination";
 import type { Track } from "../types/track";
 import type { User } from "../types/user";
-import { enrichTrackListMedia } from "./trackMedia";
 
 type TrackQuery = {
   search?: string;
@@ -22,12 +21,10 @@ const q = (params: TrackQuery) => {
 
 export const tracksApi = {
   getAll: async (params: TrackQuery) => {
-    const response = await request<PaginatedResponse<Track>>(`/api/tracks${q(params)}`);
-    return { ...response, items: enrichTrackListMedia(response.items) };
+    return request<PaginatedResponse<Track>>(`/api/tracks${q(params)}`);
   },
   getFavorites: async (params: TrackQuery) => {
-    const response = await request<PaginatedResponse<Track>>(`/api/tracks/favorites${q(params)}`);
-    return { ...response, items: enrichTrackListMedia(response.items) };
+    return request<PaginatedResponse<Track>>(`/api/tracks/favorites${q(params)}`);
   },
   like: (id: string) => request<User>(`/api/tracks/${id}/like`, { method: "POST" }),
   unlike: (id: string) => request<User>(`/api/tracks/${id}/like`, { method: "DELETE" }),

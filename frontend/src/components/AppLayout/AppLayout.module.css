@@ -1,5 +1,4 @@
-
-.app-shell {
+﻿.app-shell {
   height: 100vh;
   max-width: 1440px;
   margin: 0 auto;
@@ -9,6 +8,8 @@
   flex-direction: column;
   gap: 16px;
   overflow: hidden;
+}
+
 .page-content {
   flex: 1 1 auto;
   min-height: 0;
@@ -54,7 +55,4 @@
   }
 }
 
-
-
-}
 

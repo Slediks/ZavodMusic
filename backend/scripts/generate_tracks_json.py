@@ -7,6 +7,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from collections import Counter
 
 from mutagen import File as MutagenFile
 from mutagen.flac import FLAC, Picture
@@ -30,6 +31,7 @@ class AudioMeta:
     title: str
     artists: list[str]
     album: str
+    album_artist: str | None
     genre: str
     year: int | None
     lyrics: str
@@ -66,6 +68,10 @@ def split_artists(value: str) -> list[str]:
         return []
     parts = [p.strip() for p in value.replace("/", ";").split(";")]
     return [p for p in parts if p]
+
+
+def normalize_key(value: str | None) -> str:
+    return (value or "").strip().lower()
 
 
 def first_of(tags: Any, keys: list[str]) -> str:
@@ -131,6 +137,7 @@ def read_audio_meta(path: Path) -> AudioMeta:
 
     title = first_of(tags, ["TIT2", "title", "©nam"]) or path.stem
     artist_raw = first_of(tags, ["TPE1", "artist", "©ART"]) or "Unknown Artist"
+    album_artist_raw = first_of(tags, ["TPE2", "albumartist", "aART"])
     album = first_of(tags, ["TALB", "album", "©alb"]) or "Unknown Album"
     genre = first_of(tags, ["TCON", "genre", "©gen"]) or "unknown"
     year_raw = first_of(tags, ["TDRC", "date", "©day"]) 
@@ -145,6 +152,7 @@ def read_audio_meta(path: Path) -> AudioMeta:
         title=title,
         artists=split_artists(artist_raw) or ["Unknown Artist"],
         album=album,
+        album_artist=album_artist_raw.strip() or None,
         genre=genre,
         year=parse_year(year_raw),
         lyrics=lyrics,
@@ -223,9 +231,17 @@ def main() -> None:
     existing_artist_ids = {str(a.get("id")) for a in artists if a.get("id")}
     existing_album_ids = {str(a.get("id")) for a in albums if a.get("id")}
 
-    artist_by_name = {str(a.get("name", "")).strip().lower(): a for a in artists if a.get("name")}
+    artist_by_name = {normalize_key(str(a.get("name", ""))): a for a in artists if a.get("name")}
+    for album in albums:
+        # Normalize existing albums to a single author model.
+        artist_ids = album.get("artistIds") or []
+        artist_names = album.get("artistNames") or []
+        if isinstance(artist_ids, list) and len(artist_ids) > 1:
+            album["artistIds"] = artist_ids[:1]
+        if isinstance(artist_names, list) and len(artist_names) > 1:
+            album["artistNames"] = artist_names[:1]
     album_by_key = {
-        (str(a.get("title", "")).strip().lower(), tuple(str(x).strip().lower() for x in a.get("artistNames", []))): a
+        (normalize_key(str(a.get("title", ""))), normalize_key((a.get("artistNames") or [""])[0] if isinstance(a.get("artistNames"), list) and a.get("artistNames") else "")): a
         for a in albums
         if a.get("title")
     }
@@ -306,7 +322,7 @@ def main() -> None:
         artist_ids: list[str] = []
         artist_names: list[str] = []
         for artist_name in meta.artists:
-            key = artist_name.strip().lower()
+            key = normalize_key(artist_name)
             artist = artist_by_name.get(key)
             if not artist:
                 new_id = next_id("a", existing_artist_ids)
@@ -319,7 +335,25 @@ def main() -> None:
             if not artist.get("coverUrl") and cover_url:
                 artist["coverUrl"] = cover_url
 
-        album_key = (meta.album.strip().lower(), tuple(n.strip().lower() for n in artist_names))
+        album_artist_name = meta.album_artist.strip() if meta.album_artist else ""
+        album_artist_id: str | None = None
+        if album_artist_name:
+            album_artist_key = normalize_key(album_artist_name)
+            album_artist = artist_by_name.get(album_artist_key)
+            if not album_artist:
+                new_id = next_id("a", existing_artist_ids)
+                existing_artist_ids.add(new_id)
+                album_artist = {"id": new_id, "name": album_artist_name, "coverUrl": cover_url}
+                artists.append(album_artist)
+                artist_by_name[album_artist_key] = album_artist
+            elif not album_artist.get("coverUrl") and cover_url:
+                album_artist["coverUrl"] = cover_url
+            album_artist_id = album_artist["id"]
+
+        album_key = (
+            normalize_key(meta.album),
+            normalize_key(album_artist_name or (artist_names[0] if artist_names else "")),
+        )
         album = album_by_key.get(album_key)
         if not album:
             new_id = next_id("al", existing_album_ids)
@@ -327,14 +361,19 @@ def main() -> None:
             album = {
                 "id": new_id,
                 "title": meta.album.strip(),
-                "artistIds": artist_ids,
-                "artistNames": artist_names,
+                "artistIds": [album_artist_id or (artist_ids[0] if artist_ids else "")],
+                "artistNames": [album_artist_name or (artist_names[0] if artist_names else "Unknown Artist")],
                 "coverUrl": cover_url,
+                "_hasExplicitAlbumArtist": bool(album_artist_id and album_artist_name),
             }
             albums.append(album)
             album_by_key[album_key] = album
         elif not album.get("coverUrl") and cover_url:
             album["coverUrl"] = cover_url
+        if album_artist_id and album_artist_name:
+            album["artistIds"] = [album_artist_id]
+            album["artistNames"] = [album_artist_name]
+            album["_hasExplicitAlbumArtist"] = True
 
         existing = tracks_by_audio.get(audio_url)
         if existing is None:
@@ -363,6 +402,54 @@ def main() -> None:
         }
         generated_tracks.append(generated)
         render_progress(index)
+
+    # Fallback album author: when album artist is missing across all tracks of an album,
+    # pick the artist who appears in the most tracks of that album.
+    tracks_by_album: dict[str, list[dict[str, Any]]] = {}
+    for track in generated_tracks:
+        album_id = str(track.get("albumId", "")).strip()
+        if album_id:
+            tracks_by_album.setdefault(album_id, []).append(track)
+
+    for album in albums:
+        album_id = str(album.get("id", "")).strip()
+        if not album_id:
+            continue
+        album_tracks = tracks_by_album.get(album_id, [])
+        if not album_tracks:
+            continue
+
+        if bool(album.get("_hasExplicitAlbumArtist")):
+            current_artist_ids = album.get("artistIds") or []
+            current_artist_names = album.get("artistNames") or []
+            album["artistIds"] = [str(current_artist_ids[0]).strip()] if current_artist_ids else [""]
+            album["artistNames"] = [str(current_artist_names[0]).strip()] if current_artist_names else ["Unknown Artist"]
+            continue
+
+        counts: Counter[str] = Counter()
+        artist_id_to_name: dict[str, str] = {}
+        for track in album_tracks:
+            ids = track.get("artistIds") or []
+            names = track.get("artistNames") or []
+            for idx, artist_id in enumerate(ids):
+                aid = str(artist_id).strip()
+                if not aid:
+                    continue
+                counts[aid] += 1
+                if idx < len(names):
+                    artist_id_to_name[aid] = str(names[idx]).strip()
+
+        if counts:
+            winner_id = counts.most_common(1)[0][0]
+            winner_name = artist_id_to_name.get(winner_id) or next(
+                (str(a.get("name", "")).strip() for a in artists if str(a.get("id", "")).strip() == winner_id),
+                "Unknown Artist",
+            )
+            album["artistIds"] = [winner_id]
+            album["artistNames"] = [winner_name]
+
+    for album in albums:
+        album.pop("_hasExplicitAlbumArtist", None)
 
     if total_files > 0:
         print()

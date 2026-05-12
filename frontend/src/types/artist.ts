@@ -3,7 +3,6 @@
 export type Artist = {
   id: string;
   name: string;
-  coverUrl: string | null;
   coverExists: boolean;
   tracksCount: number;
   duration: number;
@@ -18,5 +17,4 @@ export type ArtistTracksResponse = {
   limit: number;
   pages: number;
 };
-
 

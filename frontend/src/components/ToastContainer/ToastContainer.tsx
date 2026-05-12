@@ -1,4 +1,4 @@
-﻿import styles from './ToastContainer.module.css';
+﻿import styles from "./ToastContainer.module.css";
 import { useToast } from "../../context/ToastContext";
 
 export function ToastContainer() {
@@ -10,7 +10,7 @@ export function ToastContainer() {
         <button
           key={toast.id}
           type="button"
-          className={`${'{'}styles["toast-item"]} toast-${toast.type}`}
+          className={[styles["toast-item"], styles[`toast-${toast.type}`]].join(" ")}
           onClick={() => removeToast(toast.id)}
         >
           {toast.message}
@@ -19,15 +19,5 @@ export function ToastContainer() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
 
 

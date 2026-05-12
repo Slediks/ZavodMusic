@@ -1,11 +1,37 @@
-
-.ui-btn { border: 1px solid var(--border-strong); background: var(--surface-alt); color: var(--text-color); border-radius: 10px; padding: 8px 12px; cursor: pointer; transition: 180ms ease; 
-.ui-btn:hover { transform: translateY(-1px); border-color: var(--primary-color); }
-.ui-btn-primary { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
-.ui-btn-ghost { background: var(--surface-alt); }
-.ui-btn-danger { background: var(--danger); color: #fff; border-color: var(--danger); }
-
-
-
+﻿.ui-btn {
+  border: 1px solid var(--border-strong);
+  background: var(--surface-alt);
+  color: var(--text-color);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 180ms ease;
 }
+
+.ui-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--primary-color);
+}
+
+.ui-btn-primary {
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border-color: var(--primary-color);
+}
+
+.ui-btn-ghost {
+  background: var(--surface-alt);
+}
+
+.ui-btn-danger {
+  background: var(--danger);
+  color: var(--text-inverse);
+  border-color: var(--danger);
+}
+
+.ui-btn-danger:hover {
+  border-color: var(--danger);
+}
+
+
 

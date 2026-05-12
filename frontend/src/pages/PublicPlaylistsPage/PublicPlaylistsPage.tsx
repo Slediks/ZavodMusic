@@ -8,8 +8,8 @@ import { PlaylistCard } from "../../components/PlaylistCard/PlaylistCard";
 import { SearchToolbar } from "../../components/SearchToolbar/SearchToolbar";
 import { useAuth } from "../../context/AuthContext";
 import { useToast } from "../../context/ToastContext";
-import { useDebounce } from "../../hooks/useDebounce";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSearchControls } from "../../hooks/useSearchControls";
 import { ApiError } from "../../types/api";
 import type { Playlist } from "../../types/playlist";
 import { getRandomSearchPhrase } from "../../utils/searchPhrases";
@@ -19,9 +19,7 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
   const { showToast } = useToast();
 
   const [items, setItems] = useState<Playlist[]>([]);
-  const [searchInput, setSearchInput] = useState("");
-  const search = useDebounce(searchInput, 300);
-  const [instantSearch, setInstantSearch] = useState("");
+  const { searchInput, setSearchInput, search, clearInstantSearch, applyInstantSearch, clearAllSearch } = useSearchControls();
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
   const [total, setTotal] = useState(0);
@@ -38,7 +36,7 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
       const res = await playlistsApi.getPublic({
         page: opts?.page ?? page,
         limit: opts?.limit ?? limit,
-        search: opts?.search ?? (instantSearch || search)
+        search: opts?.search ?? search
       });
       setItems(res.items || []);
       setPages(res.pages || 0);
@@ -52,12 +50,12 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
 
   useEffect(() => {
     void loadPublicPlaylists();
-  }, [search, instantSearch, page, limit]);
+  }, [search, page, limit]);
 
   const likedIds = useMemo(() => new Set(user?.likedPlaylistIds || []), [user?.likedPlaylistIds]);
 
   return (
-    <section className={`${'{'}styles["page-stub"]} ${styles.tracksPage}`}>
+    <section className={styles.tracksPage}>
       <h1 className={styles.title}>Публичные плейлисты</h1>
 
       <SearchToolbar
@@ -65,16 +63,15 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
         value={searchInput}
         onValueChange={(next) => {
           setSearchInput(next);
-          setInstantSearch("");
+          clearInstantSearch();
           setPage(1);
         }}
         onEnter={() => {
-          setInstantSearch(searchInput.trim());
+          applyInstantSearch();
           setPage(1);
         }}
         onClear={() => {
-          setSearchInput("");
-          setInstantSearch("");
+          clearAllSearch();
           setPage(1);
         }}
         limit={limit}
@@ -94,12 +91,12 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
               <div className={styles.skeletonGrid} aria-hidden="true">
                 {Array.from({ length: Math.max(8, Math.min(limit, 12)) }).map((_, idx) => (
                   <article key={`playlist-sk-${idx}`} className={styles.skeletonCard}>
-                    <div className={`ui-skeleton ${styles.skeletonCover}`} />
-                    <div className={`ui-skeleton ${styles.skeletonTitle}`} />
-                    <div className={`ui-skeleton ${styles.skeletonSubtitle}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonCover}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonTitle}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonSubtitle}`} />
                     <div className={styles.skeletonMetaRow}>
-                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
-                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
+                      <div className={`${styles.skeletonBase} ${styles.skeletonMeta}`} />
+                      <div className={`${styles.skeletonBase} ${styles.skeletonMeta}`} />
                     </div>
                   </article>
                 ))}
@@ -144,6 +141,16 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

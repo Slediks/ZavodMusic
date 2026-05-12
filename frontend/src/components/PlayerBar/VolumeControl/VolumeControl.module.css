@@ -1,5 +1,4 @@
-
-.volume-wrap {
+﻿.volume-wrap {
   --progress-track-h: 8px;
   --progress-thumb-w: 6px;
   --progress-thumb-h: 10px;
@@ -8,6 +7,25 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+}
+
+.player-action {
+  border: none;
+  background: transparent;
+  color: var(--muted-color);
+  opacity: 0.8;
+  padding: 4px;
+}
+
+.player-action:hover:not(:disabled) {
+  opacity: 1;
+  color: var(--primary-strong);
+}
+
+.volume-icon {
+  --ui-icon-size: 1.9rem;
+}
+
 .volume-popover {
   position: absolute;
   right: 0;
@@ -112,8 +130,5 @@
 .volume-popover input[type="range"]:hover::-moz-range-thumb {
   width: var(--progress-thumb-hover-w);
   height: var(--progress-thumb-hover-h);
-}
-
-
 }
 

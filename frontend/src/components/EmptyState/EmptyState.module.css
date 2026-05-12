@@ -1,4 +1,7 @@
-
-.ui-empty { border-radius: 10px; padding: 10px 12px; background: var(--surface-alt); color: var(--muted-color); 
+﻿.ui-empty {
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--surface-alt);
+  color: var(--muted-color);
 }
 

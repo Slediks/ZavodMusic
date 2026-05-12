@@ -1,8 +1,8 @@
-
+﻿
 .ui-icon {
-  --ui-icon-size: 1rem;
-  width: var(--ui-icon-size);
-  height: var(--ui-icon-size);
+  --ui-icon-base-size: 1rem;
+  width: var(--ui-icon-size, var(--ui-icon-base-size));
+  height: var(--ui-icon-size, var(--ui-icon-base-size));
   display: inline-block;
   vertical-align: middle;
   background-color: currentColor;
@@ -16,4 +16,5 @@
   mask-size: contain;
 
 }
+
 

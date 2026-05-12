@@ -9,6 +9,8 @@
   min-height: 0;
   height: 100%;
   overflow: hidden;
+}
+
 .hero {
   display: grid;
   grid-template-columns: 112px 1fr;
@@ -127,4 +129,4 @@
   .metaItem:not(:last-child)::after {
     margin-left: 10px;
   }
-}
+

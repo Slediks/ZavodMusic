@@ -14,16 +14,10 @@
     "id": "al31",
     "title": "Krasavitsa",
     "artistIds": [
-      "a24",
-      "a25",
-      "a26",
-      "a27"
+      "a24"
     ],
     "artistNames": [
-      "ANGUISH",
-      "влад пиво",
-      "ЯРЧЕ СОЛНЦА",
-      "ILY"
+      "ANGUISH"
     ],
     "coverUrl": "/static/covers/cover-a84cd2a72abc1f7a.jpg"
   },
@@ -75,14 +69,10 @@
     "id": "al30",
     "title": "Monsters",
     "artistIds": [
-      "a21",
-      "a22",
-      "a23"
+      "a21"
     ],
     "artistNames": [
-      "All Time Low",
-      "Demi Lovato",
-      "blackbear"
+      "All Time Low"
     ],
     "coverUrl": "/static/covers/cover-c0e45f0decc521a0.jpg"
   },
@@ -90,20 +80,10 @@
     "id": "al11",
     "title": "Open Season",
     "artistIds": [
-      "a4",
-      "a5",
-      "a6",
-      "a7",
-      "a8",
-      "a9"
+      "a4"
     ],
     "artistNames": [
-      "Jillzay",
-      "Скриптонит",
-      "Cheenah",
-      "104",
-      "Magg '98",
-      "Kolyaolya"
+      "Jillzay"
     ],
     "coverUrl": "/static/covers/cover-fd5f9a21e02c3aad.jpg"
   },
@@ -122,12 +102,10 @@
     "id": "al16",
     "title": "RockStar Cycle",
     "artistIds": [
-      "a12",
-      "a14"
+      "a12"
     ],
     "artistNames": [
-      "Kijin",
-      "Серега Пират"
+      "Kijin"
     ],
     "coverUrl": "/static/covers/cover-e1538af5b5d8ba1e.jpg"
   },
@@ -355,12 +333,10 @@
     "id": "al28",
     "title": "Ламбада",
     "artistIds": [
-      "a19",
-      "a5"
+      "a19"
     ],
     "artistNames": [
-      "T-Fest",
-      "Скриптонит"
+      "T-Fest"
     ],
     "coverUrl": "/static/covers/cover-03e3bbe88928d98c.jpg"
   },
@@ -456,12 +432,10 @@
     "id": "al21",
     "title": "потерянный мир",
     "artistIds": [
-      "a16",
-      "a17"
+      "a16"
     ],
     "artistNames": [
-      "mzlff",
-      "pyrokinesis"
+      "mzlff"
     ],
     "coverUrl": "/static/covers/cover-01f1dc2db0d84b94.png"
   },
@@ -469,12 +443,10 @@
     "id": "al15",
     "title": "Привет, да, это матрица",
     "artistIds": [
-      "a12",
-      "a13"
+      "a12"
     ],
     "artistNames": [
-      "Kijin",
-      "dot"
+      "Kijin"
     ],
     "coverUrl": "/static/covers/cover-9263c9da3d8d4281.jpg"
   },
@@ -515,12 +487,10 @@
     "id": "al39",
     "title": "ТАЙМАУТ",
     "artistIds": [
-      "a35",
-      "a36"
+      "a35"
     ],
     "artistNames": [
-      "Nikitata",
-      "Kordhell"
+      "Nikitata"
     ],
     "coverUrl": "/static/covers/cover-376f087f12a22afc.jpg"
   },
@@ -550,12 +520,10 @@
     "id": "al45",
     "title": "Хочу к тебе",
     "artistIds": [
-      "a42",
-      "a43"
+      "a42"
     ],
     "artistNames": [
-      "ЕГОР НАТС",
-      "Вневесомости"
+      "ЕГОР НАТС"
     ],
     "coverUrl": "/static/covers/cover-3ca1c91a17eb6bbc.jpg"
   },

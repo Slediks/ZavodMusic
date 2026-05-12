@@ -5,6 +5,7 @@ import { usePlayer } from "../../context/PlayerContext";
 import { UiIcon } from "../UiIcon/UiIcon";
 import { ProgressBar } from "../PlayerBar/ProgressBar/ProgressBar";
 import { PlayerControls } from "../PlayerBar/PlayerControls/PlayerControls";
+import { getTrackCoverUrl } from "../../api/trackMedia";
 
 type FullscreenPlayerProps = {
   likedTrackIds: string[];
@@ -75,36 +76,36 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
   if (!isOpen || !currentTrack) return null;
 
   return (
-    <section className={`${'{'}styles["fullscreen-player"]} ${showLyrics ? "has-lyrics" : "no-lyrics"}`} role="dialog" aria-modal="false">
-      <button type="button" className={styles["ui-icon-btn"] + " " + styles["fullscreen-close"]} onClick={closeFullscreen} aria-label="Закрыть"><UiIcon name="close" /></button>
+    <section className={[styles["fullscreen-player"], showLyrics ? styles["has-lyrics"] : styles["no-lyrics"]].join(" ")} role="dialog" aria-modal="false">
+      <button type="button" className={styles["fullscreen-close"]} onClick={closeFullscreen} aria-label="Закрыть"><UiIcon name="close" /></button>
 
       <div className={styles["fullscreen-main"]}>
         <div className={styles["fullscreen-cover-wrap"]}>
-          <img src={currentTrack.coverUrl} alt={currentTrack.title} className={styles["fullscreen-cover"]} />
+          <img src={getTrackCoverUrl(currentTrack.id)} alt={currentTrack.title} className={styles["fullscreen-cover"]} />
           <div className={styles["fullscreen-cover-overlay"]} aria-hidden="true" />
 
           <div className={styles["fullscreen-cover-controls"]}>
             <button
               type="button"
-              className={`ui-icon-btn ${'{'}styles["player-action"]} ${'{'}styles["fullscreen-control-btn"]} ${'{'}styles["fullscreen-anchor-btn"]} ${'{'}styles["fullscreen-queue-btn"]} ${isQueueOpen ? "is-active" : ""}`}
+              className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-queue-btn"], isQueueOpen ? styles["is-active"] : ""].filter(Boolean).join(" ")}
               onClick={toggleQueuePanel}
               aria-label="Очередь"
             >
-              <UiIcon name="queue" />
+              <UiIcon name="queue" className={styles["fullscreen-control-icon"]} />
             </button>
 
             <button
               type="button"
-              className={`ui-icon-btn ${'{'}styles["player-action"]} ${'{'}styles["fullscreen-control-btn"]} ${'{'}styles["fullscreen-anchor-btn"]} ${'{'}styles["fullscreen-like-btn"]} ${isCurrentLiked ? "is-active" : ""}`}
+              className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-like-btn"], isCurrentLiked ? styles["is-active"] : ""].filter(Boolean).join(" ")}
               onClick={() => onToggleLike(currentTrack)}
               aria-label="Лайк"
             >
-              <UiIcon name="heart" />
+              <UiIcon name="heart" className={styles["fullscreen-control-icon"]} />
             </button>
 
             <button
               type="button"
-              className={`ui-icon-btn ${'{'}styles["player-action"]} ${'{'}styles["fullscreen-control-btn"]} ${'{'}styles["fullscreen-anchor-btn"]} ${'{'}styles["fullscreen-dislike-btn"]} ${isCurrentDisliked ? "is-active is-disliked" : ""}`}
+              className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-dislike-btn"], isCurrentDisliked ? styles["is-active"] : "", isCurrentDisliked ? styles["is-disliked"] : ""].filter(Boolean).join(" ")}
               onClick={() => {
                 const willBecomeDisliked = !isCurrentDisliked;
                 onToggleDislike(currentTrack);
@@ -112,31 +113,31 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
               }}
               aria-label="Дизлайк"
             >
-              <UiIcon name="heartOff" />
+              <UiIcon name="heartOff" className={styles["fullscreen-control-icon"]} />
             </button>
 
             {hasLyrics ? (
               <button
                 type="button"
-                className={`ui-icon-btn ${'{'}styles["player-action"]} ${'{'}styles["fullscreen-control-btn"]} ${'{'}styles["fullscreen-anchor-btn"]} ${'{'}styles["fullscreen-text-btn"]} ${showLyrics ? "is-active" : ""}`}
+                className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-text-btn"], showLyrics ? styles["is-active"] : ""].filter(Boolean).join(" ")}
                 onClick={() => {
                   if (showLyrics) openFullscreen();
                   else openLyrics();
                 }}
                 aria-label="Текст"
               >
-                <UiIcon name="text" />
+                <UiIcon name="text" className={styles["fullscreen-control-icon"]} />
               </button>
             ) : null}
 
             <div className={styles["fullscreen-center-controls"]}>
               <button
                 type="button"
-                className={`ui-icon-btn ${'{'}styles["player-action"]} ${'{'}styles["fullscreen-control-btn"]} ${isShuffled ? "is-active" : ""}`}
+                className={[styles["fullscreen-control-btn"], isShuffled ? styles["is-active"] : ""].filter(Boolean).join(" ")}
                 onClick={toggleShuffle}
                 aria-label={isShuffled ? "Перемешивание включено" : "Перемешать"}
               >
-                <UiIcon name="shuffle" />
+                <UiIcon name="shuffle" className={styles["fullscreen-control-icon"]} />
               </button>
 
               <div className={styles["fullscreen-transport-group"]}>
@@ -152,11 +153,11 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
 
               <button
                 type="button"
-                className={`ui-icon-btn ${'{'}styles["player-action"]} ${'{'}styles["fullscreen-control-btn"]} ${repeatMode !== "off" ? "is-active" : ""}`}
+                className={[styles["fullscreen-control-btn"], repeatMode !== "off" ? styles["is-active"] : ""].filter(Boolean).join(" ")}
                 onClick={() => setRepeatMode(nextRepeat(repeatMode as RepeatMode))}
                 aria-label="Режим повтора"
               >
-                <UiIcon name={repeatMode === "one" ? "repeatOne" : "repeat"} />
+                <UiIcon name={repeatMode === "one" ? "repeatOne" : "repeat"} className={styles["fullscreen-control-icon"]} />
               </button>
             </div>
           </div>
@@ -181,6 +182,9 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
     </section>
   );
 }
+
+
+
 
 
 

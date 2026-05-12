@@ -1,4 +1,4 @@
-﻿import styles from './VolumeControl.module.css';
+﻿import styles from "./VolumeControl.module.css";
 import { useEffect, useRef } from "react";
 import { UiIcon } from "../../UiIcon/UiIcon";
 
@@ -36,8 +36,8 @@ export function VolumeControl({ volume, isMuted, onSetVolume, onToggleMute }: Vo
 
   return (
     <div className={styles["volume-wrap"]} ref={wrapRef}>
-      <button type="button" className={styles["ui-icon-btn"] + " " + styles["player-action"]} onClick={onToggleMute} aria-label="Звук">
-        <UiIcon name={isMuted || volume === 0 ? "volumeOff" : "volumeOn"} />
+      <button type="button" className={styles["player-action"]} onClick={onToggleMute} aria-label="Звук">
+        <UiIcon name={isMuted || volume === 0 ? "volumeOff" : "volumeOn"} className={styles["volume-icon"]} />
       </button>
 
       <div className={styles["volume-popover"]} aria-hidden="true">
@@ -56,8 +56,5 @@ export function VolumeControl({ volume, isMuted, onSetVolume, onToggleMute }: Vo
     </div>
   );
 }
-
-
-
 
 

@@ -1,4 +1,4 @@
-
+﻿
 .header {
   background: transparent;
   border: none;
@@ -22,9 +22,11 @@
 }
 
 .brand-logo {
-  height: 80px;
+  height: 64px;
   aspect-ratio: 1417.35 / 373.07;
   background: var(--primary-strong);
+  -webkit-mask-image: url("/logo.svg");
+  mask-image: url("/logo.svg");
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: left center;
@@ -36,7 +38,7 @@
 
 .brand-divider {
   width: 1px;
-  height: 80px;
+  height: 64px;
   background: var(--primary-strong);
   margin: 0 10px;
   flex: 0 0 auto;
@@ -49,7 +51,7 @@
 }
 
 .brand-title {
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 700;
   line-height: 1;
   color: var(--primary-strong);
@@ -80,7 +82,7 @@
   justify-content: center;
 }
 
-.theme-toggle .ui-icon {
+.theme-toggle-icon {
   --ui-icon-size: 2.1rem;
 }
 
@@ -167,6 +169,10 @@
 }
 .user-chip-logout:hover {
   color: var(--text-color);
+}
+
+.user-chip-logout-icon {
+  --ui-icon-size: 1rem;
 }
 
 .nav-container { margin-top: 16px; }

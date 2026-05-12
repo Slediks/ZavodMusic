@@ -1,11 +1,11 @@
-
+﻿
 .queue-panel-backdrop {
   position: fixed;
   inset: 0;
   z-index: 70;
   display: flex;
   justify-content: flex-end;
-  background: rgba(3, 11, 18, 0.34);
+  background: var(--overlay-backdrop-soft);
   backdrop-filter: blur(1px);
   animation: fadeIn 0.2s ease-out;
 }
@@ -59,7 +59,7 @@
   transform: none !important;
 }
 
-.queue-header-btn .ui-icon {
+.queue-header-icon {
   --ui-icon-size: 1rem;
 }
 
@@ -146,7 +146,7 @@
   color: var(--primary-strong);
 }
 
-.queue-cover-fallback .ui-icon {
+.queue-cover-fallback-icon {
   --ui-icon-size: 0.9rem;
 }
 
@@ -157,7 +157,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in oklab, #000 35%, transparent);
+  background: color-mix(in oklab, var(--mix-black) 35%, transparent);
   opacity: 0;
   transition: opacity 120ms ease;
 }
@@ -222,7 +222,7 @@
   place-items: center;
 }
 
-.queue-remove-btn .ui-icon {
+.queue-remove-icon {
   --ui-icon-size: 0.85rem;
 }
 
@@ -272,3 +272,7 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+
+
+

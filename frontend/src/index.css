@@ -13,23 +13,49 @@
   --ring: rgba(88, 189, 233, 0.2);
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
   --danger: #ff7f86;
+  --text-inverse: #ffffff;
+  --mix-black: #000000;
+  --danger-strong: #ff6f7b;
+  --success-color: #31b86a;
+  --overlay-backdrop: rgba(3, 11, 18, 0.52);
+  --overlay-backdrop-soft: rgba(3, 11, 18, 0.34);
+  --card-shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.25);
+  --card-shadow-strong: 0 18px 40px rgba(0, 0, 0, 0.32);
+  --fullscreen-overlay-start: rgba(4, 10, 16, 0.46);
+  --fullscreen-overlay-end: rgba(4, 10, 16, 0.82);
+  --accent-glow: 0 8px 24px rgba(81, 191, 236, 0.32);
+  --player-track-tint: #1b3850;
+  --player-track-tint-deep: #0e2232;
 }
 
 [data-theme="light"] {
   --primary-color: #007dba;
   --primary-strong: #004680;
   --primary-soft: #b9e5fa;
-  --bg-color: #f3f7fb;
+  --bg-color: #cfdeec;
   --surface-color: #ffffff;
-  --surface-alt: #f7fafc;
-  --surface-muted: #eef4f8;
-  --text-color: #163247;
-  --muted-color: #60798d;
-  --border: #d5e2ec;
-  --border-strong: #b8cddb;
+  --surface-alt: #f8fbff;
+  --surface-muted: #c7d9eb;
+  --text-color: #0d2238;
+  --muted-color: #48637d;
+  --border: #afc4d9;
+  --border-strong: #8ea8c0;
   --ring: rgba(0, 125, 186, 0.18);
-  --shadow: 0 8px 24px rgba(25, 56, 78, 0.08);
-  --danger: #d14e57;
+  --shadow: 0 16px 42px rgba(12, 31, 50, 0.24);
+  --danger: #c64b57;
+  --text-inverse: #ffffff;
+  --mix-black: #000000;
+  --danger-strong: #b6444f;
+  --success-color: #2f9460;
+  --overlay-backdrop: rgba(6, 14, 24, 0.62);
+  --overlay-backdrop-soft: rgba(6, 14, 24, 0.46);
+  --card-shadow-soft: 0 14px 30px rgba(12, 31, 50, 0.22);
+  --card-shadow-strong: 0 30px 60px rgba(12, 31, 50, 0.34);
+  --fullscreen-overlay-start: rgba(7, 16, 27, 0.48);
+  --fullscreen-overlay-end: rgba(7, 16, 27, 0.72);
+  --accent-glow: 0 16px 36px rgba(0, 125, 186, 0.4);
+  --player-track-tint: #4f93c1;
+  --player-track-tint-deep: #70abd0;
 }
 
 * {
@@ -80,9 +106,9 @@ button:disabled {
   border-radius: 8px;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, var(--surface-muted) 88%, #000 12%) 0%,
+    color-mix(in srgb, var(--surface-muted) 88%, var(--mix-black) 12%) 0%,
     color-mix(in srgb, var(--primary-strong) 22%, var(--surface-muted) 78%) 45%,
-    color-mix(in srgb, var(--surface-muted) 88%, #000 12%) 100%
+    color-mix(in srgb, var(--surface-muted) 88%, var(--mix-black) 12%) 100%
   );
   background-size: 220% 100%;
   animation: skeletonShimmer 1.35s linear infinite;
@@ -101,3 +127,6 @@ button:disabled {
   padding: 16px;
   box-shadow: var(--shadow);
 }
+
+
+

@@ -9,6 +9,8 @@
   min-height: 0;
   height: 100%;
   overflow: hidden;
+}
+
 .hero {
   position: relative;
   display: grid;
@@ -43,6 +45,10 @@
   transform: none !important;
 }
 
+.quickBtnIcon {
+  --ui-icon-size: 1.1rem;
+}
+
 .quickBtnActive {
   color: var(--primary-color);
   opacity: 1;
@@ -72,7 +78,7 @@
   color: var(--muted-color);
 }
 
-.coverFallback .ui-icon {
+.coverFallbackIcon {
   width: 100%;
   aspect-ratio: 1 / 1;
   height: auto;
@@ -82,7 +88,7 @@
   position: absolute;
   inset: 0;
   border-radius: 14px;
-  background: color-mix(in srgb, #000 42%, transparent);
+  background: color-mix(in srgb, var(--mix-black) 42%, transparent);
   opacity: 0;
   transition: opacity 140ms ease;
 }
@@ -114,7 +120,7 @@
   transform: translate(-50%, -50%) !important;
 }
 
-.coverPlay .ui-icon {
+.coverPlayIcon {
   --ui-icon-size: 2rem;
 }
 
@@ -200,7 +206,6 @@
     height: 100%;
   }
 
-}
   .hero {
     grid-template-columns: 1fr;
     gap: 12px;

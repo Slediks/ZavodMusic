@@ -1,12 +1,13 @@
-
-.ui-modal-backdrop {
+﻿.ui-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(3, 11, 18, 0.52);
+  background: var(--overlay-backdrop);
   display: grid;
   place-items: center;
   z-index: 50;
   padding: 12px;
+}
+
 .ui-modal {
   width: min(520px, calc(100vw - 24px));
   max-height: calc(100vh - 24px);
@@ -55,9 +56,8 @@
   color: var(--text-color);
 }
 
-.ui-modal-close .ui-icon {
-  width: 16px;
-  height: 16px;
+.ui-modal-close-icon {
+  --ui-icon-size: 1rem;
 }
 
 .ui-modal-actions {
@@ -66,18 +66,9 @@
   gap: 8px;
 }
 
-.ui-modal .ui-btn-ghost:hover {
-  border-color: var(--border-strong) !important;
-}
-
-.ui-modal .ui-btn-danger:hover {
-  border-color: var(--danger) !important;
-}
-
 .ui-modal button:hover:not(:disabled) {
   transform: scale(1.05);
 }
 
 
-}
 

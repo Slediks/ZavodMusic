@@ -39,8 +39,8 @@ export function SearchToolbar({
             }}
           />
           {value && onClear ? (
-            <button type="button" className={`ui-icon-btn ${styles.clearBtn}`} onClick={onClear} aria-label="Очистить">
-              <UiIcon name="backspace" />
+            <button type="button" className={styles.clearBtn} onClick={onClear} aria-label="Очистить">
+              <UiIcon name="backspace" className={styles.clearIcon} />
             </button>
           ) : null}
         </div>
@@ -63,6 +63,8 @@ export function SearchToolbar({
     </div>
   );
 }
+
+
 
 
 

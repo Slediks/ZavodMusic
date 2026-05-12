@@ -1,11 +1,11 @@
-
-.player-track-info {
+﻿.player-track-info {
   height: 100%;
   display: flex;
   gap: 14px;
   align-items: center;
   min-width: 0;
 }
+
 .player-text-meta {
   display: grid;
   gap: 4px;
@@ -22,7 +22,7 @@
   aspect-ratio: 1;
   border-radius: 12px;
   object-fit: cover;
-  background: color-mix(in srgb, var(--bg-color) 72%, #1b3850 28%);
+  background: color-mix(in srgb, var(--bg-color) 72%, var(--player-track-tint) 28%);
 }
 
 .player-cover-fallback {
@@ -32,15 +32,17 @@
   padding: 12px;
 }
 
-.player-cover-fallback .ui-icon {
+.player-cover-fallback-icon {
   width: 100%;
   height: 100%;
   color: var(--muted-color);
 }
 
-.player-cover-wrap.is-playing { animation: pulse 1.4s ease-in-out infinite; }
+.is-playing {
+  animation: pulse 1.4s ease-in-out infinite;
+}
 
-.player-cover-wrap .hover-fullscreen-btn {
+.hover-fullscreen-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -48,7 +50,7 @@
   left: 0;
   border: none;
   border-radius: 8px;
-  background: color-mix(in srgb, #0e2232 72%, transparent);
+  background: color-mix(in srgb, var(--player-track-tint-deep) 72%, transparent);
   color: var(--muted-color);
   cursor: pointer;
   display: inline-flex;
@@ -67,11 +69,12 @@
   transition-delay: 0ms;
 }
 
-.player-cover-wrap .hover-fullscreen-btn .ui-icon {
+.hover-fullscreen-icon {
   --ui-icon-size: 2rem;
 }
 
-.player-title, .player-subtitle {
+.player-title,
+.player-subtitle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -97,4 +100,12 @@
   }
 }
 
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+
+
+

@@ -6,6 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { usePlayer } from "../../context/PlayerContext";
 import { ConfirmModal } from "../ConfirmModal/ConfirmModal";
 import { UiIcon } from "../UiIcon/UiIcon";
+import { getTrackCoverUrl } from "../../api/trackMedia";
 
 const restrictToVerticalAxis: Modifier = ({ transform }) => ({ ...transform, x: 0 });
 
@@ -56,7 +57,7 @@ function QueueSortableItem({
     <div
       ref={setNodeRef}
       style={style}
-      className={`${'{'}styles["queue-item"]} ${isActive ? "is-active" : ""} ${isDisabled ? "is-disabled" : ""}`}
+      className={[styles["queue-item"], isActive ? styles["is-active"] : "", isDisabled ? styles["is-disabled"] : ""].filter(Boolean).join(" ")}
       onDoubleClick={() => {
         if (!isDisabled) onPlay();
       }}
@@ -77,9 +78,9 @@ function QueueSortableItem({
         {!coverFailed && coverUrl ? (
           <img src={coverUrl} alt={title} className={styles["queue-cover"]} onError={() => setCoverFailed(true)} />
         ) : (
-          <span className={styles["queue-cover-fallback"]}><UiIcon name="musicTwo" /></span>
+          <span className={styles["queue-cover-fallback"]}><UiIcon name="musicTwo" className={styles["queue-cover-fallback-icon"]} /></span>
         )}
-        <span className={`${'{'}styles["queue-cover-overlay"]} ${showCoverOverlay ? "queue-cover-overlay-visible" : ""}`}>
+        <span className={[styles["queue-cover-overlay"], showCoverOverlay ? styles["queue-cover-overlay-visible"] : ""].filter(Boolean).join(" ")}>
           <UiIcon name={coverIconName} className={styles["queue-cover-play-icon"]} />
         </span>
       </button>
@@ -91,14 +92,14 @@ function QueueSortableItem({
 
       <button
         type="button"
-        className={styles["ui-icon-btn"] + " " + styles["queue-remove-btn"]}
+        className={styles["queue-remove-btn"]}
         onClick={(event) => {
           event.stopPropagation();
           onRemove();
         }}
         aria-label={`Удалить ${title} из очереди`}
       >
-        <UiIcon name="trash" />
+        <UiIcon name="trash" className={styles["queue-remove-icon"]} />
       </button>
     </div>
   );
@@ -140,19 +141,19 @@ export function QueuePanel({ dislikedTrackIds }: QueuePanelProps) {
           <div className={styles["queue-panel-actions"]}>
             <button
               type="button"
-              className={styles["ui-icon-btn"] + " " + styles["queue-header-btn"] + " " + styles["queue-header-btn-danger"]}
+              className={[styles["queue-header-btn"], styles["queue-header-btn-danger"]].join(" ")}
               onClick={() => setConfirmOpen(true)}
               aria-label="Очистить очередь"
             >
-              <UiIcon name="trash" />
+              <UiIcon name="trash" className={styles["queue-header-icon"]} />
             </button>
             <button
               type="button"
-              className={styles["ui-icon-btn"] + " " + styles["queue-header-btn"]}
+              className={styles["queue-header-btn"]}
               onClick={toggleQueuePanel}
               aria-label="Закрыть"
             >
-              <UiIcon name="close" />
+              <UiIcon name="close" className={styles["queue-header-icon"]} />
             </button>
           </div>
         </div>
@@ -168,7 +169,7 @@ export function QueuePanel({ dislikedTrackIds }: QueuePanelProps) {
                     id={makeQueueDndId(index)}
                     title={track.title}
                     subtitle={track.artistNames.join(", ")}
-                    coverUrl={track.coverUrl}
+                    coverUrl={getTrackCoverUrl(track.id)}
                     isActive={index === queueIndex}
                     isDisabled={disabled}
                     isPlaying={isPlaying}
@@ -201,6 +202,9 @@ export function QueuePanel({ dislikedTrackIds }: QueuePanelProps) {
     </div>
   );
 }
+
+
+
 
 
 

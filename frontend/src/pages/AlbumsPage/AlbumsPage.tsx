@@ -6,8 +6,8 @@ import { EmptyState } from "../../components/EmptyState/EmptyState";
 import { ErrorBlock } from "../../components/ErrorBlock/ErrorBlock";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { SearchToolbar } from "../../components/SearchToolbar/SearchToolbar";
-import { useDebounce } from "../../hooks/useDebounce";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useSearchControls } from "../../hooks/useSearchControls";
 import { usePlayer } from "../../context/PlayerContext";
 import { useToast } from "../../context/ToastContext";
 import type { Album } from "../../types/album";
@@ -18,9 +18,7 @@ export function AlbumsPage({ onOpenAlbum }: { onOpenAlbum: (id: string) => void 
   const { playTrack, hydrateTracks } = usePlayer();
   const { showToast } = useToast();
   const [items, setItems] = useState<Album[]>([]);
-  const [searchInput, setSearchInput] = useState("");
-  const search = useDebounce(searchInput, 300);
-  const [instantSearch, setInstantSearch] = useState("");
+  const { searchInput, setSearchInput, search, clearInstantSearch, applyInstantSearch, clearAllSearch } = useSearchControls();
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(0);
   const [total, setTotal] = useState(0);
@@ -35,7 +33,7 @@ export function AlbumsPage({ onOpenAlbum }: { onOpenAlbum: (id: string) => void 
       setLoading(true);
       setError("");
       try {
-        const res = await albumsApi.getAll({ search: instantSearch || search, page, limit });
+        const res = await albumsApi.getAll({ search, page, limit });
         setItems(res.items || []);
         setPages(res.pages || 0);
         setTotal(res.total || 0);
@@ -46,10 +44,10 @@ export function AlbumsPage({ onOpenAlbum }: { onOpenAlbum: (id: string) => void 
       }
     };
     void run();
-  }, [search, instantSearch, page, limit]);
+  }, [search, page, limit]);
 
   return (
-    <section className={`${'{'}styles["page-stub"]} ${styles.tracksPage}`}>
+    <section className={styles.tracksPage}>
       <h1 className={styles.title}>Альбомы</h1>
 
       <SearchToolbar
@@ -57,16 +55,15 @@ export function AlbumsPage({ onOpenAlbum }: { onOpenAlbum: (id: string) => void 
         value={searchInput}
         onValueChange={(next) => {
           setSearchInput(next);
-          setInstantSearch("");
+          clearInstantSearch();
           setPage(1);
         }}
         onEnter={() => {
-          setInstantSearch(searchInput.trim());
+          applyInstantSearch();
           setPage(1);
         }}
         onClear={() => {
-          setSearchInput("");
-          setInstantSearch("");
+          clearAllSearch();
           setPage(1);
         }}
         limit={limit}
@@ -86,12 +83,12 @@ export function AlbumsPage({ onOpenAlbum }: { onOpenAlbum: (id: string) => void 
               <div className={styles.skeletonGrid} aria-hidden="true">
                 {Array.from({ length: Math.max(8, Math.min(limit, 12)) }).map((_, idx) => (
                   <article key={`album-sk-${idx}`} className={styles.skeletonCard}>
-                    <div className={`ui-skeleton ${styles.skeletonCover}`} />
-                    <div className={`ui-skeleton ${styles.skeletonTitle}`} />
-                    <div className={`ui-skeleton ${styles.skeletonSubtitle}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonCover}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonTitle}`} />
+                    <div className={`${styles.skeletonBase} ${styles.skeletonSubtitle}`} />
                     <div className={styles.skeletonMetaRow}>
-                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
-                      <div className={`ui-skeleton ${styles.skeletonMeta}`} />
+                      <div className={`${styles.skeletonBase} ${styles.skeletonMeta}`} />
+                      <div className={`${styles.skeletonBase} ${styles.skeletonMeta}`} />
                     </div>
                   </article>
                 ))}
@@ -131,6 +128,17 @@ export function AlbumsPage({ onOpenAlbum }: { onOpenAlbum: (id: string) => void 
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

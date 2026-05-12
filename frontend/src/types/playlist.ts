@@ -10,7 +10,6 @@ export type Playlist = {
   trackIds: string[];
   tracksCount: number;
   duration: number;
-  coverUrl: string | null;
   coverExists: boolean;
 };
 
@@ -34,5 +33,4 @@ export type MyPlaylistsResponse = {
     pages: number;
   };
 };
-
 
