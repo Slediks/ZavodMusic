@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    allowedHosts: ['slediks.alexpshkov.ru'],
+    allowedHosts: [''],
   },
 })
 
