@@ -1,7 +1,8 @@
 ﻿import React, { useEffect, useState } from "react";
 import { parseHash } from "./api/adminApi";
-import { CrudPage } from "./components/CrudPage";
-import { Login } from "./components/Login";
+import { CrudPage } from "./components/crud/CrudPage";
+import { AppLayout } from "./components/layout/AppLayout";
+import { Login } from "./components/ui/Login";
 import { ScanPage } from "./pages/ScanPage";
 import { SmartPage } from "./pages/SmartPage";
 
@@ -21,21 +22,26 @@ export default function App() {
 
   useEffect(() => {
     const onHash = () => setPath(parseHash());
+    const onUnauthorized = () => setAuthed(false);
     window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    window.addEventListener("admin-unauthorized", onUnauthorized);
+    return () => {
+      window.removeEventListener("hashchange", onHash);
+      window.removeEventListener("admin-unauthorized", onUnauthorized);
+    };
   }, []);
 
   if (!authed) return <Login onSuccess={() => setAuthed(true)} />;
 
-  return <div className="app"><aside className="sidebar"><h1>Zavod Admin</h1>{NAV.map(([href,label])=><a key={href} href={`#${href}`} className={path===href?"nav active":"nav"}>{label}</a>)}<button onClick={()=>{ localStorage.removeItem("admin_token"); setAuthed(false); }}>Выйти</button></aside>
-    <main className="content">
-      {path === "/tracks" && <CrudPage type="tracks" title="Треки" createEnabled={false} quickDisable />}
-      {path === "/albums" && <CrudPage type="albums" title="Альбомы" />}
-      {path === "/artists" && <CrudPage type="artists" title="Авторы" />}
-      {path === "/playlists" && <CrudPage type="playlists" title="Плейлисты" createEnabled={false} readonlyTrackIds />}
-      {path === "/users" && <CrudPage type="users" title="Пользователи" />}
-      {path === "/smart" && <SmartPage />}
-      {path === "/scan" && <ScanPage />}
-    </main>
-  </div>;
+  const page =
+    path === "/tracks" ? <CrudPage type="tracks" title="Треки" createEnabled={false} quickDisable /> :
+    path === "/albums" ? <CrudPage type="albums" title="Альбомы" /> :
+    path === "/artists" ? <CrudPage type="artists" title="Авторы" /> :
+    path === "/playlists" ? <CrudPage type="playlists" title="Плейлисты" createEnabled={false} readonlyTrackIds /> :
+    path === "/users" ? <CrudPage type="users" title="Пользователи" /> :
+    path === "/smart" ? <SmartPage /> :
+    <ScanPage />;
+
+  return <AppLayout nav={NAV} path={path} onLogout={() => { localStorage.removeItem("admin_token"); setAuthed(false); }}>{page}</AppLayout>;
 }
+

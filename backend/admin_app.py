@@ -6,8 +6,9 @@ import time
 import uuid
 from difflib import SequenceMatcher
 from functools import wraps
+import logging
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from flask import Flask, jsonify, make_response, request, send_file
 
@@ -34,10 +35,12 @@ PAGE_LIMIT = 100
 SELECT_LIMIT = 100
 
 app = Flask(__name__)
+logger = logging.getLogger(__name__)
 
 TOKENS: set[str] = set()
 file_lock = threading.Lock()
 scan_lock = threading.Lock()
+smart_lock = threading.Lock()
 
 scan_state: dict[str, Any] = {
     "running": False,
@@ -47,6 +50,17 @@ scan_state: dict[str, Any] = {
     "processedFiles": 0,
     "etaSec": None,
     "result": None,
+    "error": None,
+    "stopRequested": False,
+    "stopped": False,
+}
+
+smart_state: dict[str, Any] = {
+    "running": False,
+    "kind": None,
+    "stopRequested": False,
+    "stopped": False,
+    "lastScore": None,
     "error": None,
 }
 
@@ -61,8 +75,16 @@ TRANSLIT_MAP = {
 def read_json(path: Path, fallback: Any) -> Any:
     if not path.exists():
         return fallback
-    with path.open("r", encoding="utf-8-sig") as f:
-        return json.load(f)
+    try:
+        with path.open("r", encoding="utf-8-sig") as f:
+            raw = f.read().strip()
+            if not raw:
+                logger.warning("JSON file is empty, using fallback: %s", path)
+                return fallback
+            return json.loads(raw)
+    except (OSError, json.JSONDecodeError) as exc:
+        logger.warning("Failed to read JSON from %s (%s), using fallback", path, exc)
+        return fallback
 
 
 def write_json(path: Path, payload: Any) -> None:
@@ -205,9 +227,15 @@ def resolve_static_file(static_url: str | None) -> Path | None:
 
 
 def apply_cors(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
+    origin = request.headers.get("Origin", "*")
+    requested_headers = request.headers.get("Access-Control-Request-Headers", "")
+    allow_headers = requested_headers or "Content-Type, X-Admin-Token, Authorization, Accept"
+
+    response.headers["Access-Control-Allow-Origin"] = origin
+    response.headers["Vary"] = "Origin"
     response.headers["Access-Control-Allow-Methods"] = "GET,POST,PATCH,PUT,DELETE,OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type,X-Admin-Token"
+    response.headers["Access-Control-Allow-Headers"] = allow_headers
+    response.headers["Access-Control-Max-Age"] = "86400"
     return response
 
 
@@ -707,47 +735,41 @@ def write_smart_exclusions(kind: str, payload: dict[str, Any]) -> None:
     write_json(SMART_EXCLUSION_PATHS[kind], payload)
 
 
-def sort_pair(a: str, b: str) -> list[str]:
-    return sorted([a, b])
+def sort_pair(a: str, b: str) -> tuple[str, str]:
+    return (a, b) if a <= b else (b, a)
 
 
-def smart_candidates(kind: str, data: dict[str, list[dict[str, Any]]]) -> list[tuple[str, str, float]]:
-    items: list[dict[str, Any]]
+def smart_pair_score(kind: str, left: dict[str, Any], right: dict[str, Any]) -> float | None:
     if kind == "tracks":
-        items = data["tracks"]
-    elif kind == "albums":
-        items = data["albums"]
-    else:
-        items = data["artists"]
+        dur_l = int(left.get("duration", 0) or 0)
+        dur_r = int(right.get("duration", 0) or 0)
+        dur_diff = abs(dur_l - dur_r)
+        if dur_diff > 5:
+            return None
+        dur_score = 1.0 if dur_diff <= 2 else 0.8
 
-    candidates: list[tuple[str, str, float]] = []
-    for i in range(len(items)):
-        left = items[i]
-        for j in range(i + 1, len(items)):
-            right = items[j]
-            if kind == "tracks":
-                score_title = similarity(left.get("title"), right.get("title"))
-                score_artist = similarity(" ".join(left.get("artistNames", [])), " ".join(right.get("artistNames", [])))
-                dur_l = int(left.get("duration", 0) or 0)
-                dur_r = int(right.get("duration", 0) or 0)
-                dur_score = 1.0 if abs(dur_l - dur_r) <= 2 else (0.8 if abs(dur_l - dur_r) <= 5 else 0.0)
-                file_score = similarity(str(left.get("audioUrl", "")).split("/")[-1], str(right.get("audioUrl", "")).split("/")[-1])
-                score = 0.45 * score_title + 0.25 * score_artist + 0.2 * dur_score + 0.1 * file_score
-                threshold = 0.84
-            elif kind == "albums":
-                score_title = similarity(left.get("title"), right.get("title"))
-                score_artist = similarity(" ".join(left.get("artistNames", [])), " ".join(right.get("artistNames", [])))
-                score = 0.68 * score_title + 0.32 * score_artist
-                threshold = 0.87
-            else:
-                score = similarity(left.get("name"), right.get("name"))
-                threshold = 0.9
+        score_title = similarity(left.get("title"), right.get("title"))
+        if 0.45 * score_title + 0.25 + 0.2 * dur_score + 0.1 < 0.84:
+            return None
 
-            if score >= threshold:
-                candidates.append((left["id"], right["id"], score))
+        score_artist = similarity(" ".join(left.get("artistNames", [])), " ".join(right.get("artistNames", [])))
+        if 0.45 * score_title + 0.25 * score_artist + 0.2 * dur_score + 0.1 < 0.84:
+            return None
 
-    candidates.sort(key=lambda item: item[2], reverse=True)
-    return candidates
+        file_score = similarity(str(left.get("audioUrl", "")).split("/")[-1], str(right.get("audioUrl", "")).split("/")[-1])
+        score = 0.45 * score_title + 0.25 * score_artist + 0.2 * dur_score + 0.1 * file_score
+        return score if score >= 0.84 else None
+
+    if kind == "albums":
+        score_title = similarity(left.get("title"), right.get("title"))
+        if 0.68 * score_title + 0.32 < 0.87:
+            return None
+        score_artist = similarity(" ".join(left.get("artistNames", [])), " ".join(right.get("artistNames", [])))
+        score = 0.68 * score_title + 0.32 * score_artist
+        return score if score >= 0.87 else None
+
+    score = similarity(left.get("name"), right.get("name"))
+    return score if score >= 0.9 else None
 
 
 @app.route("/admin/api/smart-search/<kind>/next", methods=["GET"])
@@ -755,41 +777,89 @@ def smart_candidates(kind: str, data: dict[str, list[dict[str, Any]]]) -> list[t
 def smart_next(kind: str):
     if kind not in {"tracks", "albums", "artists"}:
         return error(404, "Unknown smart-search kind")
+    with smart_lock:
+        if smart_state["running"]:
+            return error(409, "Smart search already running")
+        smart_state.update({
+            "running": True,
+            "kind": kind,
+            "stopRequested": False,
+            "stopped": False,
+            "lastScore": None,
+            "error": None,
+        })
+
     data = read_all()
     exclusions = get_smart_exclusions(kind)
     excluded_ids = set(exclusions.get("excludedIds", []))
-    excluded_pairs = {tuple(p) for p in exclusions.get("pairs", []) if isinstance(p, list) and len(p) == 2}
+    excluded_pairs = {
+        sort_pair(str(p[0]), str(p[1]))
+        for p in exclusions.get("pairs", [])
+        if isinstance(p, list) and len(p) == 2
+    }
 
-    for left_id, right_id, score in smart_candidates(kind, data):
-        pair = tuple(sort_pair(left_id, right_id))
-        if left_id in excluded_ids or right_id in excluded_ids:
-            continue
-        if pair in excluded_pairs:
-            continue
+    try:
+        items = data[kind]
+        for left in items:
+            if smart_state.get("stopRequested"):
+                smart_state["stopped"] = True
+                return jsonify({"pair": None, "stopped": True})
 
-        pool = data[kind]
-        left = next((x for x in pool if x.get("id") == left_id), None)
-        right = next((x for x in pool if x.get("id") == right_id), None)
-        if left and right:
-            return jsonify({"pair": [left, right], "score": round(score, 4)})
+            left_id = str(left.get("id") or "")
+            if not left_id or left_id in excluded_ids:
+                continue
 
-    items = data[kind]
-    all_ids = [str(i.get("id")) for i in items if i.get("id")]
-    for item_id in all_ids:
-        if item_id in excluded_ids:
-            continue
-        still_has_pair = any(
-            ((a == item_id or b == item_id) and (a not in excluded_ids and b not in excluded_ids) and tuple(sort_pair(a, b)) not in excluded_pairs)
-            for a, b, _ in smart_candidates(kind, data)
-        )
-        if not still_has_pair:
-            excluded_ids.add(item_id)
+            best_right: dict[str, Any] | None = None
+            best_score: float | None = None
+            for right in items:
+                right_id = str(right.get("id") or "")
+                if not right_id or right_id == left_id or right_id in excluded_ids:
+                    continue
+                pair = sort_pair(left_id, right_id)
+                if pair in excluded_pairs:
+                    continue
+
+                score = smart_pair_score(kind, left, right)
+                if score is None:
+                    continue
+                if best_score is None or score > best_score:
+                    best_score = score
+                    best_right = right
+
+            if best_right is not None and best_score is not None:
+                smart_state["lastScore"] = round(best_score, 4)
+                return jsonify({"pair": [left, best_right], "score": round(best_score, 4), "stopped": False})
+
+            # Автоматически исключаем объект без совпадений.
+            excluded_ids.add(left_id)
             exclusions["excludedIds"] = sorted(excluded_ids)
-            exclusions["pairs"] = [p for p in exclusions.get("pairs", []) if item_id not in p]
+            exclusions["pairs"] = [p for p in exclusions.get("pairs", []) if left_id not in p]
             write_smart_exclusions(kind, exclusions)
-            break
 
-    return jsonify({"pair": None})
+        return jsonify({"pair": None, "stopped": False})
+    except Exception as exc:
+        smart_state["error"] = str(exc)
+        raise
+    finally:
+        smart_state["running"] = False
+
+
+@app.route("/admin/api/smart-search/<kind>/stop", methods=["POST"])
+@require_auth
+def smart_stop(kind: str):
+    if kind not in {"tracks", "albums", "artists"}:
+        return error(404, "Unknown smart-search kind")
+    with smart_lock:
+        if smart_state.get("running") and smart_state.get("kind") == kind:
+            smart_state["stopRequested"] = True
+            return jsonify({"ok": True, "requested": True})
+    return jsonify({"ok": True, "requested": False})
+
+
+@app.route("/admin/api/smart-search/status", methods=["GET"])
+@require_auth
+def smart_status():
+    return jsonify(smart_state)
 
 
 @app.route("/admin/api/smart-search/<kind>/ignore-pair", methods=["POST"])
@@ -829,6 +899,71 @@ def smart_exclude_id(kind: str):
     return jsonify({"ok": True})
 
 
+@app.route("/admin/api/smart-search/<kind>/safe-remove", methods=["POST"])
+@require_auth
+def smart_safe_remove(kind: str):
+    if kind not in {"tracks", "albums", "artists"}:
+        return error(404, "Unknown smart-search kind")
+    payload = request.get_json(silent=True) or {}
+    source_id = str(payload.get("sourceId", ""))
+    target_id = str(payload.get("targetId", ""))
+    if not source_id or not target_id or source_id == target_id:
+        return error(400, "Need distinct sourceId and targetId")
+
+    data = read_all()
+    if kind == "tracks":
+        source = next((t for t in data["tracks"] if t.get("id") == source_id), None)
+        target = next((t for t in data["tracks"] if t.get("id") == target_id), None)
+        if not source or not target:
+            return error(404, "Track not found")
+        source["disabledManually"] = True
+        persist(data)
+    elif kind == "albums":
+        source = next((a for a in data["albums"] if a.get("id") == source_id), None)
+        target = next((a for a in data["albums"] if a.get("id") == target_id), None)
+        if not source or not target:
+            return error(404, "Album not found")
+        for track in data["tracks"]:
+            if track.get("albumId") == source_id:
+                track["albumId"] = target_id
+        data["albums"] = [a for a in data["albums"] if a.get("id") != source_id]
+        persist(data)
+    else:
+        source = next((a for a in data["artists"] if a.get("id") == source_id), None)
+        target = next((a for a in data["artists"] if a.get("id") == target_id), None)
+        if not source or not target:
+            return error(404, "Artist not found")
+        for track in data["tracks"]:
+            ids = list(track.get("artistIds") or [])
+            if source_id in ids:
+                ids = [target_id if i == source_id else i for i in ids]
+                # remove duplicates preserving order
+                dedup: list[str] = []
+                for i in ids:
+                    if i not in dedup:
+                        dedup.append(i)
+                track["artistIds"] = dedup
+        for album in data["albums"]:
+            ids = list(album.get("artistIds") or [])
+            if source_id in ids:
+                ids = [target_id if i == source_id else i for i in ids]
+                dedup: list[str] = []
+                for i in ids:
+                    if i not in dedup:
+                        dedup.append(i)
+                album["artistIds"] = dedup[:1]
+        data["artists"] = [a for a in data["artists"] if a.get("id") != source_id]
+        persist(data)
+
+    exclusions = get_smart_exclusions(kind)
+    ids = set(exclusions.get("excludedIds", []))
+    ids.add(source_id)
+    exclusions["excludedIds"] = sorted(ids)
+    exclusions["pairs"] = [p for p in exclusions.get("pairs", []) if source_id not in p]
+    write_smart_exclusions(kind, exclusions)
+    return jsonify({"ok": True})
+
+
 @app.route("/admin/api/scan/status", methods=["GET"])
 @require_auth
 def scan_status():
@@ -850,6 +985,8 @@ def scan_start():
             "etaSec": None,
             "result": None,
             "error": None,
+            "stopRequested": False,
+            "stopped": False,
         })
 
     def progress_cb(progress: dict[str, Any]) -> None:
@@ -859,8 +996,9 @@ def scan_start():
 
     def worker() -> None:
         try:
-            result = run_scan(progress_cb)
+            result = run_scan(progress_cb, should_stop=lambda: bool(scan_state.get("stopRequested")))
             scan_state["result"] = result
+            scan_state["stopped"] = bool(result.get("stopped", False))
         except Exception as exc:
             scan_state["error"] = str(exc)
         finally:
@@ -870,6 +1008,16 @@ def scan_start():
 
     threading.Thread(target=worker, daemon=True).start()
     return jsonify({"ok": True})
+
+
+@app.route("/admin/api/scan/stop", methods=["POST"])
+@require_auth
+def scan_stop():
+    with scan_lock:
+        if not scan_state["running"]:
+            return jsonify({"ok": True, "requested": False})
+        scan_state["stopRequested"] = True
+    return jsonify({"ok": True, "requested": True})
 
 
 @app.route("/admin/api/media/track/<track_id>/audio", methods=["GET"])

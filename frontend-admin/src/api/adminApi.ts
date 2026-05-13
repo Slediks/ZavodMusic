@@ -8,6 +8,10 @@ export async function api(path: string, options: RequestInit = {}) {
     ...(token ? { "X-Admin-Token": token } : {}),
   };
   const res = await fetch(`${ADMIN_API_BASE}${path}`, { ...options, headers });
+  if (res.status === 401) {
+    localStorage.removeItem("admin_token");
+    window.dispatchEvent(new Event("admin-unauthorized"));
+  }
   if (!res.ok) {
     const payload = await res.json().catch(() => ({}));
     throw new Error(payload.error || `HTTP ${res.status}`);
@@ -35,3 +39,4 @@ export function buildCoverUrl(staticPath: string | null | undefined) {
   const token = encodeURIComponent(getAdminToken());
   return `${ADMIN_API_BASE}/media/cover?path=${encodeURIComponent(staticPath)}&token=${token}`;
 }
+

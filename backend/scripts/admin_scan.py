@@ -21,11 +21,18 @@ AUDIO_EXTENSIONS = {".mp3", ".flac", ".m4a", ".ogg", ".wav"}
 def read_json(path: Path, fallback: Any) -> Any:
     if not path.exists():
         return fallback
-    with path.open("r", encoding="utf-8-sig") as f:
-        return json.load(f)
+    try:
+        with path.open("r", encoding="utf-8-sig") as f:
+            raw = f.read().strip()
+            if not raw:
+                return fallback
+            return json.loads(raw)
+    except (OSError, json.JSONDecodeError):
+        return fallback
 
 
 def write_json(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
@@ -94,7 +101,10 @@ def file_fingerprint(path: Path) -> str:
     return h.hexdigest()
 
 
-def run_scan(progress_cb: Callable[[dict[str, Any]], None] | None = None) -> dict[str, Any]:
+def run_scan(
+    progress_cb: Callable[[dict[str, Any]], None] | None = None,
+    should_stop: Callable[[], bool] | None = None,
+) -> dict[str, Any]:
     tracks = read_json(TRACKS_PATH, [])
     artists = read_json(ARTISTS_PATH, [])
     albums = read_json(ALBUMS_PATH, [])
@@ -128,7 +138,20 @@ def run_scan(progress_cb: Callable[[dict[str, Any]], None] | None = None) -> dic
 
     seen_audio_urls: set[str] = set()
 
+    stopped = False
+
     for i, audio_path in enumerate(files, start=1):
+        if should_stop and should_stop():
+            stopped = True
+            if progress_cb:
+                progress_cb({
+                    "totalFiles": total,
+                    "processedFiles": i - 1,
+                    "etaSec": None,
+                    "stopped": True,
+                })
+            break
+
         rel = audio_path.relative_to(BASE_DIR).as_posix()
         audio_url = "/" + rel
         seen_audio_urls.add(audio_url)
@@ -216,4 +239,5 @@ def run_scan(progress_cb: Callable[[dict[str, Any]], None] | None = None) -> dic
     write_json(TRACKS_PATH, tracks)
     write_json(ARTISTS_PATH, artists)
     write_json(ALBUMS_PATH, albums)
+    stats["stopped"] = stopped
     return stats
