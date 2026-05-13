@@ -1,0 +1,13 @@
+﻿:root {
+  font-family: "Segoe UI", "Inter", sans-serif;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #e9f2f9;
+  background: #0b1220;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

@@ -1,0 +1,157 @@
+﻿.appShell {
+  min-height: 100vh;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 292px 1fr;
+  background:
+    radial-gradient(1200px 800px at 10% -10%, rgba(31, 82, 133, 0.42), transparent 60%),
+    linear-gradient(180deg, #091327 0%, #081121 100%);
+  color: #eaf2f8;
+}
+
+.sidebar {
+  border-right: 1px solid #203657;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(10, 24, 45, 0.96), rgba(6, 17, 33, 0.96));
+}
+
+.brandWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandBadge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #1f5d9a, #183d63);
+  font-weight: 700;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.subtitle {
+  margin: 0;
+  color: #8fb0d0;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+.navList {
+  display: grid;
+  gap: 6px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #c2d6ea;
+  text-decoration: none;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #476c93;
+}
+
+.navItem:hover {
+  border-color: #2d4f74;
+  background: rgba(20, 49, 80, 0.34);
+}
+
+.active {
+  border-color: #3f6c9a;
+  background: linear-gradient(180deg, rgba(32, 70, 110, 0.66), rgba(24, 50, 82, 0.76));
+  color: #f7fbff;
+}
+
+.active .dot {
+  background: #9ad5ff;
+}
+
+.logout {
+  margin-top: auto;
+  border: 1px solid #33587e;
+  border-radius: 12px;
+  background: #1b3655;
+  color: #edf5fc;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.mainWrap {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.topbar {
+  border-bottom: 1px solid #1f3453;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(9, 21, 40, 0.85);
+}
+
+.kicker {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #84a5c5;
+}
+
+.pageTitle {
+  margin: 2px 0 0;
+  font-size: 22px;
+}
+
+.statusPill {
+  border: 1px solid #2f577f;
+  border-radius: 999px;
+  padding: 6px 11px;
+  color: #a2d7ff;
+  font-size: 12px;
+}
+
+.content {
+  padding: 16px 18px 18px;
+  overflow: auto;
+  min-height: 0;
+  display: flex;
+}
+
+.content > * {
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 1040px) {
+  .appShell {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid #203657;
+  }
+}
