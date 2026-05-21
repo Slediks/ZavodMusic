@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import json
+import os
 import threading
 from pathlib import Path
 from typing import Any
@@ -840,4 +841,8 @@ def get_album_tracks(album_id: str):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.getenv("APP_PORT", "5000")),
+        debug=os.getenv("APP_DEBUG", "1") == "1",
+    )

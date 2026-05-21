@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import json
+import os
 import threading
 import time
 import uuid
@@ -1046,4 +1047,8 @@ def media_cover():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5051, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.getenv("APP_PORT", "5051")),
+        debug=os.getenv("APP_DEBUG", "1") == "1",
+    )
