@@ -237,8 +237,22 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   const playTrack = useCallback((track: Track, nextQueue?: Track[]) => {
     const prepared = nextQueue && nextQueue.length > 0 ? nextQueue : [track];
     const index = prepared.findIndex((t) => t.id === track.id);
+    const nextIndex = index >= 0 ? index : 0;
+    const nextTrack = prepared[nextIndex] ?? track;
+
+    const audio = audioRef.current;
+    if (audio) {
+      const nextAudioUrl = getTrackAudioUrl(nextTrack.id);
+      if (audio.src !== nextAudioUrl) {
+        audio.src = nextAudioUrl;
+        audio.load();
+      } else {
+        audio.currentTime = 0;
+      }
+    }
+
     setQueue(prepared);
-    setQueueIndex(index >= 0 ? index : 0);
+    setQueueIndex(nextIndex);
     setOriginalQueueTrackIds(prepared.map((t) => t.id));
     setIsShuffled(false);
     setCurrentTime(0);

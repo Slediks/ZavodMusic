@@ -15,7 +15,7 @@ import type { Playlist } from '../../types/playlist';
 
 export function MyPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: string) => void }) {
   const { user, updateUser } = useAuth();
-  const { playTrack, queue } = usePlayer();
+  const { playTrack } = usePlayer();
   const { showToast } = useToast();
   const [created, setCreated] = useState<Playlist[]>([]);
   const [liked, setLiked] = useState<Playlist[]>([]);
@@ -68,10 +68,6 @@ export function MyPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: strin
       const playable = (detail.tracks || []).filter((track) => !dislikedTrackIds.includes(track.id));
       if (!playable.length) {
         showToast("Нет доступных треков для старта", "error");
-        return;
-      }
-      if (playable.length == queue.length && playable.every((tr, i) => tr.id == queue[i].id)){
-        showToast("В очереди уже находится этот плейлист", "info");
         return;
       }
       playTrack(playable[0], playable);

@@ -18,7 +18,7 @@ import {usePlayer} from "../../context/PlayerContext.tsx";
 export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: string) => void }) {
   const { user, updateUser } = useAuth();
   const { showToast } = useToast();
-  const { playTrack, queue } = usePlayer();
+  const { playTrack } = usePlayer();
   const [items, setItems] = useState<Playlist[]>([]);
   const { searchInput, setSearchInput, search, clearInstantSearch, applyInstantSearch, clearAllSearch } = useSearchControls();
   const [page, setPage] = useState(1);
@@ -62,10 +62,6 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
       const playable = (detail.tracks || []).filter((track) => !dislikedTrackIds.includes(track.id));
       if (!playable.length) {
         showToast("Нет доступных треков для старта", "error");
-        return;
-      }
-      if (playable.length == queue.length && playable.every((tr, i) => tr.id == queue[i].id)){
-        showToast("В очереди уже находится этот плейлист", "info");
         return;
       }
       playTrack(playable[0], playable);
