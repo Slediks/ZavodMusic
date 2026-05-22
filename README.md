@@ -1,10 +1,10 @@
 # ZavodMusic
 
-Локальное музыкальное веб-приложение:
-- `backend` — Flask API + JSON-хранилище
-- `frontend` — React/Vite клиент
+Р›РѕРєР°Р»СЊРЅРѕРµ РјСѓР·С‹РєР°Р»СЊРЅРѕРµ РІРµР±-РїСЂРёР»РѕР¶РµРЅРёРµ:
+- `backend` вЂ” Flask API + JSON-С…СЂР°РЅРёР»РёС‰Рµ
+- `frontend` вЂ” React/Vite РєР»РёРµРЅС‚
 
-## Требования
+## РўСЂРµР±РѕРІР°РЅРёСЏ
 
 - Python 3.11+
 - Node.js 20+
@@ -19,7 +19,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-API по умолчанию: `http://127.0.0.1:5000`
+API РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ: `http://127.0.0.1:5000`
 
 ## Frontend
 
@@ -30,7 +30,7 @@ copy .env.example .env
 npm run dev
 ```
 
-Клиент по умолчанию: `http://127.0.0.1:5173`
+РљР»РёРµРЅС‚ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ: `http://127.0.0.1:5173`
 
 ## Production build (frontend)
 
@@ -40,11 +40,11 @@ npm run build
 npm run preview
 ```
 
-## Генерация JSON треков (опционально)
+## Р“РµРЅРµСЂР°С†РёСЏ JSON С‚СЂРµРєРѕРІ (РѕРїС†РёРѕРЅР°Р»СЊРЅРѕ)
 
 ```powershell
 cd backend
 python scripts/generate_tracks_json.py --music-dir "E:\\Music" --output data/tracks.json
 ```
 
-Скрипт генерации использует `mutagen` (уже включен в `requirements.txt`).
+РЎРєСЂРёРїС‚ РіРµРЅРµСЂР°С†РёРё РёСЃРїРѕР»СЊР·СѓРµС‚ `mutagen` (СѓР¶Рµ РІРєР»СЋС‡РµРЅ РІ `requirements.txt`).
