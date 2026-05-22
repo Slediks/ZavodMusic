@@ -23,6 +23,13 @@ const nextRepeat = (mode: RepeatMode): RepeatMode => {
   return "off";
 };
 
+function openPath(path: string, closeFullscreen: () => void) {
+  if (!path) return;
+  window.history.pushState({}, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+  closeFullscreen();
+}
+
 export function FullscreenPlayer({ isAuthorized, likedTrackIds, dislikedTrackIds, onToggleLike, onToggleDislike }: FullscreenPlayerProps) {
   const {
     fullscreenMode,
@@ -81,6 +88,8 @@ export function FullscreenPlayer({ isAuthorized, likedTrackIds, dislikedTrackIds
   }, [isOpen, closeFullscreen]);
 
   if (!isOpen || !currentTrack) return null;
+
+  const artistIds = currentTrack.artistIds || [];
 
   return (
     <section className={[styles["fullscreen-player"], showLyrics ? styles["has-lyrics"] : styles["no-lyrics"]].join(" ")} role="dialog" aria-modal="false">
@@ -182,7 +191,28 @@ export function FullscreenPlayer({ isAuthorized, likedTrackIds, dislikedTrackIds
 
         <div className={styles["fullscreen-track-meta"]}>
           <h2>{currentTrack.title}</h2>
-          <p className={styles["fullscreen-artist"]}>{currentTrack.artistNames.join(", ")}</p>
+          <p className={styles["fullscreen-artist"]}>
+            {currentTrack.artistNames.map((name, index) => {
+              const artistId = artistIds[index];
+              const clickable = Boolean(artistId);
+              return (
+                <span key={`${name}-${index}`}>
+                    <button
+                      type="button"
+                      className={`${styles["artist-btn"]} ${clickable ? styles["artist-btn-clickable"] : ""}`}
+                      disabled={!clickable}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (artistId) openPath(`/artists/${artistId}`, closeFullscreen);
+                      }}
+                    >
+                      {name}
+                    </button>
+                  {index < currentTrack.artistNames.length - 1 ? <span>, </span> : null}
+                  </span>
+              );
+            })}
+          </p>
         </div>
 
         <div className={styles["fullscreen-progress-wrap"]}>

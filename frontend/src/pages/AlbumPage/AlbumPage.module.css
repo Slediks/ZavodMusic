@@ -39,6 +39,12 @@
   place-items: center;
   color: var(--muted-color);
   font-size: 34px;
+  padding: 24px;
+}
+
+.coverFallbackIcon {
+  --ui-icon-size: 100%;
+  color: var(--muted-color);
 }
 
 .heroContent {
@@ -110,7 +116,6 @@
     height: 100%;
   }
 
-}
   .hero {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -130,3 +135,4 @@
     margin-left: 10px;
   }
 
+}

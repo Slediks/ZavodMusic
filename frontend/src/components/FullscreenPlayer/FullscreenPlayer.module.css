@@ -173,6 +173,21 @@
   color: var(--text-color);
 }
 
+.artist-btn {
+  border: none;
+  background: transparent;
+  font-size: clamp(16px, 2vh, 22px);
+  color: var(--text-color);
+  padding: 0;
+  transform: none !important;
+  cursor: default;
+}
+
+.artist-btn-clickable {
+  cursor: pointer;
+}
+
+
 .fullscreen-progress-wrap {
   width: min(calc(var(--fullscreen-cover-size) + 56px), 100%);
   margin-top: 38px;

@@ -10,6 +10,12 @@ type PlayerTrackInfoProps = {
   onOpenFullscreen?: () => void;
 };
 
+function openPath(path: string) {
+  if (!path) return;
+  window.history.pushState({}, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+}
+
 export function PlayerTrackInfo({ track, isPlaying, onOpenFullscreen }: PlayerTrackInfoProps) {
   const [coverFailed, setCoverFailed] = useState(false);
 
@@ -21,6 +27,7 @@ export function PlayerTrackInfo({ track, isPlaying, onOpenFullscreen }: PlayerTr
     return <div className={styles["player-track-info"]}>Ничего не играет</div>;
   }
 
+  const artistIds = track.artistIds || [];
   const artistLabel = track.artistNames.join(", ");
   const coverWrapClassName = [styles["player-cover-wrap"], isPlaying ? styles["is-playing"] : ""].filter(Boolean).join(" ");
 
@@ -43,7 +50,28 @@ export function PlayerTrackInfo({ track, isPlaying, onOpenFullscreen }: PlayerTr
 
       <div className={styles["player-text-meta"]}>
         <div className={styles["player-title"]} title={track.title}>{track.title}</div>
-        <div className={styles["player-subtitle"]} title={artistLabel}>{artistLabel}</div>
+        <div className={styles["player-subtitle"]} title={artistLabel}>
+          {track.artistNames.map((name, index) => {
+            const artistId = artistIds[index];
+            const clickable = Boolean(artistId);
+            return (
+              <span key={`${name}-${index}`}>
+                    <button
+                      type="button"
+                      className={`${styles["artist-btn"]} ${clickable ? styles["artist-btn-clickable"] : ""}`}
+                      disabled={!clickable}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (artistId) openPath(`/artists/${artistId}`);
+                      }}
+                    >
+                      {name}
+                    </button>
+                {index < track.artistNames.length - 1 ? <span>, </span> : null}
+                  </span>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

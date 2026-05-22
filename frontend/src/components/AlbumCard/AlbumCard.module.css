@@ -132,6 +132,21 @@
   text-overflow: ellipsis;
 }
 
+.artist-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted-color);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0;
+  transform: none !important;
+  cursor: default;
+}
+
+.artist-btn-clickable {
+  cursor: pointer;
+}
+
 .album-meta {
   display: flex;
   justify-content: space-between;

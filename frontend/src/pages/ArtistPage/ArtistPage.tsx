@@ -63,7 +63,7 @@ export function ArtistPage({ artistId, onOpenAlbum, onToggleLike, onToggleDislik
             <img src={getArtistCoverUrl(artist.id)} alt={""} className={styles.cover} />
           ) : (
             <div className={`${styles.cover} ${styles.coverFallback}`}>
-              <UiIcon name="musicArtist" />
+              <UiIcon name="musicArtist" className={styles["coverFallbackIcon"]} />
             </div>
           )}
         </div>

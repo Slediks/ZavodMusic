@@ -10,6 +10,12 @@ type AlbumCardProps = {
   onPlay: (id: string) => void;
 };
 
+function openPath(path: string) {
+  if (!path) return;
+  window.history.pushState({}, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+}
+
 export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
   const albumLink = `${window.location.origin}/albums/${album.id}`;
   const copyAlbumLink = async () => {
@@ -28,6 +34,8 @@ export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
     document.execCommand("copy");
     document.body.removeChild(textarea);
   };
+
+  const artistIds = album.artistIds || [];
 
   return (
     <article
@@ -82,7 +90,27 @@ export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
 
       <div className={styles["album-info-wrap"]}>
         <div className={styles["album-title"]}>{album.title}</div>
-        <p className={styles["album-subtitle"]}>{album.artistNames.join(", ")}</p>
+        <p className={styles["album-subtitle"]}>
+          {album.artistNames.map((name, index) => {
+          const artistId = artistIds[index];
+          const clickable = Boolean(artistId);
+          return (
+            <span key={`${name}-${index}`}>
+                    <button
+                      type="button"
+                      className={`${styles["artist-btn"]} ${clickable ? styles["artist-btn-clickable"] : ""}`}
+                      disabled={!clickable}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (artistId) openPath(`/artists/${artistId}`);
+                      }}
+                    >
+                      {name}
+                    </button>
+              {index < album.artistNames.length - 1 ? <span>, </span> : null}
+                  </span>
+          );
+        })}</p>
       </div>
 
       <div className={styles["album-meta"]}>

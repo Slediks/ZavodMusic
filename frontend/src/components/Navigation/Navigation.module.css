@@ -29,9 +29,3 @@
   border-bottom-color: var(--primary-color);
 }
 
-@media (max-width: 900px) {
-  .top-nav {
-    display: none;
-  }
-}
-
