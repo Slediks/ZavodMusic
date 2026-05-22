@@ -50,8 +50,9 @@ export function AppLayout({ pathname, onNavigate, isDark, isAuthorized, currentL
         onToggleTheme={onToggleTheme}
       />
       <main className={styles["page-content"]}>{children}</main>
-      <PlayerBar likedTrackIds={likedTrackIds} dislikedTrackIds={dislikedTrackIds} onToggleLike={onToggleLike} onToggleDislike={onToggleDislike} />
+      <PlayerBar isAuthorized={isAuthorized} likedTrackIds={likedTrackIds} dislikedTrackIds={dislikedTrackIds} onToggleLike={onToggleLike} onToggleDislike={onToggleDislike} />
       <FullscreenPlayer
+        isAuthorized={isAuthorized}
         likedTrackIds={likedTrackIds}
         dislikedTrackIds={dislikedTrackIds}
         onToggleLike={onToggleLike}

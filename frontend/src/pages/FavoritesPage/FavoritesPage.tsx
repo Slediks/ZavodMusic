@@ -109,6 +109,7 @@ export function FavoritesPage({ onTracksHydrated, onToggleLike, onToggleDislike 
             <TrackTable
               tracks={tracks}
               loading={loading}
+              isAuthorized={user != null}
               sortBy="title"
               sortDirection="asc"
               dislikedTrackIds={dislikedTrackIds}

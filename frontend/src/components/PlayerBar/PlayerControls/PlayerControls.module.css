@@ -7,8 +7,18 @@
 .player-action {
   border: none;
   background: transparent;
-  color: color-mix(in srgb, var(--text-color) 78%, var(--primary-color) 22%);
+  color: var(--muted-color);
+  opacity: 0.8;
   padding: 0;
+}
+
+.player-action:disabled {
+  opacity: 0.35;
+}
+
+.player-action:hover:not(:disabled) {
+  opacity: 1;
+  color: var(--primary-strong);
 }
 
 .player-action-icon {
@@ -22,6 +32,7 @@
   color: var(--surface-color);
   box-shadow: var(--accent-glow);
   border-radius: 999px;
+  opacity: 1;
 }
 
 .player-action-primary-icon {

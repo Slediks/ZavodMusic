@@ -16,6 +16,7 @@ type SortDirection = "asc" | "desc";
 type TrackTableProps = {
   tracks: Track[];
   loading: boolean;
+  isAuthorized: boolean;
   sortBy: SortBy;
   sortDirection: SortDirection;
   dislikedTrackIds: string[];
@@ -66,6 +67,7 @@ function SortableTrackRow({
   track,
   isLiked,
   isDisliked,
+  isAuthorized,
   onToggleLike,
   onToggleDislike,
   onInfo,
@@ -81,6 +83,7 @@ function SortableTrackRow({
   track: Track;
   isLiked: boolean;
   isDisliked: boolean;
+  isAuthorized: boolean;
   onToggleLike: (track: Track) => void;
   onToggleDislike: (track: Track) => void;
   onInfo: (track: Track) => void;
@@ -101,6 +104,7 @@ function SortableTrackRow({
         track={track}
         isLiked={isLiked}
         isDisliked={isDisliked}
+        isAuthorized={isAuthorized}
         onToggleLike={onToggleLike}
         onToggleDislike={onToggleDislike}
         onInfo={onInfo}
@@ -122,6 +126,7 @@ function SortableTrackRow({
 export function TrackTable({
   tracks,
   loading,
+  isAuthorized,
   sortBy,
   sortDirection,
   dislikedTrackIds,
@@ -182,6 +187,7 @@ export function TrackTable({
                           track={track}
                           isLiked={likedTrackIds.includes(track.id)}
                           isDisliked={dislikedTrackIds.includes(track.id)}
+                          isAuthorized={isAuthorized}
                           onToggleLike={onToggleLike}
                           onToggleDislike={onToggleDislike}
                           onInfo={onInfo}
@@ -204,6 +210,7 @@ export function TrackTable({
                     track={track}
                     isLiked={likedTrackIds.includes(track.id)}
                     isDisliked={dislikedTrackIds.includes(track.id)}
+                    isAuthorized={isAuthorized}
                     onToggleLike={onToggleLike}
                     onToggleDislike={onToggleDislike}
                     onInfo={onInfo}

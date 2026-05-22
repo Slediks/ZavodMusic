@@ -76,7 +76,7 @@ function QueueSortableItem({
         aria-label={`Воспроизвести ${title}`}
       >
         {!coverFailed && coverUrl ? (
-          <img src={coverUrl} alt={title} className={styles["queue-cover"]} onError={() => setCoverFailed(true)} />
+          <img src={coverUrl} alt={""} className={styles["queue-cover"]} onError={() => setCoverFailed(true)} />
         ) : (
           <span className={styles["queue-cover-fallback"]}><UiIcon name="musicTwo" className={styles["queue-cover-fallback-icon"]} /></span>
         )}

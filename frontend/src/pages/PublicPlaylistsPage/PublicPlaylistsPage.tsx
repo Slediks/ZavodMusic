@@ -13,11 +13,12 @@ import { useSearchControls } from "../../hooks/useSearchControls";
 import { ApiError } from "../../types/api";
 import type { Playlist } from "../../types/playlist";
 import { getRandomSearchPhrase } from "../../utils/searchPhrases";
+import {usePlayer} from "../../context/PlayerContext.tsx";
 
 export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: string) => void }) {
   const { user, updateUser } = useAuth();
   const { showToast } = useToast();
-
+  const { playTrack, queue } = usePlayer();
   const [items, setItems] = useState<Playlist[]>([]);
   const { searchInput, setSearchInput, search, clearInstantSearch, applyInstantSearch, clearAllSearch } = useSearchControls();
   const [page, setPage] = useState(1);
@@ -53,6 +54,25 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
   }, [search, page, limit]);
 
   const likedIds = useMemo(() => new Set(user?.likedPlaylistIds || []), [user?.likedPlaylistIds]);
+
+  const playPlaylistFromCard = async (playlist: Playlist) => {
+    try {
+      const detail = await playlistsApi.getById(playlist.id);
+      const dislikedTrackIds = user?.dislikedTrackIds || [];
+      const playable = (detail.tracks || []).filter((track) => !dislikedTrackIds.includes(track.id));
+      if (!playable.length) {
+        showToast("Нет доступных треков для старта", "error");
+        return;
+      }
+      if (playable.length == queue.length && playable.every((tr, i) => tr.id == queue[i].id)){
+        showToast("В очереди уже находится этот плейлист", "info");
+        return;
+      }
+      playTrack(playable[0], playable);
+    } catch (e) {
+      showToast(e instanceof ApiError ? e.message : "Не удалось запустить плейлист", "error");
+    }
+  };
 
   return (
     <section className={styles.tracksPage}>
@@ -113,7 +133,7 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
                     canLike={p.ownerId !== user?.id}
                     isLiked={likedIds.has(p.id)}
                     onOpen={onOpenPlaylist}
-                    onPlay={() => showToast("Для воспроизведения откройте плейлист", "info")}
+                    onPlay={(playlist) => { void playPlaylistFromCard(playlist); }}
                     onLike={async (playlist) => {
                       const wasLiked = likedIds.has(playlist.id);
                       try {

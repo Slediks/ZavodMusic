@@ -126,7 +126,7 @@ export function PlaylistPage({ playlistId, onDeleted }: { playlistId: string; on
             </div>
             <div className={styles.coverWrap}>
               {playlist.coverExists ? (
-                <img src={getPlaylistCoverUrl(playlist.id)} alt={playlist.title} className={styles.cover} />
+                <img src={getPlaylistCoverUrl(playlist.id)} alt={""} className={styles.cover} />
               ) : (
                 <div className={`${styles.cover} ${styles.coverFallback}`}>
                   <UiIcon name="folderMusic" className={styles.coverFallbackIcon} />
@@ -166,6 +166,7 @@ export function PlaylistPage({ playlistId, onDeleted }: { playlistId: string; on
                 <TrackTable
                   tracks={orderedTracks}
                   loading={false}
+                  isAuthorized={user != null}
                   showHeader={false}
                   sortable={isOwner}
                   onReorder={handleReorderInTable}

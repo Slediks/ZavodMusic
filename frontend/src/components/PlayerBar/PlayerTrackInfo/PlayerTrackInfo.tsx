@@ -28,7 +28,7 @@ export function PlayerTrackInfo({ track, isPlaying, onOpenFullscreen }: PlayerTr
     <div className={styles["player-track-info"]}>
       <div className={coverWrapClassName}>
         {!coverFailed && getTrackCoverUrl(track.id) ? (
-          <img src={getTrackCoverUrl(track.id)} alt={track.title} className={styles["player-cover"]} onError={() => setCoverFailed(true)} />
+          <img src={getTrackCoverUrl(track.id)} alt={""} className={styles["player-cover"]} onError={() => setCoverFailed(true)} />
         ) : (
           <div className={styles["player-cover"] + " " + styles["player-cover-fallback"]}>
             <UiIcon name="musicTwo" className={styles["player-cover-fallback-icon"]} />

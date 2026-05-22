@@ -12,6 +12,7 @@ import { ProgressBar } from "./ProgressBar/ProgressBar";
 import { VolumeControl } from "./VolumeControl/VolumeControl";
 
 type PlayerBarProps = {
+  isAuthorized: boolean;
   likedTrackIds: string[];
   dislikedTrackIds: string[];
   onToggleLike: (track: Track) => void;
@@ -24,7 +25,7 @@ const nextRepeat = (mode: RepeatMode): RepeatMode => {
   return "off";
 };
 
-export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onToggleDislike }: PlayerBarProps) {
+export function PlayerBar({ isAuthorized, likedTrackIds, dislikedTrackIds, onToggleLike, onToggleDislike }: PlayerBarProps) {
   const { showToast } = useToast();
   const {
     currentTrack,
@@ -111,7 +112,7 @@ export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onTog
         </div>
 
         <div className={styles["player-center"]}>
-          {hasCurrentTrack ? (
+          {(hasCurrentTrack && isAuthorized) ? (
             <button
               type="button"
               className={[styles["player-action"], isCurrentLiked ? styles["is-active"] : ""].filter(Boolean).join(" ")}
@@ -149,7 +150,7 @@ export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onTog
             <UiIcon name={repeatMode === "one" ? "repeatOne" : "repeat"} className={styles["player-action-icon"]} />
           </button>
 
-          {hasCurrentTrack ? (
+          {(hasCurrentTrack && isAuthorized) ? (
             <button
               type="button"
               className={[styles["player-action"], isCurrentDisliked ? styles["is-disliked"] : "", isCurrentDisliked ? styles["is-active"] : ""].filter(Boolean).join(" ")}
@@ -162,15 +163,17 @@ export function PlayerBar({ likedTrackIds, dislikedTrackIds, onToggleLike, onTog
         </div>
 
         <div className={styles["player-right"]}>
-          <button
-            type="button"
-            className={styles["player-action"]}
-            onClick={() => setIsAddToPlaylistOpen(true)}
-            aria-label="Добавить в плейлист"
-            disabled={!hasCurrentTrack}
-          >
-            <UiIcon name="folderMusic" className={styles["player-action-icon"]} />
-          </button>
+          {isAuthorized ? (
+            <button
+              type="button"
+              className={styles["player-action"]}
+              onClick={() => setIsAddToPlaylistOpen(true)}
+              aria-label="Добавить в плейлист"
+              disabled={!hasCurrentTrack}
+            >
+              <UiIcon name="folderMusic" className={styles["player-action-icon"]} />
+            </button>
+          ) : null}
 
           <button
             type="button"

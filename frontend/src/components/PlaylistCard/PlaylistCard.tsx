@@ -35,7 +35,7 @@ export function PlaylistCard({ playlist, canManage, isLiked, canLike = true, can
     >
       <div className={styles["playlist-cover-wrap"]}>
         {playlist.coverExists ? (
-          <img src={getPlaylistCoverUrl(playlist.id)} alt={playlist.title} className={styles["playlist-cover"]} />
+          <img src={getPlaylistCoverUrl(playlist.id)} alt={""} className={styles["playlist-cover"]} />
         ) : (
           <div className={styles["playlist-cover"] + " " + styles.placeholder}><UiIcon name="folderMusic" className={styles["playlist-cover-fallback-icon"]} /></div>
         )}

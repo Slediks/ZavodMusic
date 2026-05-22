@@ -44,7 +44,7 @@ export function ArtistCard({ artist, onOpen, onPlay }: ArtistCardProps) {
     >
       <div className={styles["artist-cover-wrap"]}>
         {artist.coverExists ? (
-          <img src={getArtistCoverUrl(artist.id)} alt={artist.name} className={styles["artist-cover"]} />
+          <img src={getArtistCoverUrl(artist.id)} alt={""} className={styles["artist-cover"]} />
         ) : (
           <div className={styles["artist-cover"] + " " + styles["artist-cover-fallback"]}><UiIcon name="musicArtist" className={styles["artist-cover-fallback-icon"]} /></div>
         )}

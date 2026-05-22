@@ -44,7 +44,7 @@ export function AlbumCard({ album, onOpen, onPlay }: AlbumCardProps) {
     >
       <div className={styles["album-cover-wrap"]}>
         {album.coverExists ? (
-          <img src={getAlbumCoverUrl(album.id)} alt={album.title} className={styles["album-cover"]} />
+          <img src={getAlbumCoverUrl(album.id)} alt={""} className={styles["album-cover"]} />
         ) : (
           <div className={styles["album-cover"] + " " + styles["album-cover-fallback"]}><UiIcon name="musicAlbum" className={styles["album-cover-fallback-icon"]} /></div>
         )}

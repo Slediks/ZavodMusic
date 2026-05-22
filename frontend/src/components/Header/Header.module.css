@@ -23,10 +23,10 @@
 
 .brand-logo {
   height: 64px;
-  aspect-ratio: 1417.35 / 373.07;
+  aspect-ratio: 317.35 / 373.07;
   background: var(--primary-strong);
-  -webkit-mask-image: url("/logo.svg");
-  mask-image: url("/logo.svg");
+  -webkit-mask-image: url("/favicon.svg");
+  mask-image: url("/favicon.svg");
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: left center;

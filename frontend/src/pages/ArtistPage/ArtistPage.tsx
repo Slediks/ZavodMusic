@@ -60,7 +60,7 @@ export function ArtistPage({ artistId, onOpenAlbum, onToggleLike, onToggleDislik
       <header className={styles.hero}>
         <div className={styles.coverWrap}>
           {artist.coverExists ? (
-            <img src={getArtistCoverUrl(artist.id)} alt={artist.name} className={styles.cover} />
+            <img src={getArtistCoverUrl(artist.id)} alt={""} className={styles.cover} />
           ) : (
             <div className={`${styles.cover} ${styles.coverFallback}`}>
               <UiIcon name="musicArtist" />
@@ -83,6 +83,7 @@ export function ArtistPage({ artistId, onOpenAlbum, onToggleLike, onToggleDislik
           <TrackTable
             tracks={tracks}
             loading={false}
+            isAuthorized={user != null}
             showHeader={false}
             sortBy="title"
             sortDirection="asc"

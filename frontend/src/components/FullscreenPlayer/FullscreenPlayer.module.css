@@ -50,6 +50,18 @@
   display: block;
 }
 
+.fullscreen-cover-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px;
+}
+
+.fullscreen-cover-fallback-icon {
+  --ui-icon-size: 100%;
+  color: var(--muted-color);
+}
+
 .fullscreen-cover-overlay {
   position: absolute;
   inset: 0;
@@ -207,7 +219,6 @@
   white-space: pre-wrap;
   font-family: inherit;
 }
-
 
 
 

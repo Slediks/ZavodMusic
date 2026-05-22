@@ -54,7 +54,7 @@ export function AlbumPage({ albumId, onToggleLike, onToggleDislike }: { albumId:
       <header className={styles.hero}>
         <div className={styles.coverWrap}>
           {album.coverExists ? (
-            <img src={getAlbumCoverUrl(album.id)} alt={album.title} className={styles.cover} />
+            <img src={getAlbumCoverUrl(album.id)} alt={""} className={styles.cover} />
           ) : (
             <div className={`${styles.cover} ${styles.coverFallback}`}>
               <UiIcon name="musicAlbum" />
@@ -78,6 +78,7 @@ export function AlbumPage({ albumId, onToggleLike, onToggleDislike }: { albumId:
           <TrackTable
             tracks={tracks}
             loading={false}
+            isAuthorized={user != null}
             showHeader={false}
             sortBy="title"
             sortDirection="asc"

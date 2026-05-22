@@ -1,5 +1,5 @@
 ﻿import styles from './FullscreenPlayer.module.css';
-import { useEffect, useMemo } from "react";
+import {useEffect, useMemo, useState} from "react";
 import type { Track } from "../../types/track";
 import { usePlayer } from "../../context/PlayerContext";
 import { UiIcon } from "../UiIcon/UiIcon";
@@ -8,6 +8,7 @@ import { PlayerControls } from "../PlayerBar/PlayerControls/PlayerControls";
 import { getTrackCoverUrl } from "../../api/trackMedia";
 
 type FullscreenPlayerProps = {
+  isAuthorized: boolean;
   likedTrackIds: string[];
   dislikedTrackIds: string[];
   onToggleLike: (track: Track) => void;
@@ -22,7 +23,7 @@ const nextRepeat = (mode: RepeatMode): RepeatMode => {
   return "off";
 };
 
-export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike, onToggleDislike }: FullscreenPlayerProps) {
+export function FullscreenPlayer({ isAuthorized, likedTrackIds, dislikedTrackIds, onToggleLike, onToggleDislike }: FullscreenPlayerProps) {
   const {
     fullscreenMode,
     closeFullscreen,
@@ -47,6 +48,8 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
     removeTrackAndSkip,
   } = usePlayer();
 
+  const [coverFailed, setCoverFailed] = useState(false);
+
   const isOpen = fullscreenMode !== "closed";
   const showLyrics = fullscreenMode === "lyrics";
   const hasLyrics = Boolean(currentTrack?.lyrics);
@@ -65,6 +68,10 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
   );
 
   useEffect(() => {
+    setCoverFailed(false);
+  }, [currentTrack?.id]);
+
+  useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeFullscreen();
@@ -81,7 +88,13 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
 
       <div className={styles["fullscreen-main"]}>
         <div className={styles["fullscreen-cover-wrap"]}>
-          <img src={getTrackCoverUrl(currentTrack.id)} alt={currentTrack.title} className={styles["fullscreen-cover"]} />
+          {!coverFailed && getTrackCoverUrl(currentTrack.id) ? (
+            <img src={getTrackCoverUrl(currentTrack.id)} alt={""} className={styles["fullscreen-cover"]} onError={() => setCoverFailed(true)} />
+          ) : (
+            <div className={styles["fullscreen-cover"] + " " + styles["fullscreen-cover-fallback"]}>
+              <UiIcon name="musicTwo" className={styles["fullscreen-cover-fallback-icon"]} />
+            </div>
+          )}
           <div className={styles["fullscreen-cover-overlay"]} aria-hidden="true" />
 
           <div className={styles["fullscreen-cover-controls"]}>
@@ -94,27 +107,31 @@ export function FullscreenPlayer({ likedTrackIds, dislikedTrackIds, onToggleLike
               <UiIcon name="queue" className={styles["fullscreen-control-icon"]} />
             </button>
 
-            <button
-              type="button"
-              className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-like-btn"], isCurrentLiked ? styles["is-active"] : ""].filter(Boolean).join(" ")}
-              onClick={() => onToggleLike(currentTrack)}
-              aria-label="Лайк"
-            >
-              <UiIcon name="heart" className={styles["fullscreen-control-icon"]} />
-            </button>
+            {isAuthorized ? (
+              <button
+                type="button"
+                className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-like-btn"], isCurrentLiked ? styles["is-active"] : ""].filter(Boolean).join(" ")}
+                onClick={() => onToggleLike(currentTrack)}
+                aria-label="Лайк"
+              >
+                <UiIcon name="heart" className={styles["fullscreen-control-icon"]} />
+              </button>
+            ) : null}
 
-            <button
-              type="button"
-              className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-dislike-btn"], isCurrentDisliked ? styles["is-active"] : "", isCurrentDisliked ? styles["is-disliked"] : ""].filter(Boolean).join(" ")}
-              onClick={() => {
-                const willBecomeDisliked = !isCurrentDisliked;
-                onToggleDislike(currentTrack);
-                if (willBecomeDisliked) removeTrackAndSkip(currentTrack.id);
-              }}
-              aria-label="Дизлайк"
-            >
-              <UiIcon name="heartOff" className={styles["fullscreen-control-icon"]} />
-            </button>
+            {isAuthorized ? (
+              <button
+                type="button"
+                className={[styles["fullscreen-control-btn"], styles["fullscreen-anchor-btn"], styles["fullscreen-dislike-btn"], isCurrentDisliked ? styles["is-active"] : "", isCurrentDisliked ? styles["is-disliked"] : ""].filter(Boolean).join(" ")}
+                onClick={() => {
+                  const willBecomeDisliked = !isCurrentDisliked;
+                  onToggleDislike(currentTrack);
+                  if (willBecomeDisliked) removeTrackAndSkip(currentTrack.id);
+                }}
+                aria-label="Дизлайк"
+              >
+                <UiIcon name="heartOff" className={styles["fullscreen-control-icon"]} />
+              </button>
+            ) : null}
 
             {hasLyrics ? (
               <button

@@ -128,6 +128,7 @@ export function TracksPage({ onTracksHydrated, onToggleLike, onToggleDislike }: 
             <TrackTable
               tracks={tracks}
               loading={loading}
+              isAuthorized={user != null}
               sortBy={sortBy}
               sortDirection={sortDirection}
               dislikedTrackIds={dislikedTrackIds}

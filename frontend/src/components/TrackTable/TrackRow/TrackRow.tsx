@@ -10,6 +10,7 @@ type TrackRowProps = {
   track: Track;
   isLiked: boolean;
   isDisliked: boolean;
+  isAuthorized: boolean;
   onToggleLike: (track: Track) => void;
   onToggleDislike: (track: Track) => void;
   onInfo: (track: Track) => void;
@@ -35,6 +36,7 @@ export function TrackRow({
   track,
   isLiked,
   isDisliked,
+  isAuthorized,
   onToggleLike,
   onToggleDislike,
   onInfo,
@@ -96,7 +98,7 @@ export function TrackRow({
             aria-label={`Воспроизвести ${track.title}`}
           >
             {!coverFailed && getTrackCoverUrl(track.id) ? (
-              <img src={getTrackCoverUrl(track.id)} alt={track.title} className={styles.trackCover} onError={() => setCoverFailed(true)} />
+              <img src={getTrackCoverUrl(track.id)} alt={""} className={styles.trackCover} onError={() => setCoverFailed(true)} />
             ) : (
               <span className={styles.coverFallback}><UiIcon name="musicTwo" className={styles.coverFallbackIcon} /></span>
             )}
@@ -160,14 +162,20 @@ export function TrackRow({
             <UiIcon name="trash" className={styles.actionIcon} />
           </button>
         ) : null}
-        <button
-          type="button"
-          className={`${styles.iconBtn} ${isLiked ? styles.iconBtnActive : ""} ${isDisliked ? styles.iconBtnDanger : ""}`}
-          onClick={(e) => { e.stopPropagation(); isDisliked ? onToggleDislike(track) : onToggleLike(track); }}
-          aria-label={isDisliked ? "Убрать дизлайк" : isLiked ? "Убрать лайк" : "Поставить лайк"}
-        >
-          <UiIcon name={isDisliked ? "heartOff" : "heart"} className={styles.actionIcon} />
-        </button>
+        {isAuthorized ? (
+          <button
+            type="button"
+            className={`${styles.iconBtn} ${isLiked ? styles.iconBtnActive : ""} ${isDisliked ? styles.iconBtnDanger : ""}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isDisliked) onToggleDislike(track);
+              else onToggleLike(track);
+            }}
+            aria-label={isDisliked ? "Убрать дизлайк" : isLiked ? "Убрать лайк" : "Поставить лайк"}
+          >
+            <UiIcon name={isDisliked ? "heartOff" : "heart"} className={styles.actionIcon} />
+          </button>
+        ) : null}
       </div>
 
       <div className={`${styles.cell} ${styles.timeCell}`}>
@@ -190,9 +198,11 @@ export function TrackRow({
                       Добавить в очередь
                     </button>
                   ) : null}
-                  <button type="button" className={styles.menuItem} onClick={(e) => { e.stopPropagation(); onAddToPlaylist(track); setMenuOpen(false); }}>
-                    Добавить в плейлист
-                  </button>
+                  {isAuthorized ? (
+                    <button type="button" className={styles.menuItem} onClick={(e) => { e.stopPropagation(); onAddToPlaylist(track); setMenuOpen(false); }}>
+                      Добавить в плейлист
+                    </button>
+                  ) : null}
                   <button type="button" className={styles.menuItem} onClick={(e) => { e.stopPropagation(); onInfo(track); setMenuOpen(false); }}>
                     Показать информацию
                   </button>
