@@ -7,6 +7,7 @@ import { UiIcon } from "../UiIcon/UiIcon";
 import { Skeleton } from "./Skeleton/Skeleton";
 import { TrackRow } from "./TrackRow/TrackRow";
 import type { Track } from "../../types/track";
+import type { RefObject } from "react";
 
 const restrictToVerticalAxis: Modifier = ({ transform }) => ({ ...transform, x: 0 });
 
@@ -37,6 +38,7 @@ type TrackTableProps = {
   showQueueButton?: boolean;
   menuIncludeQueue?: boolean;
   showDragHandle?: boolean;
+  bodyListRef?: RefObject<HTMLDivElement | null>;
 };
 
 function SortHeader({ label, field, sortBy, sortDirection, onSort }: { label: string; field: SortBy; sortBy: SortBy; sortDirection: SortDirection; onSort: (sortBy: SortBy) => void }) {
@@ -147,6 +149,7 @@ export function TrackTable({
   showQueueButton = true,
   menuIncludeQueue = false,
   showDragHandle = false,
+  bodyListRef,
 }: TrackTableProps) {
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }));
 
@@ -170,7 +173,7 @@ export function TrackTable({
         </div>
       ) : null}
 
-      <div className={styles.bodyList}>
+      <div ref={bodyListRef} className={styles.bodyList}>
         {loading
           ? Array.from({ length: 8 }).map((_, idx) => (
               <div key={`sk-${idx}`} className={styles.skeletonRow}><Skeleton height={56} /></div>

@@ -1,5 +1,5 @@
 ﻿import styles from './PublicPlaylistsPage.module.css';
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { playlistsApi } from "../../api/playlistsApi";
 import { EmptyState } from "../../components/EmptyState/EmptyState";
 import { ErrorBlock } from "../../components/ErrorBlock/ErrorBlock";
@@ -10,18 +10,23 @@ import { useAuth } from "../../context/AuthContext";
 import { useToast } from "../../context/ToastContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { useSearchControls } from "../../hooks/useSearchControls";
+import { useUrlListFilters } from "../../hooks/useUrlListFilters";
+import { useScrollToTopOnPageChange } from "../../hooks/useScrollToTopOnPageChange";
 import { ApiError } from "../../types/api";
 import type { Playlist } from "../../types/playlist";
 import { getRandomSearchPhrase } from "../../utils/searchPhrases";
 import {usePlayer} from "../../context/PlayerContext.tsx";
 
 export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: string) => void }) {
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialSearchInput = initialParams.get("search") ?? "";
+  const initialPage = Math.max(1, Number(initialParams.get("page")) || 1);
   const { user, updateUser } = useAuth();
   const { showToast } = useToast();
   const { playTrack } = usePlayer();
   const [items, setItems] = useState<Playlist[]>([]);
-  const { searchInput, setSearchInput, search, clearInstantSearch, applyInstantSearch, clearAllSearch } = useSearchControls();
-  const [page, setPage] = useState(1);
+  const { searchInput, setSearchInput, setSearchFromExternal, search, clearInstantSearch, applyInstantSearch, clearAllSearch } = useSearchControls({ initialSearchInput });
+  const [page, setPage] = useState(initialPage);
   const [pages, setPages] = useState(0);
   const [total, setTotal] = useState(0);
   const [limit, setLimit] = useLocalStorage<number>("zavod_public_playlists_limit", 24);
@@ -29,6 +34,19 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
   const [error, setError] = useState("");
   const [searchPhrase] = useState(getRandomSearchPhrase);
   const normalizedSearchPhrase = searchPhrase.replace(/^чем\s+/i, "");
+  const cardsRegionRef = useRef<HTMLDivElement | null>(null);
+
+  useUrlListFilters({
+    page,
+    setPage,
+    limit,
+    setLimit,
+    searchInput,
+    setSearchInput: setSearchFromExternal,
+    defaultPage: 1,
+    defaultLimit: 24,
+  });
+  useScrollToTopOnPageChange(page, cardsRegionRef);
 
   const loadPublicPlaylists = async (opts?: { page?: number; limit?: number; search?: string }) => {
     setLoading(true);
@@ -102,7 +120,7 @@ export function PublicPlaylistsPage({ onOpenPlaylist }: { onOpenPlaylist: (id: s
 
       {!error ? (
         <div className={styles.tableAndFooter}>
-          <div className={styles.cardsRegion}>
+          <div ref={cardsRegionRef} className={styles.cardsRegion}>
             {loading ? (
               <div className={styles.skeletonGrid} aria-hidden="true">
                 {Array.from({ length: Math.max(8, Math.min(limit, 12)) }).map((_, idx) => (

@@ -20,7 +20,6 @@ export function Pagination({ total, page, pages, onChange }: PaginationProps) {
         : page >= pages
           ? dotsCount - 1
           : 1;
-
   return (
     <div className={styles.pagination}>
       <span className={styles.leftPart}>Найдено: <strong>{total}</strong></span>
