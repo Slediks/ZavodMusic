@@ -1,0 +1,40 @@
+.mascotWrap {
+  position: fixed;
+  right: 0;
+  bottom: 108px;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.mascotImage {
+  width: 136px;
+  height: auto;
+  image-rendering: auto;
+  user-select: none;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.28));
+  opacity: 1;
+}
+
+@media (max-width: 1440px) {
+  .mascotWrap {
+    top: 10px;
+    left: 356px;
+  }
+
+  .mascotImage {
+    width: 80px;
+    transform: rotateY(180deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .mascotWrap {
+    left: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mascotWrap {
+    display: none;
+  }
+}

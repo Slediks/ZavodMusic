@@ -7,6 +7,7 @@ import { PlayerBar } from "../PlayerBar/PlayerBar";
 import { QueuePanel } from "../QueuePanel/QueuePanel";
 import { ToastContainer } from "../ToastContainer/ToastContainer";
 import { UiIcon } from "../UiIcon/UiIcon";
+import { Mascot } from "../Mascot/Mascot";
 
 type AppLayoutProps = {
   pathname: string;
@@ -60,13 +61,7 @@ export function AppLayout({ pathname, onNavigate, isDark, isAuthorized, currentL
       />
       <QueuePanel dislikedTrackIds={dislikedTrackIds} />
       <ToastContainer />
+      <Mascot />
     </div>
   );
 }
-
-
-
-
-
-
-
